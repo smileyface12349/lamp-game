@@ -4,8 +4,10 @@ extends Node
 @export var lampOff: Panel
 @export var dialogueText: RichTextLabel
 @export var readingSpeedDropdown: OptionButton 
+@export var controlsHint: RichTextLabel
 
-var state: Dialogue = AllDialogue.DIALOGUE["initial_0"]
+var current: Dialogue = AllDialogue.DIALOGUE["initial_0"]
+var lamp: bool = false
 var elapsed: float = 0.0
 var timeForDialogue: float = 0.0
 var animationIn: float = -ANIMATION_FADE_LENGTH
@@ -24,7 +26,7 @@ func _ready() -> void:
 	reading_speed_changed(1)
 
 	# Initialise state to the first bit of dialogue
-	change_state(state)
+	change_state("initial_0")
 
 	# Connect buttons to methods
 	readingSpeedDropdown.connect("item_selected", reading_speed_changed)
@@ -35,12 +37,11 @@ func _process(delta: float) -> void:
 
 	# Switch when time elapsed
 	if elapsed > timeForDialogue:
-		change_state(AllDialogue.DIALOGUE[state.action.off_off])
-		elapsed = 0
+		change_state(current.action.get_next(lamp, lamp))
 
 	# Fade in
 	animationIn += ANIMATION_IN_CHARACTERS_PER_SECOND * delta
-	dialogueText.text = "[fade start=" + str(floor(animationIn)) + " length=" + str(ANIMATION_FADE_LENGTH) + "]" + state.get_text()
+	dialogueText.text = "[fade start=" + str(floor(animationIn)) + " length=" + str(ANIMATION_FADE_LENGTH) + "]" + current.get_text()
 
 	# Fade out
 	if elapsed > timeForDialogue - ANIMATION_OUT_DURATION - EXTRA_BLACK_TIME:
@@ -49,12 +50,32 @@ func _process(delta: float) -> void:
 	else:
 		dialogueText.modulate = Color(1, 1, 1, 1)
 
+# Toggle lamp with space bar
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("toggle_lamp"):
+		change_state(current.action.get_next(lamp, !lamp))
+		lamp = !lamp
+		lampOn.visible = lamp
+		lampOff.visible = !lamp
+		if lamp:
+			dialogueText.add_theme_color_override("default_color", Color.BLACK)
+		else:
+			dialogueText.add_theme_color_override("default_color", Color.WHITE)
+
 # Change the current piece of dialogue
-func change_state(new_state: Dialogue) -> void:
-	state = new_state
-	dialogueText.text = state.get_text()
-	timeForDialogue = state.get_total_time(wpm, extra_seconds)
+func change_state(id: String) -> void:
+	current = AllDialogue.DIALOGUE[id]
+	dialogueText.text = current.get_text()
+	timeForDialogue = current.get_total_time(wpm, extra_seconds)
+	elapsed = 0
 	animationIn = -ANIMATION_FADE_LENGTH
+
+	# Process special behaviours
+	if not current.flags.is_empty():
+		if "SHOW_CONTROLS" in current.flags:
+			controlsHint.show()
+		elif "HIDE_CONTROLS" in current.flags:
+			controlsHint.hide()
 
 # User has adjusted their reading speed
 func reading_speed_changed(index: int) -> void:

@@ -25,3 +25,14 @@ func _init(on_on: String, on_off: String, off_on: String, off_off: String, inter
 	self.off_off = off_off
 	self.interrupt = interrupt
 	self.delay = delay
+
+# Get the piece of dialogue to go to next
+func get_next(old_lamp_state: bool, new_lamp_state: bool) -> String:
+	if old_lamp_state and new_lamp_state:
+		return self.on_on
+	elif old_lamp_state and not new_lamp_state:
+		return self.on_off
+	elif not old_lamp_state and new_lamp_state:
+		return self.off_on
+	else:
+		return self.off_off

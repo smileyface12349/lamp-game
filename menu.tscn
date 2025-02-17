@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://dil6qbbjahxp5"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_hw8f6"]
+[ext_resource type="Theme" uid="uid://20w3bkrdq4fg" path="res://menu_panel.tres" id="2_2jgcf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dnhq0"]
+bg_color = Color(0.35541, 0.66, 0.1914, 1)
+
+[node name="Menu" type="Control" node_paths=PackedStringArray("startButton")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hw8f6")
+startButton = NodePath("Panel/Button")
+
+[node name="ExtendedBackground" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 2984.0
+offset_bottom = 1637.0
+theme = ExtResource("2_2jgcf")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+theme = ExtResource("2_2jgcf")
+
+[node name="Title" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 17.0
+offset_bottom = 167.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center]Lamp Game"
+
+[node name="Description" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 70.0
+offset_top = 183.0
+offset_right = -74.0
+offset_bottom = 475.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Thanks for checking out my prototype version of the game! In this game, you play as a lamp in someone's living room. There is only one button you can use - spacebar to toggle the lamp. Gameplay largely consists of listening to what characters are saying (hopefully the dialogue is interesting to listen to) and being a bit mischevious in when you toggle the lamp. You may toggle the lamp at any time, however this will often interrupt what characters are saying, so you might unintentionally skip something!
+
+The game does not feature a save system. I would recommend you play it through 2-3 times as there is a lot of branching.
+
+Things to focus on when giving feedback:
+[ul]
+Is the dialogue interesting to listen to?
+Are the characters good?
+Did you feel rewarded for experimenting with when you switched the lamp?
+Did you generally have an idea of the consequences of switching before doing it?"
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 485.0
+offset_top = -114.0
+offset_right = -474.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_dnhq0")
+text = "Start Game"

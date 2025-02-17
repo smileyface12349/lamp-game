@@ -4,11 +4,13 @@ extends Node
 var author: Character
 var text: String
 var action: DialogueAction
+var flags: Array[String]
 
-func _init(author: Character, text: String, action: DialogueAction) -> void:
+func _init(author: Character, text: String, action: DialogueAction, flags: Array[String] = []) -> void:
 	self.author = author
 	self.text = text
 	self.action = action
+	self.flags = flags
 
 func get_text() -> String:
 	if author is NoCharacter:
