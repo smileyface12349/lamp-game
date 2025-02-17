@@ -43,7 +43,7 @@ anchor_right = 1.0
 offset_left = 70.0
 offset_top = 183.0
 offset_right = -74.0
-offset_bottom = 475.0
+offset_bottom = 491.0
 grow_horizontal = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
@@ -56,7 +56,8 @@ Things to focus on when giving feedback:
 Is the dialogue interesting to listen to?
 Are the characters good?
 Did you feel rewarded for experimenting with when you switched the lamp?
-Did you generally have an idea of the consequences of switching before doing it?"
+Did you generally have an idea of the consequences of switching before doing it?
+Are there any particular instances where the dialogue didn't quite seem to flow?[/ul]"
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 1
@@ -73,3 +74,12 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_dnhq0")
 text = "Start Game"
+
+[node name="Version" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 963.0
+offset_top = 594.0
+offset_right = 1133.0
+offset_bottom = 634.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Last Updated: 17/02"

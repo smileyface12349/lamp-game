@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://de2nrt0dso5l2"]
+
+[ext_resource type="Theme" uid="uid://20w3bkrdq4fg" path="res://menu_panel.tres" id="1_y06aq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5ras"]
+bg_color = Color(0.35541, 0.66, 0.1914, 1)
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1152.0
+offset_bottom = 647.0
+theme = ExtResource("1_y06aq")
+
+[node name="Title" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 17.0
+offset_bottom = 167.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center]Game Over!"
+
+[node name="Description" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 70.0
+offset_top = 183.0
+offset_right = -74.0
+offset_bottom = 358.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "You reached the end of where I've got to so far.
+
+If you'd like to give me feedback on a particular path through the game, you can include the below text. This text tells me exactly which dialogue choices you encountered in which order, so I can understand how you experienced the game.
+
+If you'd like to see the full dialogue you encountered to comment on particular things, then you can look up the wording in the submission document."
+
+[node name="Path" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 383.0
+offset_right = 1078.0
+offset_bottom = 479.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "Your Path: "
+
+[node name="Button" type="Button" parent="Panel/Path"]
+layout_mode = 0
+offset_left = 855.0
+offset_right = 1001.0
+offset_bottom = 31.0
+text = "Copy to Clipboard"
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 485.0
+offset_top = -114.0
+offset_right = -474.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_v5ras")
+text = "Start Game"
