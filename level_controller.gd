@@ -53,7 +53,8 @@ func _process(delta: float) -> void:
 # Toggle lamp with space bar
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("toggle_lamp"):
-		change_state(current.action.get_next(lamp, !lamp))
+		if current.action.interrupt:
+			change_state(current.action.get_next(lamp, !lamp))
 		lamp = !lamp
 		lampOn.visible = lamp
 		lampOff.visible = !lamp
