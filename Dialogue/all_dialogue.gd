@@ -5,7 +5,7 @@ class_name AllDialogue
 
 static var DIALOGUE: Dictionary = {
 	# id : dialogue
-	"TODO": Dialogue.new(NoCharacter.new(), "You've reached the end of the dialogue done so far for this workshop submission, but there is dialogue planned beyond this point on this particular path. You will now be taken to the game over screen.", DialogueAction.new("", "", "", "", false, 3.0)),
+	"TODO": Dialogue.new(NoCharacter.new(), "You've reached a point where there is further dialogue planned, but it is not present for this workshop submission. You will now be taken to the game over screen.", DialogueAction.new("", "", "", "", false, 5.0)),
 	
 	# INITIAL: Colin walks into the room with his friends and puts the light on.
 	# Switching the light on at any point will interrupt this and skip to the next section.
@@ -21,23 +21,68 @@ static var DIALOGUE: Dictionary = {
 	"initial_9": Dialogue.new(CharacterEdmund.new(), "[whisphers] Is he ok?", DialogueActionOff.new("initial_refuse_1", "voice_activated_0")),
 	
 	# INITIAL_REFUSE: The player refuses to switch the light on when asked by Colin
-	"initial_refuse_1": Dialogue.new(CharacterColin.new(), "Oh get on with it, you're embarrassing me", DialogueActionOff.new("initial_refuse_2", "voice_activated_0_annoyed", true, 3.0)),
+	"initial_refuse_1": Dialogue.new(CharacterColin.new(), "Oh get on with it, you're embarrassing me!", DialogueActionOff.new("initial_refuse_2", "voice_activated_0_annoyed", true, 3.0)),
 	"initial_refuse_2": Dialogue.new(CharacterColin.new(), "There's only one lamp here...", DialogueActionOff.new("initial_refuse_3", "voice_activated_0_annoyed", true, 3.0)),
 	"initial_refuse_3": Dialogue.new(CharacterEdmund.new(), "Is he really talking to a lamp...?", DialogueActionOff.new("initial_refuse_4", "voice_activated_0_annoyed", true)),
 	"initial_refuse_4": Dialogue.new(CharacterLaurie.new(), "I think so?", DialogueActionOff.new("initial_refuse_5", "voice_activated_0_annoyed", true)),
 	"initial_refuse_5": Dialogue.new(CharacterWendy.new(), "He's crazy!", DialogueActionOff.new("initial_refuse_6", "voice_activated_0_annoyed", true)),
 	"initial_refuse_6": Dialogue.new(CharacterColin.new(), "I'm not crazy, it's gonna work!", DialogueActionOff.new("initial_refuse_7", "voice_activated_0_annoyed", true, 1.0)),
 	"initial_refuse_7": Dialogue.new(CharacterColin.new(), "Oh, switch on already!", DialogueActionOff.new("initial_refuse_8", "voice_activated_0_annoyed", true, 3.0)),
-	"initial_refuse_8": Dialogue.new(CharacterColin.new(), "On a scale from off to on, you seem pretty firmly on the off end...", DialogueActionOff.new("initial_refuse_1", "voice_activated_0_annoyed", true, 3.0)),
-	# TODO: if the player keeps refusing - skip to (obvious) moral questions. Upon switching, go to the real moral questions
+	"initial_refuse_8": Dialogue.new(CharacterColin.new(), "On a scale from off to on, you seem pretty firmly on the off end...", DialogueActionOff.new("is_it_working_1", "voice_activated_0_annoyed", true, 3.0)),
 
-	# REFUSAL_MORAL: If the player keeps refusing to switch on, then Colin asks some really obvious moral questions to try and encourage it
+	# IS_IT_WORKING: If the player keeps refusing to switch on, then the players wonder if it's actually working
+	"is_it_working_1": Dialogue.new(CharacterColin.new(), "I know how to get this lamp to switch on...", DialogueActionOff.new("is_it_working_2", "refuse_then_cooperate_1")),
+	"is_it_working_2": Dialogue.new(CharacterEdmund.new(), "Should we check it's plugged in first?", DialogueActionOff.new("is_it_working_3", "refuse_then_cooperate_1")),
+	"is_it_working_3": Dialogue.new(CharacterWendy.new(), "It's definitely plugged in...", DialogueActionOff.new("is_it_working_4", "refuse_then_cooperate_1")),
+	"is_it_working_4": Dialogue.new(CharacterEdmund.new(), "Maybe the bulb has gone?", DialogueActionOff.new("is_it_working_5", "refuse_then_cooperate_1")),
+	"is_it_working_5": Dialogue.new(CharacterColin.new(), "The bulb is fine! It just does this sometimes...", DialogueActionOff.new("is_it_working_6", "refuse_then_cooperate_1")),
+	"is_it_working_6": Dialogue.new(CharacterWendy.new(), "Have you tried switching it at the switch...?", DialogueActionOff.new("is_it_working_7", "refuse_then_cooperate_1")),
+	"is_it_working_7": Dialogue.new(CharacterColin.new(), "THERE IS NO SWITCH!", DialogueActionOff.new("is_it_working_8", "refuse_then_cooperate_1")),
+	"is_it_working_8": Dialogue.new(CharacterColin.new(), "It responds to my voice.", DialogueActionOff.new("is_it_working_9", "refuse_then_cooperate_1")),
+	"is_it_working_9": Dialogue.new(CharacterWendy.new(), "Yeah, sure it does...", DialogueActionOff.new("is_it_working_10", "refuse_then_cooperate_1")),
+	"is_it_working_10": Dialogue.new(CharacterLaurie.new(), "[Sarcastically] Maybe it's some [i]sentient[/i] lamp that is actively refusing your instructions...", DialogueActionOff.new("is_it_working_11", "refuse_then_cooperate_1")),
+	"is_it_working_11": Dialogue.new(CharacterColin.new(), "Exactly! It's refusing to do what I ask! I have an idea to make it co-operate though...", DialogueActionOff.new("refuse_moral_1", "refuse_then_cooperate_1")),
+
+	# REFUSE_MORAL: If the player keeps refusing to switch on, then Colin asks some really obvious moral questions to try and encourage it. If they switch, go to the real moral questions
+	"refuse_moral_1": Dialogue.new(CharacterColin.new(), "Switch on if you think that murder is wrong", DialogueActionOff.new("refuse_moral_2", "refuse_then_cooperate_1", 3.0)),
+	"refuse_moral_2": Dialogue.new(CharacterColin.new(), "Oooh, so murder is ok then?", DialogueActionOff.new("refuse_moral_3", "refuse_then_cooperate_1")),
+	"refuse_moral_3": Dialogue.new(CharacterWendy.new(), "I think Colin may have just gone insane...", DialogueActionOff.new("refuse_moral_4", "refuse_then_cooperate_1")),
+	"refuse_moral_4": Dialogue.new(CharacterLaurie.new(), "[Still quite sarcastic] Maybe the lamp is saying that murder is okay in some scenarios?", DialogueActionOff.new("refuse_moral_5", "refuse_then_cooperate_1")),
+	"refuse_moral_5": Dialogue.new(CharacterColin.new(), "Stay off if you think that murder is always permissible", DialogueActionOff.new("refuse_moral_6", "refuse_then_cooperate_1", 3.0)),
+	"refuse_moral_6": Dialogue.new(CharacterLaurie.new(), "That statement doesn't work. If the alleged [i]sentient lamp[/i] thinks that murder isn't always permissible, then the precondition for the statement isn't satisfied and therefore the lamp doesn't have to do anything", DialogueActionOff.new("refuse_moral_7", "refuse_then_cooperate_1")),
+	"refuse_moral_7": Dialogue.new(CharacterLaurie.new(), "To fix it, it should be \"Stay off if [i]and only if[/i] you think that murder is always permissible\"", DialogueActionOff.new("refuse_moral_8", "refuse_then_cooperate_1")),
+	"refuse_moral_8": Dialogue.new(CharacterWendy.new(), "Laurie, nobody cares", DialogueActionOff.new("refuse_moral_9", "refuse_then_cooperate_1")),
+	"refuse_moral_9": Dialogue.new(CharacterColin.new(), "Switch on if genocide is wrong", DialogueActionOff.new("refuse_moral_10", "refuse_then_cooperate_1", 3.0)),
+	"refuse_moral_10": Dialogue.new(CharacterLaurie.new(), "Stay off if you're smelly", DialogueActionOff.new("refuse_moral_11", "refuse_then_cooperate_1", 2.0)),
+	"refuse_moral_11": Dialogue.new(CharacterEdmund.new(), "So immature...", DialogueActionOff.new("refuse_moral_11a", "refuse_then_cooperate_1")),
+	"refuse_moral_11a": Dialogue.new(CharacterColin.new(), "Can lamps be smelly?", DialogueActionOff.new("refuse_moral_11b", "refuse_then_cooperate_1")),
+	"refuse_moral_11b": Dialogue.new(CharacterLaurie.new(), "I'm sure you'd manage it if you were a lamp...", DialogueActionOff.new("refuse_moral_11c", "refuse_then_cooperate_1")),
+	"refuse_moral_11c": Dialogue.new(CharacterEdmund.new(), "Come on guys...", DialogueActionOff.new("refuse_moral_12", "refuse_then_cooperate_1")),
+	"refuse_moral_12": Dialogue.new(CharacterWendy.new(), "Switch on if brexit was a stupid idea", DialogueActionOff.new("refuse_moral_13", "refuse_then_cooperate_1", 3.0)),
+	"refuse_moral_13": Dialogue.new(CharacterWendy.new(), "Ok well that settles it then, the lamp is broken!", DialogueActionOff.new("refuse_moral_13a", "refuse_then_cooperate_1")),
+	"refuse_moral_13a": Dialogue.new(CharacterEdmund.new(), "As if that is more conclusive than the previous ones...", DialogueActionOff.new("refuse_moral_14", "refuse_then_cooperate_1")),
+	"refuse_moral_14": Dialogue.new(CharacterColin.new(), "Ok, I'm going to give you 5 seconds before I smash you and throw you in the bin", DialogueActionOff.new("refuse_moral_15", "refuse_then_cooperate_1", 3.0)),
+	"refuse_moral_15": Dialogue.new(CharacterColin.new(), "3... 2.... 1...", DialogueActionOff.new("refuse_moral_16", "refuse_then_cooperate_1", 2.0)),
+	"refuse_moral_16": Dialogue.new(CharacterEdmund.new(), "Colin, don't! It might start working again later!", DialogueActionOff.new("refuse_moral_17", "refuse_then_cooperate_1", 2.0)),
+	"refuse_moral_17": Dialogue.new(CharacterColin.new(), "TOO LATE!", DialogueActionOff.new("refuse_moral_18", "refuse_then_cooperate_1")),
+	"refuse_moral_18": Dialogue.new(CharacterColin.new(), "YOU WORTHLESS PIECE OF METAL AND GLASS!!!", DialogueActionOff.new("broken_24_ending", "refuse_then_cooperate_1")),
+
+	# REFUSE_THEN_COOPERATE: If the player chooses to co-operate after this
+	"refuse_then_cooperate_1": Dialogue.new(CharacterColin.new(), "Oh ok, it's working now!", DialogueActionOn.new("refuse_then_cooperate_2", "player_cooperate_refuse_1"), ["HIDE_CONTROLS"]),
+	"refuse_then_cooperate_2": Dialogue.new(CharacterEdmund.new(), "It probably just switched on randomly...", DialogueActionOn.new("refuse_then_cooperate_3", "player_cooperate_refuse_1")),
+	"refuse_then_cooperate_3": Dialogue.new(CharacterColin.new(), "No, it's fixed!", DialogueActionOn.new("refuse_then_cooperate_4", "player_cooperate_refuse_1")),
+	"refuse_then_cooperate_4": Dialogue.new(CharacterColin.new(), "Lamp, switch off!", DialogueActionOn.new("player_cooperate_refuse_1", "refuse_then_cooperate_5", 3.0)),
+	"refuse_then_cooperate_5": Dialogue.new(CharacterColin.new(), "See, it's working now!", DialogueActionOff.new("refuse_then_cooperate_6", "player_cooperate_refuse_1")),
+	"refuse_then_cooperate_6": Dialogue.new(CharacterColin.new(), "And it's even more advanced than this...", DialogueActionOff.new("intelligence_test_1", "player_cooperate_refuse_1")),
+	
+	# REFUSE_COOPERATE_REFUSE: If the player then messes it up
+	"refuse_cooperate_refuse_1": Dialogue.new(CharacterColin.new(), "Ah, clearly not.", DialogueActionLinear.new("broken_0")),
 
 	# SENSOR_ON: The player switches the light on early, and the characters assume it's a sensor
 	"sensor_on_0": Dialogue.new(CharacterWendy.new(), "Oooh, a sensor-activated light. Cool!", DialogueActionOn.new("sensor_on_0a", "sensor_off_0")),
 	"sensor_on_0a": Dialogue.new(CharacterWendy.new(), "Well, I'm assuming it's sensor-activated because it went on as soon as we walked into the room...", DialogueActionOn.new("sensor_on_1", "sensor_off_0")),
 	"sensor_on_1": Dialogue.new(CharacterColin.new(), "Uh, yeah, I guess?", DialogueActionOn.new("sensor_on_2", "sensor_off_0")),
-	"sensor_on_2": Dialogue.new(CharacterEdmund.new(), "Suspicious...", DialogueActionOn.new("sensor_on_3", "sensor_off_0")),
+	"sensor_on_2": Dialogue.new(CharacterEdmund.new(), "Hmmmmm...", DialogueActionOn.new("sensor_on_3", "sensor_off_0")),
 	"sensor_on_3": Dialogue.new(CharacterColin.new(), "Sometimes it just responds to what I say...", DialogueActionOn.new("sensor_on_4", "sensor_cooperate_0", 2.0)),
 	"sensor_on_4": Dialogue.new(CharacterColin.new(), "Come on! Turn off...", DialogueActionOn.new("sensor_on_5", "sensor_cooperate_0", 3.0)),
 	"sensor_on_5": Dialogue.new(CharacterEdmund.new(), "Have you considered the possibility that it's just... a light that's activated by a sensor?", DialogueActionOn.new("sensor_on_6", "sensor_cooperate_0")),
@@ -84,8 +129,8 @@ static var DIALOGUE: Dictionary = {
 	"broken_20": Dialogue.new(CharacterColin.new(), "Ah, it's no use. It's just staying off now...", DialogueActionForceState.new("broken_cooperate_0", "broken_21", true, 1.0)),
 	"broken_21": Dialogue.new(CharacterColin.new(), "Hang on a minute, let's try this. In 5 seconds I want you to be off.", DialogueActionForceState.new("broken_22", "broken_cooperate_off_0", false, 3.0)),
 	"broken_22": Dialogue.new(CharacterColin.new(), "See, it's not broken! It's just doing the opposite of what I say.", DialogueActionOn.new("TODO", "broken_23", true, 3.0)),
-	"broken_23": Dialogue.new(CharacterColin.new(), "OH COME ON!!! YOU WORTHLESS PIECE OF METAL AND GLASS!!!", DialogueActionLinear.new("broken_24")),
-	"broken_24": Dialogue.new(NoCharacter.new(), "Colin smashes you to pieces. The end.", DialogueActionLinear.new("")),
+	"broken_23": Dialogue.new(CharacterColin.new(), "OH COME ON!!! YOU WORTHLESS PIECE OF METAL AND GLASS!!!", DialogueActionLinear.new("broken_24_ending")),
+	"broken_24_ending": Dialogue.new(NoCharacter.new(), "Colin smashes you to pieces. The end.", DialogueActionLinear.new("")),
 	
 	# BROKEN_COOPERATE: The player co-operates after convincing them it's broken, and switches the light on
 	"broken_cooperate_0": Dialogue.new(CharacterColin.new(), "See, it's not completely broken!", DialogueActionOn.new("broken_cooperate_1", "broken_23")),
@@ -151,16 +196,18 @@ static var DIALOGUE: Dictionary = {
 	"moral_questions_1a_general_2": Dialogue.new(CharacterColin.new(), "In the first, you choose to kill 1 person to save 5", DialogueActionEither.new("moral_questions_1a_general_3", "moral_questions_1_interrupted")),
 	"moral_questions_1a_general_3": Dialogue.new(CharacterColin.new(), "In the second, you choose to kill 1 person to save 5", DialogueActionEither.new("moral_questions_1a_general_4", "moral_questions_1_interrupted")),
 	"moral_questions_1a_general_4": Dialogue.new(CharacterLaurie.new(), "I'm not really sure. It just feels different.", DialogueActionEither.new("moral_questions_1a_general_5", "moral_questions_1_interrupted")),
-	"moral_questions_1a_general_5": Dialogue.new(CharacterColin.new(), "Morality is more complicated than you think...", DialogueActionEither.new("moral_questions_2", "moral_questions_1_interrupted")),
+	"moral_questions_1a_general_5": Dialogue.new(CharacterColin.new(), "See, it's more complicated than you think...", DialogueActionEither.new("moral_questions_2", "moral_questions_1_interrupted")),
 	"moral_questions_1_interrupted": Dialogue.new(CharacterColin.new(), "Oh, the lamp is bored. On to the next one!", DialogueActionEither.new("moral_questions_2", "moral_questions_2")),
 
 	# MORAL_QUESTIONS_2: More questions here
-	"moral_questions_2": Dialogue.new(NoCharacter.new(), "[a few more moral/political questions will be put in here - some discussion amongst the characters will follow each one but not as extensive as the trolley problem discussion]", DialogueActionEither.new("TODO", "TODO")),
+	"moral_questions_2": Dialogue.new(NoCharacter.new(), "[a few more moral/political questions will be put in here - some discussion amongst the characters will follow each one but not as extensive as the trolley problem discussion]", DialogueActionLinear.new("post_moral_questions_1")),
 	
 	# VOICE_ACTIVATED_OFF: If the player turns off at the wrong time in the above exchange. 
 	"voice_activated_off_0": Dialogue.new(CharacterColin.new(), "Ah crap, it's broken again! Turn back on!", DialogueActionOff.new("", "")),
 	# TODO: Various responses here that lead back into the above. Reward player for being adventurous.
 
+	# POST_MORAL_QUESTIONS: Some text to force the lamp state to on, then some small discussion to make it seem natural before Sophie walks in
+	"post_moral_questions_1": Dialogue.new(NoCharacter.new(), "[There will be something here to force the lamp state to on, and a short discussion. YOU HAVE 5 SECONDS TO SWITCH THE LAMP ON OR YOU WILL BE MET WITH A GAME OVER SCREEN. This is not part of the game.]", DialogueActionForceState.new("sophie_walks_in_0_disclaimer", "", false, 5.0)),
 
 
 	# Sophie walks in

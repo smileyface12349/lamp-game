@@ -65,6 +65,12 @@ func _input(event: InputEvent) -> void:
 
 # Change the current piece of dialogue
 func change_state(id: String) -> void:
+	# If they've reached the end
+	if id not in AllDialogue.DIALOGUE:
+		get_tree().change_scene_to_file("res://game_over.tscn")
+		return
+
+	# Change the dialogue state
 	current = AllDialogue.DIALOGUE[id]
 	dialogueText.text = current.get_text()
 	timeForDialogue = current.get_total_time(wpm, extra_seconds)
@@ -90,5 +96,5 @@ func reading_speed_changed(index: int) -> void:
 		extra_seconds = 2
 	elif index == 2:
 		# Fast reading speed
-		wpm = 300
+		wpm = 350
 		extra_seconds = 1.5
