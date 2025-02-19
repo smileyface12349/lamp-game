@@ -212,7 +212,8 @@ static var DIALOGUE: Dictionary = {
 
 	# Sophie walks in
 	# (Beyond this point, we will not worry about the edge cases, and it will just focus on the main narrative)
-	"sophie_walks_in_0_disclaimer": Dialogue.new(NoCharacter.new(), "[You are about half-way through the story. As this is a workshop release, the second half is not very fleshed out, and many of the branching paths are incomplete. I would suggest being co-operative to see the narrative through, rather than experimenting with switching the lamp as you were encouraged to do in the first half.]", DialogueActionOn.new("sophie_walks_in_0", "TODO")),
+	"sophie_walks_in_0_disclaimer": Dialogue.new(NoCharacter.new(), "[You are about half-way through the story. As this is a workshop release, the second half is not very fleshed out, and many of the branching paths are incomplete. I would suggest being co-operative to see the narrative through, rather than experimenting with switching the lamp as you were encouraged to do in the first half.]", DialogueActionOn.new("sophie_walks_in_0_disclaimer_1", "")),
+	"sophie_walks_in_0_disclaimer_1": Dialogue.new(NoCharacter.new(), "[If you would like to skip ahead to this point in the future, set the custom start point to 'sophie_walks_in_0']", DialogueActionOn.new("sophie_walks_in_0", "")),
 
 	# TODO: Get to the exchange between Sophie and Michael (or continuing with Colin) in the workshop release. Maybe also until they go to bed and finish with the Robber ending but a bit rushed? So then it rounds it out and we can see the narrative. Don't worry about too many of the additional branches for now.
 }

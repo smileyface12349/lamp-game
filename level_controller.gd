@@ -6,7 +6,7 @@ extends Node
 @export var readingSpeedDropdown: OptionButton 
 @export var controlsHint: RichTextLabel
 
-var current: Dialogue = AllDialogue.DIALOGUE["initial_0"]
+var current: Dialogue
 var lamp: bool = false
 var elapsed: float = 0.0
 var timeForDialogue: float = 0.0
@@ -26,7 +26,7 @@ func _ready() -> void:
 	reading_speed_changed(1)
 
 	# Initialise state to the first bit of dialogue
-	change_state("initial_0")
+	change_state(Globals.start_point)
 
 	# Connect buttons to methods
 	readingSpeedDropdown.connect("item_selected", reading_speed_changed)
@@ -69,6 +69,9 @@ func change_state(id: String) -> void:
 	if id not in AllDialogue.DIALOGUE:
 		get_tree().change_scene_to_file("res://game_over.tscn")
 		return
+
+	# Track the path (only for testing purposes)
+	Globals.path.append(id)
 
 	# Change the dialogue state
 	current = AllDialogue.DIALOGUE[id]

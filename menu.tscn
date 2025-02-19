@@ -6,11 +6,12 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dnhq0"]
 bg_color = Color(0.35541, 0.66, 0.1914, 1)
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("startButton")]
+[node name="Menu" type="Control" node_paths=PackedStringArray("startButton", "startPointTextEdit")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_hw8f6")
 startButton = NodePath("Panel/Button")
+startPointTextEdit = NodePath("Panel/CustomStartTextEdit")
 
 [node name="ExtendedBackground" type="Panel" parent="."]
 layout_mode = 0
@@ -65,10 +66,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 485.0
-offset_top = -114.0
-offset_right = -474.0
-offset_bottom = -67.0
+offset_left = 483.0
+offset_top = -140.0
+offset_right = -476.0
+offset_bottom = -93.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 32
@@ -83,3 +84,21 @@ offset_right = 1133.0
 offset_bottom = 634.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Last Updated: 18/02"
+
+[node name="CustomStartTextEdit" type="TextEdit" parent="Panel"]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 588.0
+offset_right = 552.0
+offset_bottom = 626.0
+text = "initial_0"
+placeholder_text = "Default: initial_0"
+
+[node name="CustomStartLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 580.0
+offset_right = 392.0
+offset_bottom = 631.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Custom Start Point (this is a developer option that will not be present on the final game): "
