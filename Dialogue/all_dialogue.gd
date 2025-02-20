@@ -6,13 +6,14 @@ class_name AllDialogue
 static var DIALOGUE: Dictionary = {
 	# id : dialogue
 	"TODO": Dialogue.new(NoCharacter.new(), "You've reached a point where there is further dialogue planned, but it is not present for this workshop submission. You will now be taken to the game over screen.", DialogueAction.new("", "", "", "", false, 5.0)),
+	"ERROR": Dialogue.new(NoCharacter.new(), "Hello, this is an error message. Hopefully you know what it means. You will now be taken to the game over screen.", DialogueAction.new("", "", "", "", false, 5.0)),
 	
 	# INITIAL: Colin walks into the room with his friends and puts the light on.
 	# Switching the light on at any point will interrupt this and skip to the next section.
 	"initial_0": Dialogue.new(NoCharacter.new(), "[You hear footsteps as people walk into the room]", DialogueActionOff.new("initial_1", "sensor_on_0")),
 	"initial_1": Dialogue.new(CharacterColin.new(), "Yeah, great thanks! How are you?", DialogueActionOff.new("initial_2", "sensor_on_0")),
 	"initial_2": Dialogue.new(CharacterWendy.new(), "OMG you wouldn't believe it! This morning there was an ice cream van and it was a-ma-zing!", DialogueActionOff.new("initial_3", "sensor_on_0")),
-	"initial_3": Dialogue.new(CharacterEdmund.new(), "An ice cream van in December?", DialogueActionOff.new("initial_4", "sensor_on_0")),
+	"initial_3": Dialogue.new(CharacterEdmund.new(), "An ice cream van in February?", DialogueActionOff.new("initial_4", "sensor_on_0")),
 	"initial_4": Dialogue.new(CharacterWendy.new(), "Oh stop being so boring, sweetheart. You can have ice cream whenever you want!", DialogueActionOff.new("initial_5", "sensor_on_0")),
 	"initial_5": Dialogue.new(CharacterLaurie.new(), "Surprised they get enough business...", DialogueActionOff.new("initial_6", "sensor_on_0")),
 	"initial_6": Dialogue.new(CharacterColin.new(), "Anyway! Take a seat, I'll pop the lamp on and make some tea.", DialogueActionOff.new("initial_7", "voice_activated_0", true, 1.0)),
@@ -68,12 +69,12 @@ static var DIALOGUE: Dictionary = {
 	"refuse_moral_18": Dialogue.new(CharacterColin.new(), "YOU WORTHLESS PIECE OF METAL AND GLASS!!!", DialogueActionOff.new("broken_24_ending", "refuse_then_cooperate_1")),
 
 	# REFUSE_THEN_COOPERATE: If the player chooses to co-operate after this
-	"refuse_then_cooperate_1": Dialogue.new(CharacterColin.new(), "Oh ok, it's working now!", DialogueActionOn.new("refuse_then_cooperate_2", "player_cooperate_refuse_1"), ["HIDE_CONTROLS"]),
-	"refuse_then_cooperate_2": Dialogue.new(CharacterEdmund.new(), "It probably just switched on randomly...", DialogueActionOn.new("refuse_then_cooperate_3", "player_cooperate_refuse_1")),
-	"refuse_then_cooperate_3": Dialogue.new(CharacterColin.new(), "No, it's fixed!", DialogueActionOn.new("refuse_then_cooperate_4", "player_cooperate_refuse_1")),
-	"refuse_then_cooperate_4": Dialogue.new(CharacterColin.new(), "Lamp, switch off!", DialogueActionOn.new("player_cooperate_refuse_1", "refuse_then_cooperate_5", 3.0)),
-	"refuse_then_cooperate_5": Dialogue.new(CharacterColin.new(), "See, it's working now!", DialogueActionOff.new("refuse_then_cooperate_6", "player_cooperate_refuse_1")),
-	"refuse_then_cooperate_6": Dialogue.new(CharacterColin.new(), "And it's even more advanced than this...", DialogueActionOff.new("intelligence_test_1", "player_cooperate_refuse_1")),
+	"refuse_then_cooperate_1": Dialogue.new(CharacterColin.new(), "Oh ok, it's working now!", DialogueActionOn.new("refuse_then_cooperate_2", "refuse_cooperate_refuse_1"), ["HIDE_CONTROLS"]),
+	"refuse_then_cooperate_2": Dialogue.new(CharacterEdmund.new(), "It probably just switched on randomly...", DialogueActionOn.new("refuse_then_cooperate_3", "refuse_cooperate_refuse_1")),
+	"refuse_then_cooperate_3": Dialogue.new(CharacterColin.new(), "No, it's fixed!", DialogueActionOn.new("refuse_then_cooperate_4", "refuse_cooperate_refuse_1")),
+	"refuse_then_cooperate_4": Dialogue.new(CharacterColin.new(), "Lamp, switch off!", DialogueActionOn.new("refuse_cooperate_refuse_1", "refuse_then_cooperate_5", 3.0)),
+	"refuse_then_cooperate_5": Dialogue.new(CharacterColin.new(), "See, it's working now!", DialogueActionOff.new("refuse_then_cooperate_6", "refuse_cooperate_refuse_1")),
+	"refuse_then_cooperate_6": Dialogue.new(CharacterColin.new(), "And it's even more advanced than this...", DialogueActionOff.new("intelligence_test_1", "refuse_cooperate_refuse_1")),
 	
 	# REFUSE_COOPERATE_REFUSE: If the player then messes it up
 	"refuse_cooperate_refuse_1": Dialogue.new(CharacterColin.new(), "Ah, clearly not.", DialogueActionLinear.new("broken_0")),
@@ -95,7 +96,8 @@ static var DIALOGUE: Dictionary = {
 	"sensor_off_1": Dialogue.new(CharacterColin.new(), "No it's not! Look, it'll turn back on any moment now...", DialogueActionOff.new("initial_8", "sensor_cooperate_0")),
 
 	# SENSOR_COOPERATE: The player co-operates with Colin and turns the light back on after turning it off
-	"sensor_cooperate_0": Dialogue.new(CharacterColin.new(), "See!", DialogueActionOn.new("voice_activated_0", "voice_activated_off_0")),
+	"sensor_cooperate_0": Dialogue.new(CharacterColin.new(), "See!", DialogueActionOn.new("voice_activated_0", "sensor_cooperate_1")),
+	"sensor_cooperate_1": Dialogue.new(CharacterColin.new(), "Nevermind, I don't think it's working properly today", DialogueActionOff.new("broken_0", "broken_0")),
 
 	# SENSOR_BROKEN: The player switches the light back on too early, and the players think it's broken
 	"sensor_broken_0": Dialogue.new(CharacterWendy.new(), "Yep, definitely broken...", DialogueActionOn.new("sensor_broken_1", "broken_0")),
@@ -130,7 +132,7 @@ static var DIALOGUE: Dictionary = {
 	"broken_21": Dialogue.new(CharacterColin.new(), "Hang on a minute, let's try this. In 5 seconds I want you to be off.", DialogueActionForceState.new("broken_22", "broken_cooperate_off_0", false, 3.0)),
 	"broken_22": Dialogue.new(CharacterColin.new(), "See, it's not broken! It's just doing the opposite of what I say.", DialogueActionOn.new("TODO", "broken_23", true, 3.0)),
 	"broken_23": Dialogue.new(CharacterColin.new(), "OH COME ON!!! YOU WORTHLESS PIECE OF METAL AND GLASS!!!", DialogueActionLinear.new("broken_24_ending")),
-	"broken_24_ending": Dialogue.new(NoCharacter.new(), "Colin smashes you to pieces. The end.", DialogueActionLinear.new("")),
+	"broken_24_ending": Dialogue.new(NoCharacter.new(), "Colin smashes you to pieces. The end. [Ending 1/4].", DialogueActionLinear.new("")),
 	
 	# BROKEN_COOPERATE: The player co-operates after convincing them it's broken, and switches the light on
 	"broken_cooperate_0": Dialogue.new(CharacterColin.new(), "See, it's not completely broken!", DialogueActionOn.new("broken_cooperate_1", "broken_23")),
@@ -144,15 +146,15 @@ static var DIALOGUE: Dictionary = {
 	"broken_cooperate_off_3": Dialogue.new(CharacterWendy.new(), "Cool!", DialogueActionOn.new("voice_activated_2", "broken_23")),
 
 	# VOICE_ACTIVATED: The guests notice the light switch on and start asking questions about the lamp
-	"voice_activated_0_annoyed": Dialogue.new(CharacterColin.new(), "Finally!", DialogueActionOn.new("voice_activated_0", "voice_activated_off_0"), ["HIDE_CONTROLS"]),
-	"voice_activated_0": Dialogue.new(CharacterWendy.new(), "Woah! Is this light voice activated?", DialogueActionOn.new("voice_activated_1", "voice_activated_off_0"), ["HIDE_CONTROLS"]),
-	"voice_activated_1": Dialogue.new(CharacterColin.new(), "Oh yes! Just you watch...", DialogueActionOn.new("voice_activated_2", "voice_activated_off_0")),
-	"voice_activated_2": Dialogue.new(CharacterColin.new(), "Lamp, switch off!", DialogueActionOn.new("voice_activated_refuse_1", "voice_activated_3", true, 3.0)),
-	"voice_activated_3": Dialogue.new(CharacterColin.new(), "Aaand, on!", DialogueActionOff.new("voice_activated_refuse_2", "voice_activated_4", true, 3.0)),
-	"voice_activated_4": Dialogue.new(CharacterLaurie.new(), "[whispers] Woah!", DialogueActionOn.new("voice_activated_5", "voice_activated_off_0")),
+	"voice_activated_0_annoyed": Dialogue.new(CharacterColin.new(), "Finally!", DialogueActionOn.new("voice_activated_0", "TODO"), ["HIDE_CONTROLS"]),
+	"voice_activated_0": Dialogue.new(CharacterWendy.new(), "Woah! Is this light voice activated?", DialogueActionOn.new("voice_activated_1", "TODO"), ["HIDE_CONTROLS"]),
+	"voice_activated_1": Dialogue.new(CharacterColin.new(), "Oh yes! Just you watch...", DialogueActionOn.new("voice_activated_2", "TODO")),
+	"voice_activated_2": Dialogue.new(CharacterColin.new(), "Lamp, switch off!", DialogueActionOn.new("TODO", "voice_activated_3", true, 3.0)),
+	"voice_activated_3": Dialogue.new(CharacterColin.new(), "Aaand, on!", DialogueActionOff.new("TODO", "voice_activated_4", true, 3.0)),
+	"voice_activated_4": Dialogue.new(CharacterLaurie.new(), "[whispers] Woah!", DialogueActionOn.new("voice_activated_5", "TODO")),
 	"voice_activated_5": Dialogue.new(CharacterWendy.new(), "Does it listen to me too?", DialogueActionOn.new("voice_activated_6", "voice_activated_7")),
 	"voice_activated_6": Dialogue.new(CharacterWendy.new(), "Lamp Off!", DialogueActionOn.new("TODO", "voice_activated_7", true, 3.0)),
-	"voice_activated_7": Dialogue.new(CharacterLaurie.new(), "Cool!", DialogueActionOff.new("voice_activated_8", "voice_activated_off_0")),
+	"voice_activated_7": Dialogue.new(CharacterLaurie.new(), "Cool!", DialogueActionOff.new("voice_activated_8", "TODO")),
 	"voice_activated_8": Dialogue.new(CharacterEdmund.new(), "Come on guys, it's just a voice activated light...", DialogueActionOff.new("intelligence_test_1", "TODO")),
 	
 	# INTELLIGENCE_TEST: The characters ask the lamp questions to test their intelligence
@@ -185,9 +187,9 @@ static var DIALOGUE: Dictionary = {
 	"moral_questions_1_switch_1": Dialogue.new(CharacterLaurie.new(), "A popular choice! I agree. Why kill 5 people when you can kill just 1 instead?", DialogueActionEither.new("moral_questions_1_general_1", "moral_questions_1_interrupted")),
 	"moral_questions_1_stay_1": Dialogue.new(CharacterLaurie.new(), "Are you insane? You'd kill 5 people instead of 1?", DialogueActionEither.new("moral_questions_1_stay_2", "moral_questions_1_interrupted")),
 	"moral_questions_1_stay_2": Dialogue.new(CharacterColin.new(), "It's not as clear as you might think. The difference is in the action you take.", DialogueActionEither.new("moral_questions_1_general_1", "moral_questions_1_interrupted")),
-	"moral_questions_1_general_1": Dialogue.new(CharacterColin.new(), "Who are you to decide who lives and who dies?", DialogueActionEither.new("moral_questions_1_switch_3", "moral_questions_1_interrupted")),
-	"moral_questions_1_general_2": Dialogue.new(CharacterColin.new(), "If you get involved, you are now responsible for intentionally killing that person", DialogueActionEither.new("moral_questions_1_switch_4", "moral_questions_1_interrupted")),
-	"moral_questions_1_general_3": Dialogue.new(CharacterWendy.new(), "But you save 5 people! Are you seriously saying you wouldn't switch it?", DialogueActionEither.new("moral_questions_1_switch_5", "moral_questions_1_interrupted")),
+	"moral_questions_1_general_1": Dialogue.new(CharacterColin.new(), "Who are you to decide who lives and who dies?", DialogueActionEither.new("moral_questions_1_general_2", "moral_questions_1_interrupted")),
+	"moral_questions_1_general_2": Dialogue.new(CharacterColin.new(), "If you get involved, you are now responsible for intentionally killing that person", DialogueActionEither.new("moral_questions_1_general_3", "moral_questions_1_interrupted")),
+	"moral_questions_1_general_3": Dialogue.new(CharacterWendy.new(), "But you save 5 people! Are you seriously saying you wouldn't switch it?", DialogueActionEither.new("moral_questions_1_general_4", "moral_questions_1_interrupted")),
 	"moral_questions_1_general_4": Dialogue.new(CharacterColin.new(), "I'm not sure. Let me pose you a similar scenario.", DialogueActionEither.new("moral_questions_1a", "moral_questions_1_interrupted")),
 	"moral_questions_1a": Dialogue.new(CharacterColin.new(), "You're on a bridge watching a trolley go towards 5 people. Switch if you would push a fat man off the bridge to stop the trolley.", DialogueActionEither.new("moral_questions_1a_stay_1", "moral_questions_1a_switch_1")),
 	"moral_questions_1a_switch_1": Dialogue.new(CharacterLaurie.new(), "Nah, surely not!", DialogueActionEither.new("moral_questions_1a_general_1", "moral_questions_1_interrupted")),
@@ -201,19 +203,108 @@ static var DIALOGUE: Dictionary = {
 
 	# MORAL_QUESTIONS_2: More questions here
 	"moral_questions_2": Dialogue.new(NoCharacter.new(), "[a few more moral/political questions will be put in here - some discussion amongst the characters will follow each one but not as extensive as the trolley problem discussion]", DialogueActionLinear.new("post_moral_questions_1")),
-	
-	# VOICE_ACTIVATED_OFF: If the player turns off at the wrong time in the above exchange. 
-	"voice_activated_off_0": Dialogue.new(CharacterColin.new(), "Ah crap, it's broken again! Turn back on!", DialogueActionOff.new("", "")),
-	# TODO: Various responses here that lead back into the above. Reward player for being adventurous.
 
 	# POST_MORAL_QUESTIONS: Some text to force the lamp state to on, then some small discussion to make it seem natural before Sophie walks in
-	"post_moral_questions_1": Dialogue.new(NoCharacter.new(), "[There will be something here to force the lamp state to on, and a short discussion. YOU HAVE 5 SECONDS TO SWITCH THE LAMP ON OR YOU WILL BE MET WITH A GAME OVER SCREEN. This is not part of the game.]", DialogueActionForceState.new("sophie_walks_in_0_disclaimer", "", false, 5.0)),
+	"post_moral_questions_1": Dialogue.new(NoCharacter.new(), "[There will be something here to force the lamp state to on, and a short discussion that will be cut off half-way through. YOU HAVE 5 SECONDS TO SWITCH THE LAMP ON OR YOU WILL BE MET WITH A GAME OVER SCREEN. This is not part of the game.]", DialogueActionForceState.new("sophie_walks_in_0_disclaimer", "", false, 5.0)),
 
+	# SOPHIE_WALKS_IN: Michael comes into the house and Sophie comes into the room
+	"sophie_walks_in_0_disclaimer": Dialogue.new(NoCharacter.new(), "[You are about half-way through the story. As this is a workshop release, the second half is not very fleshed out, a lot of the dialogue is incomplete. However, I wanted to include this to demonstrate the structure, even if I haven't written most of the actual dialogue.]", DialogueActionOn.new("sophie_walks_in_0_disclaimer_1", "")),
+	"sophie_walks_in_0_disclaimer_1": Dialogue.new(NoCharacter.new(), "[If you would like to skip ahead to this point in the future, set the custom start point to 'sophie_walks_in_0'. The following dialogue is part of the game]", DialogueActionOn.new("sophie_walks_in_0", "")),
+	"sophie_walks_in_0": Dialogue.new(NoCharacter.new(), "[The front door slams shut]", DialogueActionOn.new("sophie_walks_in_1", "sophie_off_0")),
+	"sophie_walks_in_1": Dialogue.new(CharacterMichael.new(), "[Faintly] Oh, there's people in the living room again", DialogueActionOn.new("sophie_walks_in_2", "sophie_off_0")),
+	"sophie_walks_in_2": Dialogue.new(CharacterSophie.new(), "[Faintly] It's Colin and his friends", DialogueActionOn.new("sophie_walks_in_3", "sophie_off_0")),
+	"sophie_walks_in_3": Dialogue.new(CharacterMichael.new(), "[Faintly] Those buggers are always using the living room when we want to use it...", DialogueActionOn.new("sophie_walks_in_4", "sophie_off_0")),
+	"sophie_walks_in_4": Dialogue.new(CharacterColin.new(), "[Raises Voice] We can hear you by the way!", DialogueActionOn.new("sophie_walks_in_5", "sophie_off_0")),
+	"sophie_walks_in_5": Dialogue.new(CharacterMichael.new(), "[Raises Voice] Oh shut up, smartass. Why are you always so annoying?", DialogueActionOn.new("sophie_walks_in_6", "sophie_off_0")),
+	"sophie_walks_in_6": Dialogue.new(CharacterSophie.new(), "[Approaches the living room] EVERY SINGLE TIME I WANT TO USE THIS ROOM, YOU AND YOUR BLOODY FRIENDS ARE ALWAYS HERE!", DialogueActionOn.new("sophie_walks_in_7", "sophie_off_0")),
+	"sophie_walks_in_7": Dialogue.new(CharacterSophie.new(), "GET OUT! HAVE SOME RESPECT FOR YOUR OTHER HOUSEMATES!", DialogueActionOn.new("sophie_walks_in_8", "sophie_off_0")),
+	"sophie_walks_in_8": Dialogue.new(CharacterEdmund.new(), "[whispers] We should go...", DialogueActionOn.new("sophie_walks_in_9", "sophie_off_0")),
+	"sophie_walks_in_9": Dialogue.new(CharacterWendy.new(), "[whispers] Nah, I'm enjoying this...", DialogueActionOn.new("sophie_walks_in_9a", "sophie_off_0")),
+	"sophie_walks_in_9a": Dialogue.new(CharacterEdmund.new(), "[whispers] She didn't used to be like this before Michael...", DialogueActionOn.new("sophie_walks_in_10", "sophie_off_0")),
+	"sophie_walks_in_10": Dialogue.new(CharacterSophie.new(), "WHAT DID YOU SAY?", DialogueActionOn.new("sophie_walks_in_11", "sophie_off_0")),
+	"sophie_walks_in_11": Dialogue.new(CharacterWendy.new(), "I SAID, WE AIN'T GOIN' NOWHERE!", DialogueActionOn.new("sophie_walks_in_12", "sophie_off_0")),
+	"sophie_walks_in_12": Dialogue.new(CharacterColin.new(), "WENDY!", DialogueActionOn.new("sophie_walks_in_12a", "sophie_off_0")),
+	"sophie_walks_in_12a": Dialogue.new(CharacterLaurie.new(), "[whispers] Is Sophie pregnant?", DialogueActionOn.new("sophie_walks_in_12b", "sophie_off_0")),
+	"sophie_walks_in_12b": Dialogue.new(CharacterSophie.new(), "I HEARD THAT!", DialogueActionOn.new("sophie_walks_in_12c", "sophie_off_0")),
+	"sophie_walks_in_12c": Dialogue.new(CharacterSophie.new(), "I AM NOT PREGNANT!", DialogueActionOn.new("sophie_walks_in_12d", "sophie_off_0")),
+	"sophie_walks_in_12d": Dialogue.new(CharacterWendy.new(), "[i]awkward...[/i]", DialogueActionOn.new("sophie_walks_in_13", "sophie_off_0")),
+	"sophie_walks_in_13": Dialogue.new(CharacterColin.new(), "Sophie, we're not here very often. You got to use this room yesterday, the day before and the day before that. I think it's our turn now.", DialogueActionOn.new("sophie_walks_in_13a", "sophie_off_0")),
+	"sophie_walks_in_13a": Dialogue.new(CharacterSophie.new(), "I HATE YOU GUYS!", DialogueActionOn.new("sophie_walks_in_14", "sophie_off_0")),
+	"sophie_walks_in_14": Dialogue.new(NoCharacter.new(), "[Sophie storms off. Michael follows closely behind]", DialogueActionOn.new("sophie_walks_in_15", "sophie_off_0")),
+	"sophie_walks_in_15": Dialogue.new(CharacterSophie.new(), "[Faintly] Maybe we could disrupt the electrical supply to force them to leave?", DialogueActionOn.new("sophie_walks_in_16", "sophie_off_0")),
+	"sophie_walks_in_16": Dialogue.new(CharacterMichael.new(), "[Faintly] Pop the breaker?", DialogueActionOn.new("sophie_walks_in_17", "sophie_off_0")),
+	"sophie_walks_in_17": Dialogue.new(CharacterMichael.new(), "[Faintly] I'm not sure where I'd find that. We don't want to cause any permanent damage.", DialogueActionOn.new("sophie_walks_in_17a", "sophie_off_0")),
+	"sophie_walks_in_17a": Dialogue.new(CharacterSophie.new(), "[Faintly] Yeah, let's just wait and hope they leave. It's the only proper telly in the house!", DialogueActionOn.new("sophie_walks_in_18", "sophie_off_0")),
+	"sophie_walks_in_18": Dialogue.new(CharacterColin.new(), "Do they realise that we can still hear them talking?", DialogueActionOn.new("sophie_walks_in_19", "sophie_off_0")),
+	"sophie_walks_in_19": Dialogue.new(CharacterWendy.new(), "Yeah, I think they just don't care", DialogueActionOn.new("colin_discussion_0", "sophie_off_0")),
 
-	# Sophie walks in
-	# (Beyond this point, we will not worry about the edge cases, and it will just focus on the main narrative)
-	"sophie_walks_in_0_disclaimer": Dialogue.new(NoCharacter.new(), "[You are about half-way through the story. As this is a workshop release, the second half is not very fleshed out, and many of the branching paths are incomplete. I would suggest being co-operative to see the narrative through, rather than experimenting with switching the lamp as you were encouraged to do in the first half.]", DialogueActionOn.new("sophie_walks_in_0_disclaimer_1", "")),
-	"sophie_walks_in_0_disclaimer_1": Dialogue.new(NoCharacter.new(), "[If you would like to skip ahead to this point in the future, set the custom start point to 'sophie_walks_in_0']", DialogueActionOn.new("sophie_walks_in_0", "")),
+	# SOPHIE_OFF: The light switches off when Sophie walks in and she gets annoyed
+	"sophie_off_0": Dialogue.new(NoCharacter.new(), "[MORE DIALOGUE HERE: Sophie gets annoyed at the light switching off, but continues talking regardless (similar to the dialogue when light is kept on)]", DialogueActionOff.new("sophie_off_1", "sophie_walks_in_15")),
+	"sophie_off_1": Dialogue.new(CharacterSophie.new(), "I bet they'll get fed up if that light stays off...", DialogueActionOff.new("sophie_off_1", "sophie_walks_in_15")),
 
-	# TODO: Get to the exchange between Sophie and Michael (or continuing with Colin) in the workshop release. Maybe also until they go to bed and finish with the Robber ending but a bit rushed? So then it rounds it out and we can see the narrative. Don't worry about too many of the additional branches for now.
+	# COLIN_DISCUSSION: Colin and his friends have a discussion before going to bed
+	"colin_discussion_0": Dialogue.new(NoCharacter.new(), "[MORE DIALOGUE HERE: Colin and his friends have an interesting discussion™. Topics include politics and religion. While the players won't directly ask questions to the lamp as much as they did before, the player will be able to implicitly provide their opinion by switching at certain times. The game should try and respond to the player's opinion as much as possible, giving them arguments against their own opinion. Switch the lamp now if you'd like to switch the lamp off during this discussion]", DialogueActionOn.new("colin_george_0", "colin_sophie_transition_0", true, 3.0)),
+
+	# COLIN_GEORGE: George walks into Colin's discussion
+	"colin_george_0": Dialogue.new(NoCharacter.new(), "[The door opens slowly]", DialogueActionOn.new("colin_george_1", "TODO")),
+	"colin_george_1": Dialogue.new(NoCharacter.new(), "[George is standing there in his pyjamas]", DialogueActionOn.new("colin_george_2", "TODO")),
+	"colin_george_2": Dialogue.new(CharacterGeorge.new(), "[Nervously] Colin, are you going to Church tomorrow?", DialogueActionOn.new("colin_george_3", "TODO")),
+	"colin_george_3": Dialogue.new(CharacterColin.new(), "'Course! 10 past 10?", DialogueActionOn.new("colin_george_4", "TODO")),
+	"colin_george_4": Dialogue.new(CharacterGeorge.new(), "Ok, goodnight everyone!", DialogueActionOn.new("colin_george_5", "TODO")),
+	"colin_george_5": Dialogue.new(CharacterWendy.new(), "'night, George!", DialogueActionOn.new("colin_tv_0", "TODO")),
+
+	# COLIN_TV: Colin and his friends pop the TV on
+	"colin_tv_0": Dialogue.new(NoCharacter.new(), "[They decide to pop the TV on. Switching the lamp seems to intefere with the TV in some way / change the channel. Depending on how long the TV stays on, George may complain about a lack of sleep tomorrow. By switching the channel, you get to see different characters reacting to the same channels in different ways. Please switch the lamp off to proceed to the next section]", DialogueActionForceState.new("colin_tv_0", "colin_home_0", false)),
+
+	# COLIN_HOME: Colin and his friends go home
+	"colin_home_0": Dialogue.new(NoCharacter.new(), "[MORE DIALOGUE HERE: Colin and his friends go home]", DialogueActionForceState.new("colin_home_0", "night_time_0")),
+
+	# COLIN_SOPHIE_TRANSITION: Colin and his friends get fed up, and vacate the room for Sophie to use it
+	"colin_sophie_transition_0": Dialogue.new(NoCharacter.new(), "[Colin and his friends notice the light go off and decide to leave. Sophie and Michael replace them in the living room. They will not start the discussion unless you switch the lamp on - if you don't, they will soon give up as well and skip straight to night time]", DialogueActionOff.new("night_time_0", "sophie_discussion_0", true, 3.0)),
+
+	# SOPHIE_DISCUSSION
+	"sophie_discussion_0": Dialogue.new(NoCharacter.new(), "[MORE DIALOGUE HERE: Sophie and Michael have an interesting discussion, largely consisting of Michael stating some outrageous opinions and Sophie just agreeing. There is also a discussion around Sophie's pregnancy. Sophie wants an abortion, whereas Michael is using it to pressure her to get married.", DialogueActionOn.new("sophie_george_0", "night_time_0")),
+
+	# SOPHIE_GEORGE: George walks past the living room and ends up engaging in conversation against his will
+	"sophie_george_0": Dialogue.new(NoCharacter.new(), "[George walks past the door to the room]", DialogueActionOn.new("sophie_george_1", "TODO")),
+	"sophie_george_1": Dialogue.new(CharacterMichael.new(), "[Shouts] George! Long time no see!", DialogueActionOn.new("sophie_george_2", "TODO")),
+	"sophie_george_2": Dialogue.new(NoCharacter.new(), "[George hesistantly approaches the room and opens the door]", DialogueActionOn.new("sophie_george_3", "TODO")),
+	"sophie_george_3": Dialogue.new(CharacterMichael.new(), "Pyjamas already? It's only half 11...", DialogueActionOn.new("sophie_george_4", "TODO")),
+	"sophie_george_4": Dialogue.new(CharacterGeorge.new(), "[Nervously] I've got to get up for Church tomorrow?", DialogueActionOn.new("sophie_george_5", "TODO")),
+	"sophie_george_5": Dialogue.new(CharacterMichael.new(), "[Scoffs] Church! That's cute", DialogueActionOn.new("sophie_george_6", "TODO")),
+	"sophie_george_6": Dialogue.new(CharacterMichael.new(), "Everyone knows all the churches went woke years ago", DialogueActionOn.new("sophie_george_7", "TODO")),
+	"sophie_george_7": Dialogue.new(CharacterMichael.new(), "Real Christians don't go to Church...", DialogueActionOn.new("sophie_george_8", "TODO")),
+	"sophie_george_8": Dialogue.new(CharacterSophie.new(), "Yeah George!", DialogueActionOn.new("sophie_george_9", "TODO")),
+	"sophie_george_9": Dialogue.new(CharacterGeorge.new(), "Thank you for your opinion, but I must go to bed.", DialogueActionOn.new("sophie_george_10", "TODO")),
+	"sophie_george_10": Dialogue.new(CharacterMichael.new(), "Ha! Not even willing to debate me! 'Christians' these days...", DialogueActionOn.new("sophie_george_11", "TODO")),
+	"sophie_george_11": Dialogue.new(CharacterGeorge.new(), "Goodnight", DialogueActionOn.new("sophie_tv_0", "TODO")),
+
+	# COLIN_TV: Sophie and Michael pop the TV on
+	"sophie_tv_0": Dialogue.new(NoCharacter.new(), "[They decide to pop the TV on. Switching the lamp seems to intefere with the TV in some way / change the channel. Depending on how long the TV stays on, George may complain about a lack of sleep tomorrow. By switching the channel, you get to see different characters reacting to the same channels in different ways. Please switch the lamp off to proceed to the next section]", DialogueActionForceState.new("sophie_tv_0", "sophie_home_0", false)),
+
+	# SOPHIE_HOME: Sophie and Michael leave the living room and go to their bedroom
+	"sophie_home_0": Dialogue.new(NoCharacter.new(), "[Sophie and Michael leave the living room and go to Sophie's bedroom]", DialogueActionForceState.new("sophie_home_0", "night_time_0")),
+
+	# NIGHT_TIME: All the characters have left the room and gone to bed, leaving the player alone in silence.
+	"night_time_0": Dialogue.new(NoCharacter.new(), "[Silence]", DialogueActionLinear.new("night_time_0_remark", false, 8.0)),
+	"night_time_0_remark": Dialogue.new(NoCharacter.new(), "[NOTE: All dialogue paths merge to this one. There are 3 endings from this point. If you want to return to this point, use the ID 'night_time_0'.]", DialogueActionLinear.new("night_time_1", false, 2.0)),
+	"night_time_1": Dialogue.new(NoCharacter.new(), "[Some very faint snoring]", DialogueActionLinear.new("night_time_2", false, 4.0)),
+	"night_time_2": Dialogue.new(NoCharacter.new(), "[A bird tweeting]", DialogueActionLinear.new("night_time_3", false, 2.0)),
+	"night_time_3": Dialogue.new(NoCharacter.new(), "[Silence]", DialogueActionForceState.new("never_get_robbed_0", "night_time_4", false, 5.0)),
+	"night_time_4": Dialogue.new(NoCharacter.new(), "Suddenly, you hear the back door swing open, followed by footsteps in the room.", DialogueActionOff.new("night_time_5", "scare_robber_away_0", true, 2.0)),
+	"night_time_5": Dialogue.new(NoCharacter.new(), "You can hear frantic rustling of papers, and footsteps moving across the room. They're looking for something.", DialogueActionOff.new("night_time_6", "you_get_robbed_0", true, 5.0)),
+	"night_time_6": Dialogue.new(NoCharacter.new(), "Cling! There is a deafening silence for 2 seconds, before the footsteps resume", DialogueActionOff.new("night_time_7", "you_get_robbed_0")),
+	"night_time_7": Dialogue.new(NoCharacter.new(), "Slam! The door slams shut and you are plunged back into silence", DialogueActionLinear.new("house_gets_robbed_0", false)),
+
+	# NEVER_GET_ROBBED: If the player keeps the lamp on, the robber will never show up at all
+	"never_get_robbed_0": Dialogue.new(NoCharacter.new(), "The robber doesn't show up because the lamp is on. You wake up tomorrow and the game ends after some discussion. [Ending 2/4]", DialogueActionLinear.new("", false, 3.0)),
+
+	# SCARE_ROBBER_AWAY: If the player keeps the lamp on, the robber will never show up at all
+	"scare_robber_away_0": Dialogue.new(NoCharacter.new(), "You scare the robber away, and they don't steal anything. You wake up tomorrow and the game ends after some discussion. [Ending 2/4]", DialogueActionLinear.new("", false, 3.0)),
+
+	# YOU_GET_ROBBED: You attract the robber's attention so they decide to steal you too
+	"you_get_robbed_0": Dialogue.new(NoCharacter.new(), "You attract the robber's attention, and they decide to steal you too. You wake up in the robber's house and the game ends after some discussion. [Ending 4/4]", DialogueActionLinear.new("", false, 3.0)),
+
+	# HOUSE_GETS_ROBBED: You don't do anything to prevent the house getting robbed, so it gets robbed
+	"house_gets_robbed_0": Dialogue.new(NoCharacter.new(), "You don't do anything to prevent the house from being robbed, so it is robbed. You wake up to hear the characters' reactions, and the game ends shortly afterwards. [Ending 3/4]", DialogueActionLinear.new("", false, 3.0)),
 }

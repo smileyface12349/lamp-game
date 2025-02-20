@@ -12,4 +12,14 @@ func change_start_point() -> void:
 	Globals.start_point = startPointTextEdit.text
 
 func start_game() -> void:
+	check_dialogue()
 	get_tree().change_scene_to_file("res://main.tscn")
+
+# Checks for non-empty dead links and flags them to console
+# (empty string means an intentional ending)
+func check_dialogue() -> void:
+	for id: String in AllDialogue.DIALOGUE:
+		var dialogue: Dialogue = AllDialogue.DIALOGUE[id]
+		for result: String in [dialogue.action.on_on, dialogue.action.on_off, dialogue.action.off_on, dialogue.action.off_off]:
+			if result not in AllDialogue.DIALOGUE and result != "":
+				print("DEAD LINK FROM " + id + " TO " + result)
