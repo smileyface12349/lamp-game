@@ -83,7 +83,7 @@ offset_top = 594.0
 offset_right = 1133.0
 offset_bottom = 634.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Last Updated: 18/02"
+text = "Last Updated: 20/02"
 
 [node name="CustomStartTextEdit" type="TextEdit" parent="Panel"]
 layout_mode = 0
