@@ -1,5 +1,5 @@
 extends Character
-class_name CharacterGeorge
+class_name George
 
 func _init() -> void:
 	super("George", Color.DARK_GREEN)
