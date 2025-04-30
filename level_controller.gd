@@ -6,7 +6,8 @@ extends Node
 @export var readingSpeedDropdown: OptionButton 
 @export var controlsHint: RichTextLabel
 
-var current: Dialogue
+var current: DialogueBase
+var current_line: int = 0
 var lamp: bool = false
 var elapsed: float = 0.0
 var timeForDialogue: float = 0.0
@@ -37,8 +38,12 @@ func _process(delta: float) -> void:
 
 	# Switch when time elapsed
 	if elapsed > timeForDialogue:
-		change_state(current.action.get_next(lamp, lamp))
-
+		if not current.next_line():
+			var next: String = current.action.get_next(lamp, lamp)
+			change_state(next)
+		else:
+			display_line()
+		
 	# Fade in
 	animationIn += ANIMATION_IN_CHARACTERS_PER_SECOND * delta
 	dialogueText.text = "[fade start=" + str(floor(animationIn)) + " length=" + str(ANIMATION_FADE_LENGTH) + "]" + current.get_text()
@@ -63,7 +68,8 @@ func _input(event: InputEvent) -> void:
 		else:
 			dialogueText.add_theme_color_override("default_color", Color.WHITE)
 
-# Change the current piece of dialogue
+
+# Change the current piece of dialogue to a new id
 func change_state(id: String) -> void:
 	# If they've reached the end
 	if id not in AllDialogue.DIALOGUE:
@@ -75,10 +81,7 @@ func change_state(id: String) -> void:
 
 	# Change the dialogue state
 	current = AllDialogue.DIALOGUE[id]
-	dialogueText.text = current.get_text()
-	timeForDialogue = current.get_total_time(wpm, extra_seconds)
-	elapsed = 0
-	animationIn = -ANIMATION_FADE_LENGTH
+	display_line()
 
 	# Process special behaviours
 	if not current.flags.is_empty():
@@ -86,6 +89,13 @@ func change_state(id: String) -> void:
 			controlsHint.show()
 		elif "HIDE_CONTROLS" in current.flags:
 			controlsHint.hide()
+
+func display_line() -> void:
+	# Change the dialogue state
+	dialogueText.text = current.get_text()
+	timeForDialogue = current.get_total_time(wpm, extra_seconds)
+	elapsed = 0
+	animationIn = -ANIMATION_FADE_LENGTH
 
 # User has adjusted their reading speed
 func reading_speed_changed(index: int) -> void:
