@@ -74,13 +74,13 @@ func _input(event: InputEvent) -> void:
 
 # Change the current piece of dialogue to a new id
 func change_state(id: String) -> void:
+	# Track the path (only for testing purposes)
+	Globals.path.append(id)
+
 	# If they've reached the end
 	if id not in AllDialogue.DIALOGUE:
 		get_tree().change_scene_to_file("res://game_over.tscn")
 		return
-
-	# Track the path (only for testing purposes)
-	Globals.path.append(id)
 
 	# Change the dialogue state
 	current = AllDialogue.DIALOGUE[id]
