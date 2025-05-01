@@ -2,16 +2,17 @@ extends Node
 
 @export var lampOn: Panel
 @export var lampOff: Panel
+@export var lampDisabled: Panel
 @export var dialogueText: RichTextLabel
 @export var readingSpeedDropdown: OptionButton 
 @export var controlsHint: RichTextLabel
 
 var current: DialogueBase
-var current_line: int = 0
 var lamp: bool = false
 var elapsed: float = 0.0
 var timeForDialogue: float = 0.0
 var animationIn: float = -ANIMATION_FADE_LENGTH
+var powered: bool = true
 
 var wpm: float
 var extra_seconds: float
@@ -57,6 +58,8 @@ func _process(delta: float) -> void:
 
 # Toggle lamp with space bar
 func _input(event: InputEvent) -> void:
+	if not powered:
+		return
 	if Input.is_action_just_pressed("toggle_lamp"):
 		if current.action.interrupt:
 			change_state(current.action.get_next(lamp, !lamp))
@@ -89,6 +92,12 @@ func change_state(id: String) -> void:
 			controlsHint.show()
 		elif "HIDE_CONTROLS" in current.flags:
 			controlsHint.hide()
+		if "POWERED" in current.flags:
+			powered = true
+			lampDisabled.hide()
+		elif "UNPOWERED" in current.flags:
+			powered = false
+			lampDisabled.show()
 
 func display_line() -> void:
 	# Change the dialogue state

@@ -9,7 +9,7 @@ static var DIALOGUE: Dictionary = {
 	"ERROR": Dialogue.new(NoCharacter.new(), "Hello, this is an error message. Hopefully you know what it means. You will now be taken to the game over screen.", Action.new("", "", "", ""), 5.0),
 	
 	# INITIAL: The characters walk into the room and try to switch the light on
-	"initial_1": LongDialogue.new([
+	"initial": LongDialogue.new([
 		Line.new(NoCharacter.new(), "[You hear a door closing in the distance, followed by some distant conversation that you can barely hear]"),
 		Line.new(Colin.new(), "[inaudible] great thanks! [inaudible]"),
 		Line.new(Wendy.new(), "I GOT THE JOB!!!"),
@@ -19,25 +19,34 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Colin.new(), "Look forward to hearing more about it later."),
 		Line.new(Colin.new(), "But first, who wants a cuppa?"),
 		Line.new(Laurie.new(), "Uh, yeah, coffee, please."),
+		Line.new(Edmund.new(), "Bit late for coffee..."),
 		Line.new(Wendy.new(), "We'll both have tea please! Decaf for him."),
 		Line.new(Colin.new(), "Ok, 2 teas and a coffee! Make yourselves comfortable in the living room."),
-		Line.new(NoCharacter.new(), "[You hear footsteps getting louder and then a door closing]"),
+		Line.new(NoCharacter.new(), "[You hear footsteps getting louder and then a door closing]")
+	], ActionOff.new("initial_2", "on_outside")),
+	"initial_2": LongDialogue.new([
 		Line.new(Wendy.new(), "Blimey it's dark in 'ere! Hey! Where's the old lamp gone?"),
 		Line.new(Wendy.new(), "He's really changed the bloody lamp in the past two weeks?"),
-		Line.new(NoCharacter.new(), "", 1.0),
+		Line.new(NoCharacter.new(), "", 1.0)
+	], ActionOff.new("initial_3", "sensor_on")),
+	"initial_3": LongDialogue.new([
 		Line.new(Edmund.new(), "Doesn't even have a switch! What kind of idiot would make a lamp without a switch?"),
 		Line.new(Laurie.new(), "Maybe it's a smart lamp?"),
 		Line.new(Edmund.new(), "[Scoffs] Why does everything have to be smart these days?"),
 		Line.new(Wendy.new(), "It doesn't seem to be very smart if it's not turning on when we want it to..."),
 		Line.new(Edmund.new(), "Anyone got any idea how to switch this thing on?"),
-		Line.new(Wendy.new(), "I'll have a go"),
+		Line.new(Wendy.new(), "I'll have a go")
+	], ActionOff.new("initial_4", "smart_on")),
+	"initial_4": LongDialogue.new([
 		Line.new(NoCharacter.new(), "[You feel multiple sharp pains in your side. It hurts a little, although the pain fades quickly]"),
 		Line.new(Edmund.new(), "I don't think that's going to work, sweetheart."),
 		Line.new(Edmund.new(), "Come on then, Mr Computer Science. Amaze us with your infinite wisdom..."),
 		Line.new(NoCharacter.new(), "[You feel one significant bash in your side, bigger than the others. Despite being a lamp, you have developed a significant bruise there.]"),
 		Line.new(Edmund.new(), "Oh for god's sake Laurie. You literally studied Computer Science, when has bashing something ever fixed it?"),
 		Line.new(Wendy.new(), "Worked for the downstairs printer last week..."),
-		Line.new(Laurie.new(), "Nope, can't see how it works. Wouldn't want to try anything else without Colin here."),
+		Line.new(Laurie.new(), "Nope, can't see how it works. Wouldn't want to try anything else without Colin here.")
+	], ActionOff.new("initial_5", "bashing_on")),
+	"initial_5": LongDialogue.new([
 		Line.new(NoCharacter.new(), "[You hear some footsteps getting louder]"),
 		Line.new(Wendy.new(), "I'll get it!"),
 		Line.new(NoCharacter.new(), "[You hear someone scurry towards the door, and then the door opening]"),
@@ -51,18 +60,58 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Wendy.new(), "You shouldn't joke about that, sweetheart."),
 		Line.new(Laurie.new(), "[i]Asking[/i] it? You think [i]that[/i] is more logical? Next time the printer breaks, how about you try just [i]asking[/i] it nicely? Idiot."),
 		Line.new(Colin.new(), "Anyway, let's see if this lamp will turn on when I ask it to."),
+	], ActionOff.new("initial_6", "colin_on")),
+	"initial_6": LongDialogue.new([
 		Line.new(Colin.new(), "Lamp on!", 3.0),
 		Line.new(Colin.new(), "Please could you switch on, kind lamp?", 3.0),
 		Line.new(Colin.new(), "Oh, come on you stupid thing!"),
+	], ActionOff.new("initial_7", "switch_on"), ["SHOW_CONTROLS"]),
+	"initial_7": LongDialogue.new([
 		Line.new(NoCharacter.new(), "[You feel a really light touch, but it's precisely where the bruise is so it hurts way more than it should]"),
 		Line.new(Edmund.new(), "Tried that already..."),
-	], Action.new()),
+	], ActionOff.new("initial_8", "bashing_on")),
+	"initial_8": LongDialogue.new([
+		Line.new(Laurie.new(), "How about, sort of, switching it off and on again?"),
+		Line.new(Edmund.new(), "Is that the only thing you've learned from your degree?"),
+		Line.new(Wendy.new(), "Stop being mean, sweetheart. I think it's a sensible idea."),
+		Line.new(Edmund.new(), "Even if it was a sensible idea, we have very much established that THERE IS NO SWITCH!"),
+		Line.new(Laurie.new(), "Oh stop criticising every flipping thing I say! I mean at the wall you idiot!"),
+		Line.new(Edmund.new(), "Could've said that then..."),
+		Line.new(Wendy.new(), "Good idea Laurie! I'll do it!"),
+		Line.new(NoCharacter.new(), "[Rustling and movement]"),
+		Line.new(NoCharacter.new(), "[A distinctive click]"),
+		Line.new(Wendy.new(), "Whoops, that's me phone charger. Let me try the other -"),
+	], ActionOff.new("initial_9", "refuse_moral_1")),
+	"initial_9": LongDialogue.new([
+		EmptyLine.new(3.0),
+	], ActionOff.new("initial_10", "on_off_worked", false), ["UNPOWERED"]),
+	"initial_10": LongDialogue.new([
+		Line.new(Wendy.new(), "- back on!"),
+		Line.new(Wendy.new(), "Try now!"),
+		Line.new(Colin.new(), "Lamp on!", 3.0),
+		Line.new(Wendy.new(), "What if the bulb has gone?"),
+		Line.new(Colin.new(), "[Sigh] The bulb is fairly new but I can change it if you think it'll help..."),
+		Line.new(Colin.new(), "I'll go and get a new bulb from the utility room."),
+		Line.new(NoCharacter.new(), "[You hear footsteps as the door opens and closes. While I'm here, I just wanted to remind you that you are still in great pain due to your bruises, in case you forgot.]"),
+	], ActionOff.new("smart_discussion", "on_off_worked"), ["POWERED"]),
+
+	# SMART_DISCUSSION: The lamp is still off, and the characters discuss the advancement of technology
+	"smart_discussion": LongDialogue.new([
+		Line.new(Edmund.new(), "Why does everything have to be 'smart' these days? First it was phones, now it's fridges and washing machines!"),
+		Line.new(Wendy.new(), "And now lamps, maybe?"),
+		Line.new(Edmund.new(), "I mean, what's next? Smart [i]toilets[/i]? Pens? Shower gel?"),
+		Line.new(Laurie.new(), "Why do you always have to be so skeptical of change? Things are getting better, do you not see?"),
+		Line.new(Edmund.new(), "\"Better\". Mental health issues up. Depression up. Suicide up. How are things getting better?"),
+		# TODO: Continue this, using the fact that Laurie struggles with depression, and the impact of technology on this. Talk about social media bans and stuff.
+	], ActionOff.new("smart_discussion", "random_on")),
 
 	# ON_OUTSIDE: The player switches the lamp on before the characters enter the room. (maybe only do this when they enter the room?)
 
 	# SENSOR: The player switches the lamp on as the characters walk in, and they assume it's a sensor.
 
 	# SWITCH_ON: The player switches the lamp on when asked.
+
+	# COLIN_ON: The lamp switches on when Colin enters the room, but not explicitly asked to
 
 	# REFUSE_MORAL: If the player keeps refusing to switch on, then Colin asks some really obvious moral questions to try and encourage it. If they switch, go to the real moral questions
 	"refuse_moral_1": Dialogue.new(Colin.new(), "Switch on if you think that murder is wrong", ActionOff.new("refuse_moral_2", "refuse_then_cooperate_1"), 3.0),

@@ -19,7 +19,8 @@ func start_game() -> void:
 # (empty string means an intentional ending)
 func check_dialogue() -> void:
 	for id: String in AllDialogue.DIALOGUE:
-		var dialogue: Dialogue = AllDialogue.DIALOGUE[id]
-		for result: String in [dialogue.action.on_on, dialogue.action.on_off, dialogue.action.off_on, dialogue.action.off_off]:
-			if result not in AllDialogue.DIALOGUE and result != "":
-				print("DEAD LINK FROM " + id + " TO " + result)
+		var dialogue: DialogueBase = AllDialogue.DIALOGUE[id]
+		if dialogue.action is Action:
+			for result: String in [dialogue.action.on_on, dialogue.action.on_off, dialogue.action.off_on, dialogue.action.off_off]:
+				if result not in AllDialogue.DIALOGUE and result != "":
+					print("DEAD LINK FROM " + id + " TO " + result)

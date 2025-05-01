@@ -29,8 +29,8 @@ theme = ExtResource("2_2jgcf")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 17.0
-offset_bottom = 167.0
+offset_top = 50.0
+offset_bottom = 200.0
 grow_horizontal = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 96
@@ -42,23 +42,15 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 70.0
-offset_top = 183.0
+offset_top = 234.0
 offset_right = -74.0
-offset_bottom = 491.0
+offset_bottom = 391.0
 grow_horizontal = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "Thanks for checking out my prototype version of the game! In this game, you play as a lamp in someone's living room. There is only one button you can use - spacebar to toggle the lamp. Gameplay largely consists of listening to what characters are saying (hopefully the dialogue is interesting to listen to) and being a bit mischevious in when you toggle the lamp. You may toggle the lamp at any time, however this will often interrupt what characters are saying, so you might unintentionally skip something!
-
-The game does not feature a save system. I would recommend you play it through 2-3 times as there is a lot of branching.
-
-Some questions you may want to focus on when giving feedback:
-[ul]
-Is the dialogue interesting to read?
-Are the characters well-designed?
-Did you switch the lamp at an interesting moment? Did you feel rewarded for it?
-Did you generally have an idea of the consequences of switching before doing it? How did this impact your experience?
-Are there any particular instances where the dialogue didn't quite seem to flow?[/ul]"
+text = "[center]A game where you play as a lamp, obviously."
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 1
@@ -66,13 +58,13 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 483.0
-offset_top = -140.0
-offset_right = -476.0
-offset_bottom = -93.0
+offset_left = 431.0
+offset_top = -275.0
+offset_right = -445.0
+offset_bottom = -208.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_dnhq0")
 text = "Start Game"
 
@@ -83,22 +75,22 @@ offset_top = 594.0
 offset_right = 1133.0
 offset_bottom = 634.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Last Updated: 21/02"
+text = "Development Version"
 
 [node name="CustomStartTextEdit" type="TextEdit" parent="Panel"]
 layout_mode = 0
-offset_left = 402.0
+offset_left = 359.0
 offset_top = 588.0
-offset_right = 552.0
+offset_right = 509.0
 offset_bottom = 626.0
-text = "initial_0"
-placeholder_text = "Default: initial_0"
+text = "start"
+placeholder_text = "Default: start"
 
 [node name="CustomStartLabel" type="RichTextLabel" parent="Panel"]
 layout_mode = 0
 offset_left = 27.0
-offset_top = 580.0
+offset_top = 594.0
 offset_right = 392.0
 offset_bottom = 631.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Custom Start Point (this is a developer option that will not be present on the final game): "
+text = "Custom Start Point (developer option): "
