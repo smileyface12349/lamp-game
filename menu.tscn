@@ -6,12 +6,13 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dnhq0"]
 bg_color = Color(0.35541, 0.66, 0.1914, 1)
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("startButton", "startPointTextEdit")]
+[node name="Menu" type="Control" node_paths=PackedStringArray("startButton", "startPointTextEdit", "wordsDisplay")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_hw8f6")
 startButton = NodePath("Panel/Button")
 startPointTextEdit = NodePath("Panel/CustomStartTextEdit")
+wordsDisplay = NodePath("Panel/WordCount")
 
 [node name="ExtendedBackground" type="Panel" parent="."]
 layout_mode = 0
@@ -50,7 +51,9 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/italics_font_size = 16
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "[center]A game where you play as a lamp, obviously."
+text = "[center]A game where you play as a lamp, obviously.
+
+This game is designed to be played multiple times."
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 1
@@ -59,9 +62,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 431.0
-offset_top = -275.0
+offset_top = -235.0
 offset_right = -445.0
-offset_bottom = -208.0
+offset_bottom = -168.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 48
@@ -71,9 +74,9 @@ text = "Start Game"
 [node name="Version" type="RichTextLabel" parent="Panel"]
 layout_mode = 0
 offset_left = 963.0
-offset_top = 594.0
+offset_top = 561.0
 offset_right = 1133.0
-offset_bottom = 634.0
+offset_bottom = 601.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Development Version"
 
@@ -94,3 +97,13 @@ offset_right = 392.0
 offset_bottom = 631.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Custom Start Point (developer option): "
+
+[node name="WordCount" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 941.0
+offset_top = 601.0
+offset_right = 1133.0
+offset_bottom = 641.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[right]Word Count: Loading"
