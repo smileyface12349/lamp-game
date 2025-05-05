@@ -67,14 +67,18 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("toggle_lamp"):
 		if current.action.interrupt:
 			change_state(current.action.get_next(lamp, !lamp, state))
-		lamp = !lamp
-		lampOn.visible = lamp
-		lampOff.visible = !lamp
 		state["total_flips"] += 1
-		if lamp:
-			dialogueText.add_theme_color_override("default_color", Color.BLACK)
-		else:
-			dialogueText.add_theme_color_override("default_color", Color.WHITE)
+		update_lamp_visuals()
+
+# Update visual state of lamp to match its state. Call each time the lamp is toggled (and more if you want).
+func update_lamp_visuals() -> void:
+	lamp = !lamp
+	lampOn.visible = lamp
+	lampOff.visible = !lamp
+	if lamp and powered:
+		dialogueText.add_theme_color_override("default_color", Color.BLACK)
+	else:
+		dialogueText.add_theme_color_override("default_color", Color.WHITE)
 
 
 # Change the current piece of dialogue to a new id

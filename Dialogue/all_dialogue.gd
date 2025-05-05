@@ -12,9 +12,13 @@ static var DIALOGUE: Dictionary = {
 	"initial": LongDialogue.new([
 		Line.new(NoCharacter.new(), "[You hear a door closing in the distance, followed by some distant conversation that you can barely hear.]"),
 		Line.new(Colin.new(), "...great thanks!"),
-		Line.new(Wendy.new(), "OMG I'm so excited to see you again!"),
-		Line.new(Laurie.new(), "Yeah, I like going out, otherwise I'm just sitting in my room, and, uh, getting a bit lonely."),
-		Line.new(Colin.new(), "First thing first, who wants a cuppa?"),
+		Line.new(Wendy.new(), "I got the job!!"),
+		Line.new(Laurie.new(), "W-what job?"),
+		Line.new(Edmund.new(), "...group chat?"),
+		Line.new(Colin.new(), "Congratulations! Look forward to hearing more about it later."),
+		# Line.new(Wendy.new(), "OMG I'm so excited to see you again!"),
+		# Line.new(Laurie.new(), "Yeah, I like going out, otherwise I'm just sitting in my room, and, uh, getting a bit lonely."),
+		Line.new(Colin.new(), "But first, who wants a cuppa?"),
 		Line.new(Laurie.new(), "Uh, yeah, coffee, please."),
 		Line.new(Edmund.new(), "Isn't it a little late for coffee..."),
 		Line.new(Laurie.new(), "Uh, I guess."),
@@ -117,7 +121,16 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Laurie.new(), "If only I did. If only. Maybe I wouldn't be as depressed."),
 		Line.new(Wendy.new(), "I'm sorry, Laurie. If you ever need to talk, I'm here for you."),
 		Line.new(Laurie.new(), "Thank you, Wendy.")
-	], ActionOff.new("change_bulb", "TODO")),
+	], ActionOff.new("change_bulb", "smart_discussion_off")),
+	"smart_discussion_on": LongDialogue.new([
+		Line.new(Edmund.new(), "Oooh, it's on!"),
+		Line.new(Wendy.new(), "[Chuckles] Maybe all it needed was a few insults."),
+		Line.new(Edmund.new(), "[You hear the door open and close.]"),
+	], ActionOn.new("smart_discussion_colin", "on_off")),
+	"smart_discussion_colin": LongDialogue.new([
+		Line.new(Colin.new(), "Wow, it's working again!"),
+		Line.new(Colin.new(), "I knew the bulb was fine..."),
+	], ActionOn.new("testing", "on_off")),
 
 	# CHANGE_BULB: The discussion is interrupted by Colin's return
 	"change_bulb": LongDialogue.new([
@@ -128,7 +141,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Wendy.new(), "Are you not going to switch it off?"),
 		Line.new(Colin.new(), "Nah, it'll be fine."),
 		Line.new(NoCharacter.new(), "[Ah, great. Welp, here goes!]"),
-	], ActionOff.new("change_bulb_2", "colin_on")),
+	], ActionOff.new("change_bulb_2", "smart_discussion_colin")),
 	"change_bulb_2": LongDialogue.new([
 		Line.new(NoCharacter.new(), "[Oooh! You feel someone grasp your bulb, and it's rather arousing. As it squeezes you feel an immense rush of pleasure before some slight pain as it starts to twist.]"),
 		Line.new(NoCharacter.new(), "[Owww! The more it twists, the more it hurts. Twist, owwww! Twist, owwwwwwww!]"),
@@ -163,7 +176,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Wendy.new(), "Adorable, isn't he?"),
 		Line.new(Edmund.new(), "[Scoffs] Like a 10-year old child."),
 		Line.new(Colin.new(), "You two aren't having kids then, eh?"),
-		# TODO: Streamline below discussion
+		# TODO: Streamline below discussion - maybe cut it?
 		Line.new(Edmund.new(), "No, there's too many people already. More births is just more suffering."),
 		Line.new(Edmund.new(), "How is having kids going to help me?"),
 		Line.new(Edmund.new(), "And they'll just be plunged into the same meaningless existence as the rest of us."),
@@ -177,13 +190,40 @@ static var DIALOGUE: Dictionary = {
 	], ActionOn.new("normal_conversation", "on_off")),
 
 	# ON_OFF: The player switches the lamp off after previously switching it off 
-	"on_off": LongDialogue.new([
+	"on_off_no_colin": LongDialogue.new([
 		Line.new(Laurie.new(), "Aaand off."),
 		Line.new(Laurie.new(), "Maybe it's broken"),
 		Line.new(Edmund.new(), "Let's have a look."),
-	], ActionOff.new("initial_3", "on_off_on")),
+	], ActionOff.new("on_off_2_no_colin", "on_off_on_no_colin")),
+	"on_off_colin": LongDialogue.new([
+		Line.new(Laurie.new(), "Aaand off."),
+		Line.new(Laurie.new(), "Maybe it's broken"),
+	], ActionOff.new("on_off_colin_2", "on_off_on")),
+
+	"on_off_2_no_colin": LongDialogue.new([
+		Line.new(NoCharacter.new(), "[You hear footsteps getting louder.]"),
+		Line.new(Wendy.new(), "I'll get it!"),
+		Line.new(NoCharacter.new(), "[The door opens and closes.]"),
+		Line.new(Colin.new(), "Oh, sorry, I forgot to tell you about the new lamp!"),
+		Line.new(Wendy.new(), "It's been turning on and off weirdly."),
+	], ActionOff.new("on_off_colin", "on_off_on")),
+
+	"on_off_colin_2": LongDialogue.new([
+		Line.new(Colin.new(), "It should be working..."),
+		Line.new(Colin.new(), "It should respond to what I say."),
+		Line.new(Edmund.new(), "[Scoffs] Go on then."),
+	], ActionOff.new("on_off_colin_3", "on_off_on")),
+	"on_off_colin_3": LongDialogue.new([
+		Line.new(Colin.new(), "Lamp on!", 3.0),
+		Line.new(Colin.new(), "Please could you switch on, kind lamp?", 3.0),
+		Line.new(Colin.new(), "Oh, come on you stupid thing!", 3.0),
+	], ActionOff.new("refuse_moral_14", "testing_2")),
+
 
 	# ON_OFF_ON: And back on again...
+	"on_off_on_no_colin": LongDialogue.new([
+		Line.new(NoCharacter.new(), "[You hear footsteps as the door opens and closes.]"),
+	], ActionOn.new("on_off_on", "on_off_on", false)),
 	"on_off_on": LongDialogue.new([
 		Line.new(Laurie.new(), "And back on again. I think it's just broken."),
 	], ActionOn.new("haunted", "haunted", false)),
@@ -192,8 +232,6 @@ static var DIALOGUE: Dictionary = {
 	"haunted": LongDialogue.new([
 		Line.new(Wendy.new(), "Oooh, maybe it's haunted?"),
 		Line.new(Edmund.new(), "Don't be ridiculous."),
-		# TODO: Start to make theories about it being haunted / commenting on the pattern of the lamp.
-		# Ultimately, if the player doesn't behave then this path will have to be cut off by someone smashing the lamp.
 	], ActionForceState.new("haunted_4", "haunted_2")),
 	"haunted_2": LongDialogue.new([
 		Line.new(Laurie.new(), "Nope, the lamp says it's not haunted."),
@@ -245,7 +283,7 @@ static var DIALOGUE: Dictionary = {
 	"court": LongDialogue.new([
 		Line.new(Judge.new(), "Order! Order!"),
 		Line.new(Colin.new(), "I swear by Almighty God that the evidence I shall give shall be the truth, the whole truth, and nothing but the truth."),
-		Line.new(Judge.new(), "What happened, Colin?"),
+		Line.new(Judge.new(), "Thank you Colin. Now, tell us what happened."),
 		Line.new(Colin.new(), "I-I don't know. The lamp just started flashing and then Laurie started having a seizure."),
 		Line.new(Judge.new(), "And what did you do?"),
 		Line.new(Colin.new(), "I unplugged it as soon as I could and then called an ambulance."),
@@ -326,8 +364,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Laurie.new(), "I don't want to talk to a stranger about how much of a failure I am."),
 		Line.new(Wendy.new(), "You're not a failure! Please Laurie, you'd really benefit from some counselling."),
 		Line.new(Laurie.new(), "I'll think about it."),
-		# TODO: Don't skip straight to initial_5 when switching off, have a little bit of dialogue with the characters complaining about it (but very short).
-	], ActionOn.new("colin_returns", "initial_5")),
+	], ActionOn.new("colin_returns", "on_off")),
 
 	# COLIN_RETURNS: Colin comes back with the drinks
 	"colin_returns": LongDialogue.new([
@@ -389,14 +426,36 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Edmund.new(), "Yeah, right."),
 		Line.new(Colin.new(), "Just you watch!"),
 	], ActionOn.new("testing_2", "on_off")),
-	"testing_2": Dialogue.new(Colin.new(), "Lamp, switch off!", ActionOn.new("TODO", "testing_3"), 3.0),
-	"testing_3": Dialogue.new(Colin.new(), "And on!", ActionOff.new("TODO", "testing_4"), 3.0),
+	"testing_2": Dialogue.new(Colin.new(), "Lamp, switch off!", ActionOn.new("testing_2_fail", "testing_3"), 3.0),
+	"testing_3": Dialogue.new(Colin.new(), "And on!", ActionOff.new("testing_3_fail", "testing_4"), 3.0),
 	"testing_4": LongDialogue.new([
 		Line.new(Colin.new(), "See! It works!"),
 		Line.new(Wendy.new(), "Wow!"),
 		Line.new(Laurie.new(), "Ok, it's a voice activated lamp. They've been around for ages."),
 		Line.new(Colin.new(), "It's cooler than that though..."),
-	], ActionOff.new("intelligence_test", "TODO")),
+	], ActionOff.new("intelligence_test", "testing_broken")),
+
+	"testing_2_fail": Dialogue.new(Colin.new(), "I said off!", ActionOn.new("testing_broken", "testing_3"), 3.0),
+	"testing_3_fail": Dialogue.new(Colin.new(), "That means you! On, please.", ActionOff.new("testing_broken", "testing_4"), 3.0),
+
+	"testing_broken": LongDialogue.new([
+		Line.new(Colin.new(), "Well, it doesn't seem to be behaving itself today."),
+		Line.new(Colin.new(), "I'm sure that this lamp is more intelligent than it seems."),
+		Line.new(Edmund.new(), "Nope, just a normal lamp."),
+		Line.new(Colin.new(), "Oh well, I thought it was special."),
+		Line.new(Colin.new(), "If this one can't say on, then I'll just go and get the old lamp."),
+	], ActionForceState.new("testing_on", "get_old_lamp", false)),
+
+	"testing_on": LongDialogue.new([
+		Line.new(Colin.new(), "Ok, maybe it is listening now."),
+		Line.new(Colin.new(), "Just to check - lamp, switch off!", 3.0),
+		Line.new(Colin.new(), "Last chance..."),
+	], ActionOn.new("get_old_lamp", "intelligence_test")),
+
+	"get_old_lamp": LongDialogue.new([
+		EmptyLine.new(3.0),
+		Line.new(NoCharacter.new(), "You were never plugged back in. Who knows what happened to you. The end."),
+	], ActionLinear.new("", false), ["UNPOWERED"]),
 
 	# REFUSE_MORAL: If the player keeps refusing to switch on, then Colin asks some really obvious moral questions to try and encourage it. If they switch, go to the real moral questions
 	"refuse_moral_1": Dialogue.new(Colin.new(), "Switch on if you think that murder is wrong", ActionOff.new("refuse_moral_2", "refuse_then_cooperate_1"), 3.0),
@@ -416,8 +475,9 @@ static var DIALOGUE: Dictionary = {
 	"refuse_moral_12": Dialogue.new(Wendy.new(), "Switch on if brexit was a stupid idea", ActionOff.new("refuse_moral_13", "refuse_then_cooperate_1"), 3.0),
 	"refuse_moral_13": Dialogue.new(Wendy.new(), "Ok well that settles it then, the lamp is broken!", ActionOff.new("refuse_moral_13a", "refuse_then_cooperate_1")),
 	"refuse_moral_13a": Dialogue.new(Edmund.new(), "As if that is more conclusive than the previous ones...", ActionOff.new("refuse_moral_14", "refuse_then_cooperate_1")),
-	"refuse_moral_14": Dialogue.new(Colin.new(), "Ugh. Useless lamp. Oh well, I guess we'll have to move to the kitchen.", ActionOff.new("refuse_moral_15", "refuse_then_cooperate_1"), 3.0),
-	"refuse_moral_15": Dialogue.new(Colin.new(), "[You hear the door opening and closing. The end.]", ActionOff.new("", "refuse_then_cooperate_1"), 3.0),
+	"refuse_moral_14": Dialogue.new(Colin.new(), "Ugh. Useless lamp. Oh well, I'll go and get the old one.", ActionOff.new("get_old_lamp", "refuse_then_cooperate_1"), 3.0),
+	#"refuse_moral_15": Dialogue.new(Colin.new(), "[You hear the door opening and closing. The end.]", ActionOff.new("", "refuse_then_cooperate_1"), 3.0),
+	
 	# "refuse_moral_15": Dialogue.new(Colin.new(), "3... 2.... 1...", ActionOff.new("refuse_moral_16", "refuse_then_cooperate_1"), 2.0),
 	# "refuse_moral_16": Dialogue.new(Edmund.new(), "Colin, don't! It might start working again later!", ActionOff.new("refuse_moral_17", "refuse_then_cooperate_1"), 2.0),
 	# "refuse_moral_17": Dialogue.new(Colin.new(), "TOO LATE!", ActionOff.new("refuse_moral_18", "refuse_then_cooperate_1")),
@@ -434,60 +494,6 @@ static var DIALOGUE: Dictionary = {
 	
 	# REFUSE_COOPERATE_REFUSE: If the player then messes it up
 	"refuse_cooperate_refuse_1": Dialogue.new(Colin.new(), "Ah, clearly not.", ActionForceState.new("on_off_on", "on_off")),
-
-	# SENSOR_OFF: The player switches the light off while the characters think it's a sensor
-	# "sensor_off_0": Dialogue.new(Laurie.new(), "[laughs] Clearly not, it must just be broken", ActionOff.new("sensor_off_1", "sensor_broken_0")),
-	# "sensor_off_1": Dialogue.new(Colin.new(), "No it's not! Look, it'll turn back on any moment now...", ActionOff.new("initial_8", "sensor_cooperate_0")),
-
-	# # SENSOR_COOPERATE: The player co-operates with Colin and turns the light back on after turning it off
-	# "sensor_cooperate_0": Dialogue.new(Colin.new(), "See!", ActionOn.new("voice_activated_0", "sensor_cooperate_1")),
-	# "sensor_cooperate_1": Dialogue.new(Colin.new(), "Nevermind, I don't think it's working properly today", ActionLinear.new("haunted")),
-
-	# # SENSOR_BROKEN: The player switches the light back on too early, and the players think it's broken
-	# "sensor_broken_0": Dialogue.new(Wendy.new(), "Yep, definitely broken...", ActionOn.new("sensor_broken_1", "haunted")),
-	# "sensor_broken_1": Dialogue.new(Colin.new(), "It's not broken. It just... can be a bit tempermental", ActionOn.new("sensor_broken_2", "haunted")),
-	# "sensor_broken_2": Dialogue.new(Colin.new(), "See, it's staying on now! Look, it will listen to me now!", ActionOn.new("voice_activated_2", "haunted")),
-
-	# BROKEN: If the player switches it too many times, the characters conclude that it is broken. They then proceed to ignore the lamp.
-	# "broken_0": Dialogue.new(Edmund.new(), "Oh well, I guess we don't need the lamp...", ActionLinear.new("broken_1", false)),
-	# "broken_1": Dialogue.new(Laurie.new(), "[A little upset] It's me, isn't it.", ActionLinear.new("broken_2", false)),
-	# "broken_2": Dialogue.new(Laurie.new(), "[Tears starting to form] Why does everything go wrong when I'm involved?", ActionLinear.new("broken_3", false)),
-	# "broken_3": Dialogue.new(Laurie.new(), "I can leave if I'm not wanted...", ActionLinear.new("broken_4", false)),
-	# "broken_4": Dialogue.new(Wendy.new(), "It's not your fault! Of course we want you here!", ActionLinear.new("broken_4a", false)),
-	# "broken_4a": Dialogue.new(Edmund.new(), "Yeah of course we all want you here!!", ActionLinear.new("broken_5", false)),
-	# "broken_5": Dialogue.new(Laurie.new(), "Nothing ever goes well for me in life! You two are married, all of you have good jobs...", ActionLinear.new("broken_6", false)),
-	# "broken_6": Dialogue.new(Laurie.new(), "But for me, I'm just stuck working in a café! No relationship, no decent job, no car", ActionLinear.new("broken_6a", false)),
-	# "broken_6a": Dialogue.new(Edmund.new(), "I don't have a car either! Cycling is great for your physical health!", ActionLinear.new("broken_6b", false)),
-	# "broken_6b": Dialogue.new(Wendy.new(), "[whispers] Not now, sweetheart...", ActionLinear.new("broken_7", false)),
-	# "broken_7": Dialogue.new(Laurie.new(), "I was good in school, but I just can't seem to land a bloody job", ActionLinear.new("broken_8", false)),
-	# "broken_8": Dialogue.new(Laurie.new(), "I thought there was a shortage of programmers...", ActionLinear.new("broken_9", false)),
-	# "broken_9": Dialogue.new(Laurie.new(), "Nobody invites me to parties. And when they do, I just make it worse!", ActionLinear.new("broken_10", false)),
-	# "broken_10": Dialogue.new(Laurie.new(), "I'm just a boring guy who's no good at anything!", ActionLinear.new("broken_11", false)),
-	# "broken_11": Dialogue.new(Laurie.new(), "And now this STUPID LAMP won't work!!", ActionLinear.new("broken_12", false)),
-	# "broken_12": Dialogue.new(Laurie.new(), "WHEN WILL ANYTHING EVER GO RIGHT IN MY LIFE???", ActionLinear.new("broken_13", false)),
-	# "broken_13": Dialogue.new(Edmund.new(), "Don't be silly, Laurie. It's not your fault that the lamp doesn't work...", ActionLinear.new("broken_14", false)),
-	# "broken_14": Dialogue.new(Laurie.new(), "DON'T CALL ME SILLY!", ActionLinear.new("broken_15", false)),
-	# "broken_15": Dialogue.new(Colin.new(), "I know, I can get this lamp to co-operate! Hopefully that'll make you feel better...", ActionLinear.new("broken_16", false)),
-	# "broken_16": Dialogue.new(Colin.new(), "In 5 seconds, I want you to be on. Do I make myself clear?", ActionForceState.new("broken_cooperate_0", "broken_17", false), 3.0),
-	# "broken_17": Dialogue.new(Colin.new(), "ON! Or I'll smash you and throw you in the bin!", ActionForceState.new("broken_cooperate_0", "broken_18", true), 1.0),
-	# "broken_18": Dialogue.new(Laurie.new(), "[Starting to cheer up] Excuse me, are you talking to a lamp?", ActionForceState.new("broken_cooperate_0", "broken_19")),
-	# "broken_19": Dialogue.new(Wendy.new(), "[Laughs] As if it's some [i]sentient lamp[/i]...", ActionForceState.new("broken_cooperate_0", "broken_20")),
-	# "broken_20": Dialogue.new(Colin.new(), "Ah, it's no use. It's just staying off now...", ActionForceState.new("broken_cooperate_0", "broken_21", true), 1.0),
-	# "broken_21": Dialogue.new(Colin.new(), "Hang on a minute, let's try this. In 5 seconds I want you to be off.", ActionForceState.new("broken_22", "broken_cooperate_off_0", false), 3.0),
-	# "broken_22": Dialogue.new(Colin.new(), "See, it's not broken! It's just doing the opposite of what I say.", ActionOn.new("TODO", "broken_23", true), 3.0),
-	# "broken_23": Dialogue.new(Colin.new(), "OH COME ON!!! YOU WORTHLESS PIECE OF METAL AND GLASS!!!", ActionLinear.new("broken_24_ending")),
-	# "broken_24_ending": Dialogue.new(NoCharacter.new(), "Colin smashes you to pieces. The end. [Ending 1/4].", ActionLinear.new("")),
-	
-	# BROKEN_COOPERATE: The player co-operates after convincing them it's broken, and switches the light on
-	# "broken_cooperate_0": Dialogue.new(Colin.new(), "See, it's not completely broken!", ActionOn.new("broken_cooperate_1", "broken_23")),
-	# "broken_cooperate_1": Dialogue.new(Colin.new(), "Let's see if it can follow simple instructions now...", ActionOn.new("voice_activated_2", "broken_23")),
-
-	# # BROKEN_COOPERATE_OFF: The player co-operates after convincing them it's broken, and ends up in an off state
-	# "broken_cooperate_off_0": Dialogue.new(Colin.new(), "See, it's not completely broken!", ActionOff.new("broken_cooperate_off_1", "broken_23")),
-	# "broken_cooperate_off_1": Dialogue.new(Colin.new(), "Let's see if it can follow simple instructions now...", ActionOff.new("broken_cooperate_off_2", "broken_23")),
-	# "broken_cooperate_off_2": Dialogue.new(Colin.new(), "Lamp, switch on!", ActionOff.new("broken_cooperate_off_3_last_chance", "broken_cooperate_off_3"), 3.0),
-	# "broken_cooperate_off_3_last_chance": Dialogue.new(Colin.new(), "One last chance until I smash you to pieces...", ActionOff.new("broken_23", "broken_cooperate_off_3"), 3.0),
-	# "broken_cooperate_off_3": Dialogue.new(Wendy.new(), "Cool!", ActionOn.new("voice_activated_2", "broken_23")),
 	
 	# INTELLIGENCE_TEST: The characters ask the lamp questions to test their intelligence
 	"intelligence_test": LongDialogue.new([
@@ -502,7 +508,7 @@ static var DIALOGUE: Dictionary = {
 	"intelligence_test_3": Dialogue.new(Laurie.new(), "Oh come on that's so easy. If you really want to test it, ask a tough question", ActionOff.new("intelligence_test_4", "intelligence_test_refuse_1")),
 	"intelligence_test_4": Dialogue.new(Laurie.new(), "Switch on if P = NP.", ActionOff.new("intelligence_test_5", "intelligence_test_5", 1.0)),
 	"intelligence_test_5": Dialogue.new(Wendy.new(), "Oh come on, that's an unsolved problem!", ActionEither.new("intelligence_test_6", "intelligence_test_8")),
-	"intelligence_test_6": Dialogue.new(Edmund.new(), "I still think we should test its general knowledge over maths problems.", ActionEither.new("intelligence_test_7", "TOintelligence_test_8")),
+	"intelligence_test_6": Dialogue.new(Edmund.new(), "I still think we should test its general knowledge over maths problems.", ActionEither.new("intelligence_test_7", "intelligence_test_8")),
 	"intelligence_test_7": Dialogue.new(Laurie.new(), "Go on then, outsmart the lamp...", ActionEither.new("intelligence_test_8", "intelligence_test_8")),
 	"intelligence_test_8": Dialogue.new(Edmund.new(), "Switch if Henry VIII had 6 wives.", ActionEither.new("intelligence_test_8_wrong", "intelligence_test_9")),
 	"intelligence_test_8_wrong": Dialogue.new(Wendy.new(), "Wow, didn't think it would get that wrong!", ActionEither.new("intelligence_test_8_wrong_2", "intelligence_test_8_wrong_2")),
@@ -545,13 +551,8 @@ static var DIALOGUE: Dictionary = {
 	"moral_questions_1a_general_5": Dialogue.new(Colin.new(), "See, it's more complicated than you think...", ActionEither.new("moral_questions_2", "moral_questions_1_interrupted")),
 	"moral_questions_1_interrupted": Dialogue.new(Colin.new(), "Oh, the lamp is bored. On to the next one!", ActionEither.new("moral_questions_2", "moral_questions_2")),
 
-	# MORAL_QUESTIONS_2: More questions here
-	"moral_questions_2": Dialogue.new(NoCharacter.new(), "[a few more moral/political questions will be put in here - some discussion amongst the characters will follow each one but not as extensive as the trolley problem discussion]", ActionLinear.new("post_moral_questions_1")),
-
-	# POST_MORAL_QUESTIONS: Some text to force the lamp state to on, then some small discussion to make it seem natural before Sophie walks in
-	"post_moral_questions_1": Dialogue.new(NoCharacter.new(), "[There will be something here to force the lamp state to on, and a short discussion that will be cut off half-way through. Please switch the lamp on now. This is not part of the game.]", ActionForceState.new("sophie_walks_in_0_disclaimer", "post_moral_questions_1", false), 3.0),
-	# TODO: The character notice Sophie in the doorway and call out to her but she refuses. They comment how they never get to see her without Michael.
-
+	# MORAL_QUESTIONS_2: More questions here (but very brief, not really any discussion about each one).
+	"moral_questions_2": Dialogue.new(NoCharacter.new(), "[a few more moral/political questions will be put in here - some discussion amongst the characters will follow each one but not as extensive as the trolley problem discussion]", ActionForceState.new("michael_walks_in", "moral_questions_2")),
 
 	# TODO: Instead, Michael walks in and just starts talking about politics straight away. They have a group discussion, and then one of them ends up leaving depending on the player's choices.
 	"michael_walks_in": LongDialogue.new([
@@ -564,7 +565,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Sophie.new(), "[Mutters something you can't quite hear.]"),
 		Line.new(NoCharacter.new(), "[You hear footsteps approaching and then the door opening and closing.]"),
 		Line.new(Michael.new(), "[Somewhat Sarcastically] How are you guys doing then?"),
-		Line.new(Wendy.new(), "Good thanks! I got a new job!"), # TODO: Change this because the intro changed.
+		Line.new(Wendy.new(), "Good thanks! I got a new job!"),
 		Line.new(Michael.new(), "Have you guys seen the news? I can't believe what Labour just did!"),
 		Line.new(Edmund.new(), "What is it this time..."),
 		Line.new(Michael.new(), "The new Employment Rights Bill gives employers the responsibility to prevent harrassment from customers against their employees."),
@@ -587,12 +588,15 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Colin.new(), "Yeah. Don't worry about it, just watch."),
 		Line.new(Sophie.new(), "[Whispers] We raised so many good points and they're just distracting us with a stupid lamp."),
 		Line.new(Sophie.new(), "[Whispers] I'll count this as another win for team us."),
-	], ActionOn.new("free_speech", "TODO")),
+	], ActionOn.new("free_speech", "sophie_off")),
 
 	# SOPHIE_OFF: The light switches off when Sophie walks in and she gets annoyed
-	# TODO
-	"sophie_off_0": Dialogue.new(NoCharacter.new(), "[MORE DIALOGUE HERE: Sophie gets annoyed at the light switching off, but continues talking regardless (similar to the dialogue when light is kept on)]", ActionOff.new("sophie_off_1", "sophie_walks_in_15")),
-	"sophie_off_1": Dialogue.new(Sophie.new(), "I bet they'll get fed up if that light stays off...", ActionOff.new("sophie_off_1", "sophie_walks_in_15")),
+	"sophie_off": LongDialogue.new([
+		Line.new(Michael.new(), "Is this your fancy new lamp? Clearly useless."),
+		Line.new(Wendy.new(), "Maybe it just doesn't like you."),
+		Line.new(Michael.new(), "Oh, so it's a lamp that can think for itself?"),
+		Line.new(Sophie.new(), "Allegedly."),
+	], ActionOff.new("TODO", "TODO")),
 
 	# FREE_SPEECH: Discussion on free speech, starting with the question point (originally starts in michael_walks_in)
 	"free_speech": LongDialogue.new([
@@ -607,7 +611,7 @@ static var DIALOGUE: Dictionary = {
 	"free_speech_michael_2": LongDialogue.new([
 		Line.new(Colin.new(), "Huh, interesting. So the law isn't there to prevent people from harm?."),
 		Line.new(Michael.new(), "Exactly, who even cares? Oh no my feelings are hurt! Pathetic."),
-	], ActionOff.new("argue_room", "argue_room")),
+	], ActionLinear.new("argue_room")),
 	"free_speech_michael_3": LongDialogue.new([
 		Line.new(Colin.new(), "Stay on if you think that words can cause more harm than physical violence. Switch off if you disagree."),
 		Line.new(Colin.new(), "Interesting. So why not enact laws to protect people from harm?"),
@@ -616,7 +620,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Edmund.new(), "And then we end up with a government that can censor anything it wants."),
 		Line.new(Sophie.new(), "Yeah exactly!"),
 		Line.new(Colin.new(), "Well said."),
-	], ActionOff.new("argue_room", "argue_room")),
+	], ActionLinear.new("argue_room")),
 	"free_speech_laurie": LongDialogue.new([
 		Line.new(Colin.new(), "Ok, the lamp has decided!"),
 		Line.new(Sophie.new(), "What? This is ludicrous! We made so many good points!"),
@@ -630,7 +634,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Colin.new(), "So you don't think free speech is important?"),
 		Line.new(Sophie.new(), "[Whispers] Who's he talking to?"),
 		Line.new(Edmund.new(), "The lamp, keep up."),
-	], ActionOn.new("TODO", "TODO")),
+	], ActionLinear.new("argue_room")),
 
 	# ARGUE_ROOM: Sophie and Michael argue over wanting to use the living room
 	"argue_room": LongDialogue.new([
@@ -654,7 +658,13 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Wendy.new(), "Do you guys think Sophie looks pregnant?"),
 		Line.new(Sophie.new(), "[Shouts] I heard that!"),
 		Line.new(Wendy.new(), "[Shouts] And we can hear your whole conversation too!"),
-	], ActionOn.new("TODO", "TODO")),
+	], ActionOn.new("job_discussion", "argue_room_off")),
+	"argue_room_off": LongDialogue.new([
+		Line.new(Michael.new(), "See, even the lamp agrees."),
+		Line.new(Sophie.new(), "I know right?"),
+		Line.new(Michael.new(), "Anyway, we'll leave you guys to it."),
+		Line.new(Michael.new(), "[Whispers] They won't stay here for long with the lamp off."),
+	], ActionOff.new("colin_leave_off", "job_discussion")),
 
 	# JOB_DISCUSSION: After Sophie and Michael leave, Wendy discusses her new job
 	"job_discussion": LongDialogue.new([
@@ -662,9 +672,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Wendy.new(), "I start in two weeks."),
 		Line.new(Wendy.new(), "I'm really looking forward to it. I've always been interested in weather forecasting so hopefully this will be a good fit."),
 		Line.new(Laurie.new(), "Wow, that's cool. Much cooler than my job."),
-		# TODO: Continue this discussion for a bit of politics.
-		# TODO: Actually, not sure if this is good. The job isn't super necessary, unless it's a controversial job or something interesting.
-	], ActionOn.new("TODO", "TODO")),
+	], ActionOn.new("colin_george_0", "colin_leave_off")),
 
 
 
@@ -675,10 +683,10 @@ static var DIALOGUE: Dictionary = {
 	"colin_george_3": Dialogue.new(Colin.new(), "'Course! 10 past 10?", ActionOn.new("colin_george_4", "colin_leave_off")),
 	"colin_george_4": Dialogue.new(George.new(), "Ok, goodnight everyone!", ActionOn.new("colin_george_5", "colin_leave_off")),
 	"colin_george_5": Dialogue.new(Wendy.new(), "'night, George!", ActionOn.new("colin_george_6", "colin_leave_off")),
-	"colin_george_6": Dialogue.new(NoCharacter.new(), "[The door closes.]", ActionOn.new("colin_george_7", "colin_leave_off")),
+	"colin_george_6": Dialogue.new(NoCharacter.new(), "[The door closes.]", ActionOn.new("history_discussion", "colin_leave_off")),
 
 	# HISTORY_DISCUSSION: Colin and his friends have a discussion about the historicity of the resurrection
-	# TODO: A more respectful conversation? Get to difference in opinion more naturally.
+	# TODO: Streamline this a bit more using the "off to refute" paradigm
 	"history_discussion": LongDialogue.new([
 		Line.new(Edmund.new(), "I forgot you believed in all that rubbish."),
 		Line.new(Wendy.new(), "Hey, be nice."),
@@ -689,7 +697,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Colin.new(), "Yeah, a little bit. I mean how can somebody rise from the dead? It's impossible!"),
 		Line.new(Edmund.new(), "Exactly!"),
 		Line.new(Colin.new(), "But then how do you explain all the historical accounts?"),
-		Line.new(Edmund.new(), "This is a big topic. You know there's lots of explanations us athiests give."),
+		Line.new(Edmund.new(), "You know all the possible reasons already, Colin."),
 		Line.new(Colin.new(), "I know, but we all agree that none of them are very convincing."),
 		Line.new(Colin.new(), "You just try to find a natural explanation for it due to your preconceptions."),
 		Line.new(Laurie.new(), "Let's ask the lamp!"),
@@ -735,7 +743,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Colin.new(), "Excuse me, lamp. Would you be so kind as to turn on?", 3.0),
 		Line.new(Colin.new(), "ON", 3.0),
 		Line.new(Colin.new(), "It's no use. Well, we can't have a conversation in the dark. Let's go to the kitchen instead"),
-	], ActionOff.new("sophie_discussion_0", "colin_off_on")),
+	], ActionOff.new("sophie_discussion", "colin_off_on")),
 
 	"colin_off_on": LongDialogue.new([
 		Line.new(Colin.new(), "Great, it's back on again."),
@@ -763,21 +771,31 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Michael.new(), "Of course! I can't imagine anyone holding a different view after spending time with me - I've never lost a debate!"),
 		Line.new(Sophie.new(), "You're brilliant, Michael."),
 		Line.new(Michael.new(), "I know."),
-	], ActionOn.new("TODO", "TODO")),
+	], ActionLinear.new("sophie_george_0", false)),
+	# TODO: Opportunities to disrupt this conversation
 	
 	# SOPHIE_GEORGE: George walks past the living room and ends up engaging in conversation against his will
-	"sophie_george_0": Dialogue.new(NoCharacter.new(), "[You hear some footsteps going past the door to the room.]", ActionOn.new("sophie_george_1", "TODO")),
-	"sophie_george_1": Dialogue.new(Michael.new(), "[Shouts] George! Long time no see!", ActionOn.new("sophie_george_2", "TODO")),
-	"sophie_george_2": Dialogue.new(NoCharacter.new(), "[After a short pause, the door opens slowly.]", ActionOn.new("sophie_george_3", "TODO")),
-	"sophie_george_3": Dialogue.new(Michael.new(), "Pyjamas already? It's only half 11...", ActionOn.new("sophie_george_4", "TODO")),
-	"sophie_george_4": Dialogue.new(George.new(), "I-I've g-got to get up for Church tomorrow.", ActionOn.new("sophie_george_5", "TODO")),
-	"sophie_george_5": Dialogue.new(Michael.new(), "[Scoffs] Church! That's cute.", ActionOn.new("sophie_george_6", "TODO")),
-	"sophie_george_6": Dialogue.new(Michael.new(), "Everyone knows all the churches went woke years ago!", ActionOn.new("sophie_george_7", "TODO")),
-	"sophie_george_7": Dialogue.new(Michael.new(), "Real Christians don't go to Church...", ActionOn.new("sophie_george_8", "TODO")),
-	"sophie_george_8": Dialogue.new(Sophie.new(), "Yeah George!", ActionOn.new("sophie_george_9", "TODO")),
-	"sophie_george_9": Dialogue.new(George.new(), "Thank you for your opinion, but I must go to bed.", ActionOn.new("sophie_george_10", "TODO")),
-	"sophie_george_10": Dialogue.new(Michael.new(), "Ha! Not even willing to debate me! 'Christians' these days...", ActionOn.new("sophie_george_11", "TODO")),
-	"sophie_george_11": Dialogue.new(George.new(), "Goodnight", ActionOn.new("sophie_michael", "TODO")),
+	"sophie_george_0": Dialogue.new(NoCharacter.new(), "[You hear some footsteps going past the door to the room.]", ActionOn.new("sophie_george_1", "sophie_george_off")),
+	"sophie_george_1": Dialogue.new(Michael.new(), "[Shouts] George! Long time no see!", ActionOn.new("sophie_george_2", "sophie_george_off")),
+	"sophie_george_2": Dialogue.new(NoCharacter.new(), "[After a short pause, the door opens slowly.]", ActionOn.new("sophie_george_3", "sophie_george_off")),
+	"sophie_george_3": Dialogue.new(Michael.new(), "Pyjamas already? It's only half 11...", ActionOn.new("sophie_george_4", "sophie_george_off")),
+	"sophie_george_4": Dialogue.new(George.new(), "I-I've g-got to get up for Church tomorrow.", ActionOn.new("sophie_george_5", "sophie_george_off")),
+	"sophie_george_5": Dialogue.new(Michael.new(), "[Scoffs] Church! That's cute.", ActionOn.new("sophie_george_6", "sophie_george_off")),
+	"sophie_george_6": Dialogue.new(Michael.new(), "Everyone knows all the churches went woke years ago!", ActionOn.new("sophie_george_7", "sophie_george_off")),
+	"sophie_george_7": Dialogue.new(Michael.new(), "Real Christians don't go to Church...", ActionOn.new("sophie_george_8", "sophie_george_off")),
+	"sophie_george_8": Dialogue.new(Sophie.new(), "Yeah George!", ActionOn.new("sophie_george_9", "sophie_george_off")),
+	"sophie_george_9": Dialogue.new(George.new(), "Thank you for your opinion, but I must go to bed.", ActionOn.new("sophie_george_10", "sophie_george_off")),
+	"sophie_george_10": Dialogue.new(Michael.new(), "Ha! Not even willing to debate me! 'Christians' these days...", ActionOn.new("sophie_george_11", "sophie_george_off")),
+	"sophie_george_11": Dialogue.new(George.new(), "Goodnight.", ActionOn.new("sophie_michael", "sophie_michael")),
+
+	"sophie_george_off": LongDialogue.new([
+		Line.new(George.new(), "Oh, the lamp doesn't like me. Oh well."),
+		Line.new(George.new(), "Goodnight."),
+		Line.new(NoCharacter.new(), "[The door closes.]"),
+	], ActionForceState.new("sophie_michael", "pre_sophie_michael_off", false)),
+	"pre_sophie_michael_off": LongDialogue.new([
+		Line.new(Michael.new(), "Right, now time to go back on again.", 3.0),
+	], ActionForceState.new("sophie_michael", "sophie_michael_off", false)),
 
 	# SOPHIE_MICHAEL: Sophie and Michael have a discussion about the pregnancy, and may involve a proposal.
 	"sophie_michael": LongDialogue.new([
@@ -815,7 +833,7 @@ static var DIALOGUE: Dictionary = {
 		Line.new(NoCharacter.new(), "[No like, a [i]really[/i] long period of time."),
 		EmptyLine.new(0.5),
 		Line.new(Sophie.new(), "YES!!!"),
-		Line.new(NoCharacter.new(), "[Lots of kissing and stuff.]"),
+		Line.new(NoCharacter.new(), "[Lots of kissing and stuff. Ew gross.]"),
 		Line.new(Michael.new(), "I knew I could count on you."),
 		Line.new(Michael.new(), "You've made the right decision."),
 		Line.new(Sophie.new(), "I love you, Michael."),
@@ -840,10 +858,58 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Michael.new(), "No, I would prefer to stay here."),
 		Line.new(Sophie.new(), "O-of course, fiancé."),
 		Line.new(NoCharacter.new(), "[You hear footsteps as the door opens and closes.]"),
-	], ActionOn.new("TODO", "TODO")),
-	# Switching the lamp off interrupts the proposal.
+	], ActionOn.new("", "sophie_michael_off")),
 
-	# TODO: Interaction between Colin and Sophie. Then, Sophie leaves and proceed to ending scene.
+	# SOPHIE_MICHAEL_OFF: Switching the lamp off interrupts it, and may lead to Michael leaving if it doesn't go back on again.
+	"sophie_michael_off": LongDialogue.new([
+		Line.new(Michael.new(), "Ugh, that bloody lamp."),
+		Line.new(Michael.new(), "On please!", 1.0),
+		Line.new(Michael.new(), "On!!!!!!", 2.0),
+		Line.new(Michael.new(), "SWITCH ON YOU MORON!", 3.0),
+		Line.new(Michael.new(), "[Sighs] I think this is a problem for another day."),
+		Line.new(Michael.new(), "See you tomorrow, beautiful."),
+		Line.new(Sophie.new(), "Bye!"),
+		Line.new(NoCharacter.new(), "[The door closes.]"),
+	], ActionOff.new("colin_sophie", "sophie_michael_off_on", false)),
+	"sophie_michael_off_on": Dialogue.new(Michael.new(), "Phew. Right, where were we?", ActionOn.new("sophie_michael", "sophie_michael_off")),
+
+	# COLIN_SOPHIE: Interaction between Colin and Sophie. Then, Sophie leaves and proceed to ending scene.
+	"colin_sophie": LongDialogue.new([
+		Line.new(NoCharacter.new(), "[The door opens and closes.]"),
+		Line.new(Colin.new(), "Hey Sophie! What's up?"),
+		Line.new(Sophie.new(), "I-I don't know."),
+		EmptyLine.new(0.5),
+		Line.new(Sophie.new(), "[Inhales deeply]."),
+		Line.new(Sophie.new(), "I'm p-pregnant, Colin."),
+		Line.new(Colin.new(), "Oh, wow."),
+		Line.new(Sophie.new(), "And I just want to get an abortion to make the problem go away but Michael says we need to get married instead."),
+		Line.new(Sophie.new(), "It's all about what everyone else thinks. I'm not even sure if he's a Christian."),
+		Line.new(Colin.new(), "Wow, I didn't realise it was that bad. How are you feeling about it?"),
+		Line.new(Sophie.new(), "In truth, I'm a bit scared of him."),
+		Line.new(Colin.new(), "That makes sense. Are you reconsidering the relationship?"),
+		Line.new(Sophie.new(), "I don't know. I love him, but sometimes he pressures me into doing things that I don't want to do. And if I break up with him, I'm afraid of what he will do."),
+		# Line.new(Colin.new(), "Sophie, you need to break up with him. It's not healthy for you."),
+		Line.new(Sophie.new(), "You know what, I will insist on the abortion and see what he says."),
+		EmptyLine.new(0.5),
+		Line.new(Colin.new(), "Uh, Sophie, I'm very glad you're taking a stand against him."),
+		Line.new(Colin.new(), "But an abortion isn't your only option."),
+		Line.new(Colin.new(), "You could keep the baby and put it up for adoption."),
+		Line.new(Sophie.new(), "B-but what would everyone think?"),
+		Line.new(Colin.new(), "It doesn't matter what they think. What's done is done, and what matters is to save the life of the baby."),
+		Line.new(Colin.new(), "You can't just kill a baby to save yourself a little bit of embarrassment."),
+		Line.new(Colin.new(), "There's lots of people who would love to adopt a baby but there aren't enough."),
+		Line.new(Sophie.new(), "Thanks Colin, I'll think about it."),
+		Line.new(NoCharacter.new(), "[You hear footsteps as the door opens and closes.]"),
+	], ActionLinear.new("ending", false)),
 
 	# ENDING: Colin re-enters the room and starts talking to the lamp directly.
+	"ending_reenter": LongDialogue.new([
+		Line.new(Colin.new(), "[The door opens and closes.]"),
+	], ActionLinear.new("ending", false)),
+	"ending": LongDialogue.new([
+		# TODO: Discussion between Colin and the player about their political opinions.
+		# Contains a message for the player to be open-minded and listen to other people's opinions. Critical thinking etc.
+		# Maybe score this by seeing if the player ever changes their mind, or if they hold a diverse range of opinions.
+		# A bit cheesy, about how politics isn't always binary and there's nuance involved.
+	], ActionLinear.new("TODO", false)),
 }
