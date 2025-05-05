@@ -22,3 +22,6 @@ func next_line() -> bool:
 
 func get_text_body() -> String:
 	return ""
+
+func get_description() -> String:
+	return ""
