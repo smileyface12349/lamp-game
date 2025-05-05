@@ -23,9 +23,12 @@ func check_dialogue() -> void:
 	for id: String in AllDialogue.DIALOGUE:
 		var dialogue: DialogueBase = AllDialogue.DIALOGUE[id]
 		if dialogue.action is Action:
+			var done: Array[String] = []
 			for result: String in [dialogue.action.on_on, dialogue.action.on_off, dialogue.action.off_on, dialogue.action.off_off]:
-				if result not in AllDialogue.DIALOGUE and result != "":
-					print("DEAD LINK FROM " + id + " TO " + result)
+				if result != "" and result not in done:
+					done.append(result)
+					if result not in AllDialogue.DIALOGUE:
+						print("DEAD LINK FROM " + id + " TO " + result)
 
 func count_words() -> int:
 	var count: int = 0

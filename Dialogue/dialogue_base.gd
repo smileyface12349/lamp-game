@@ -1,21 +1,21 @@
 class_name DialogueBase
 extends Node
 
-var action: Action
+var action: ActionBase
 var flags: Array[String]
 
 func _init(action: ActionBase, flags: Array[String] = []) -> void:
-    self.action = action
-    self.flags = flags
+	self.action = action
+	self.flags = flags
 
 func get_text() -> String:
-    return ""
+	return ""
 
 func get_character() -> Character:
-    return NoCharacter.new()
+	return NoCharacter.new()
 
 func get_total_time(wpm: float, extra_seconds: float) -> float:
-    return 0
+	return 0
 
 func next_line() -> bool:
-    return false
+	return false

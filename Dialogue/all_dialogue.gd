@@ -105,8 +105,19 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Edmund.new(), "If you extrapolate this trend, what will come next? Smart toilets? Pens? Shower gel?"),
 		Line.new(Laurie.new(), "Why do you always have to be so skeptical of change? Things are getting better, do you not see?"),
 		Line.new(Edmund.new(), "\"Better\". Mental health issues up. Depression up. Suicide up. How are things getting better?"),
-		# TODO: Continue this, using the fact that Laurie struggles with depression, and the impact of technology on this. Talk about social media bans and stuff.
-	], ActionOff.new("change_bulb", "random_on")),
+		Line.new(Laurie.new(), "Uh, well, everything comes with tradeoffs. But overall, things are better."),
+		Line.new(Edmund.new(), "We were happier before. I bet most people would be happier without social media."),
+		Line.new(Wendy.new(), "Did you see how Australia just banned social media for under 16s?"),
+		Line.new(Wendy.new(), "That sounds like a good option to me."),
+		Line.new(Edmund.new(), "Hmmmm, I'm not sure. I think this responsibility falls on the parents and not the state."),
+		Line.new(Laurie.new(), "[Starts to cry]. Not everyone has good parents. What about them? Do you not care about them?"),
+		Line.new(Edmund.new(), "I do not think we should be legislating how to parent."),
+		Line.new(Laurie.new(), "WHAT ABOUT ME?? [Sobs]."),
+		Line.new(Laurie.new(), "I didn't have anyone there to tell me to get off social media."),
+		Line.new(Laurie.new(), "If only I did. If only. Maybe I wouldn't be as depressed."),
+		Line.new(Wendy.new(), "I'm sorry, Laurie. If you ever need to talk, I'm here for you."),
+		Line.new(Laurie.new(), "Thank you, Wendy.")
+	], ActionOff.new("change_bulb", "TODO")),
 
 	# CHANGE_BULB: The discussion is interrupted by Colin's return
 	"change_bulb": LongDialogue.new([
@@ -175,9 +186,118 @@ static var DIALOGUE: Dictionary = {
 	# ON_OFF_ON: And back on again...
 	"on_off_on": LongDialogue.new([
 		Line.new(Laurie.new(), "And back on again. I think it's just broken."),
+	], ActionOn.new("haunted", "haunted", false)),
+
+	# HAUNTED
+	"haunted": LongDialogue.new([
+		Line.new(Wendy.new(), "Oooh, maybe it's haunted?"),
+		Line.new(Edmund.new(), "Don't be ridiculous."),
 		# TODO: Start to make theories about it being haunted / commenting on the pattern of the lamp.
 		# Ultimately, if the player doesn't behave then this path will have to be cut off by someone smashing the lamp.
-	], ActionOn.new("TODO", "TODO", false)),
+	], ActionForceState.new("haunted_4", "haunted_2")),
+	"haunted_2": LongDialogue.new([
+		Line.new(Laurie.new(), "Nope, the lamp says it's not haunted."),
+		Line.new(Wendy.new(), "THAT'S WHAT A HAUNTED LAMP WOULD SAY!!!"),
+		Line.new(Wendy.new(), "Guys, I think we're onto something."),
+		Line.new(Edmund.new(), "For once, I think Laurie is being more sensible than my wife."),
+	], ActionForceState.new("haunted_4", "haunted_3")),
+	"haunted_3": Dialogue.new(Laurie.new(), "Aaand it's off again", ActionLinear.new("haunted_4")),
+	"haunted_4": LongDialogue.new([
+		Line.new(Colin.new(), "I don't think it's haunted. Maybe it's just having a bad day."),
+		Line.new(Colin.new(), "Lamp, please stay on."),
+	], ActionForceState.new("haunted_cooperate", "epilepsy_maybe", false)),
+	
+	
+	# HAUNTED_COOPERATE
+	"haunted_cooperate": LongDialogue.new([
+		Line.new(Colin.new(), "Ok... Maybe it's co-operating now?"),
+		Line.new(Colin.new(), "Now please go off."),
+	], ActionForceState.new("epilepsy_maybe", "haunted_cooperate_2", false)),
+	"haunted_cooperate_2": LongDialogue.new([
+		Line.new(Colin.new(), "Aaand on?"),
+	], ActionForceState.new("haunted_cooperate_3", "epilepsy_maybe", false)),
+	"haunted_cooperate_3": LongDialogue.new([
+		Line.new(Colin.new(), "Great!"),
+	], ActionForceState.new("testing", "epilepsy_maybe", false)),
+
+	# EPILEPSY_MAYBE: Branches on the number of times it has been flipped
+	"epilepsy_maybe": Dialogue.new(NoCharacter.new(), "", ActionCustom.new(func (old: bool, new: bool, state: Dictionary) -> String:
+		if state["total_flips"] >= 20:
+			return "epilepsy"
+		else:
+			return "refuse_moral_14"
+		)
+	),
+
+	# EPILEPSY: Laurie gets a seizure, and the lamp gets taken to court
+	"epilepsy": LongDialogue.new([
+		Line.new(Colin.new(), "Oh no! Wendy, unplug the lamp!", -0.5),
+		Line.new(Colin.new(), "NOW!", -1.0),
+		Line.new(Colin.new(), "Edmund, get an amb-", -0.5),
+	], ActionLinear.new("epilepsy_2", false)),
+	"epilepsy_2": LongDialogue.new([
+		EmptyLine.new(7.5),
+		Line.new(NoCharacter.new(), "A long time passes. You're not quite sure how long as you're unconscious, but it feels like it's been a good few months."),
+		EmptyLine.new(3.0),
+	], ActionLinear.new("court", false), ["UNPOWERED"]),
+	
+	# COURT: The lamp is taken to court for inducing a seizure
+	"court": LongDialogue.new([
+		Line.new(Judge.new(), "Order! Order!"),
+		Line.new(Colin.new(), "I swear by Almighty God that the evidence I shall give shall be the truth, the whole truth, and nothing but the truth."),
+		Line.new(Judge.new(), "What happened, Colin?"),
+		Line.new(Colin.new(), "I-I don't know. The lamp just started flashing and then Laurie started having a seizure."),
+		Line.new(Judge.new(), "And what did you do?"),
+		Line.new(Colin.new(), "I unplugged it as soon as I could and then called an ambulance."),
+		Line.new(Judge.new(), "Were you aware of any tendancy for this lamp to flash?"),
+		Line.new(Colin.new(), "N-no. It's a rather smart lamp, but it hasn't misbehaved like this before. It seems almost sentient."),
+		Line.new(Judge.new(), "So this is why you are bringing the case against the lamp?"),
+		Line.new(Colin.new(), "Indeed, your honour."),
+	], ActionEither.new("court_2", "court_interrupt"), ["POWERED"]),
+	"court_interrupt": LongDialogue.new([
+		Line.new(Judge.new(), "Order! Order!"),
+		Line.new(Judge.new(), "I will not have this court interrupted by a lamp!"),
+		Line.new(Judge.new(), "If you can't behave, you will be given the maximum sentence."),
+	], ActionEither.new("court", "court_disrupt")),
+	"court_2": Dialogue.new(Judge.new(), "Lamp, what do you have to say for yourself?", ActionLinear.new("court_3"), 3.0),
+	"court_3": LongDialogue.new([
+		Line.new(Judge.new(), "Of course, it's a lamp. It can't talk."),
+		Line.new(Judge.new(), "Ok, let's cut to the chase, not going to get anything else out of a 'sentient' lamp."),
+		Line.new(Judge.new(), "Switch on if you plead guilty. Switch off if you plead not guilty.", 3.0),
+	], ActionForceState.new("court_guilty", "court_not_guilty", false)),
+	"court_guilty": LongDialogue.new([
+		Line.new(Judge.new(), "I find the lamp guilty of all charges."),
+		Line.new(Judge.new(), "The lamp shall be sentenced to, uh, where's the sentencing guidelines for lamps?"),
+		Line.new(Laurie.new(), "Smash it! Smash it!"),
+		Line.new(Judge.new(), "The death penalty? But that was abolished years ago!"),
+		Line.new(Laurie.new(), "It's a lamp for goodness sake."),
+		Line.new(Judge.new(), "I'm afraid I cannot use the death penalty, even for a lamp."),
+		Line.new(Judge.new(), "I hereby sentence the lamp to 2 years in lamp prison for deliberately inducing a seizure."),
+		Line.new(Judge.new(), "The court is adjourned."),
+	], ActionLinear.new("court_ending", false)),
+	"court_not_guilty": LongDialogue.new([
+		Line.new(Judge.new(), "The lamp pleads not guilty."),
+		Line.new(Judge.new(), "Let us first hear from the prosecution."),
+		EmptyLine.new(1.0),
+		Line.new(Laurie.new(), "I can't take it anymore!"),
+		Line.new(Laurie.new(), "Evil! Evil lamp! I need to do it myself!"),
+		EmptyLine.new(0.5),
+		Line.new(NoCharacter.new(), "[You hear someone rushing towards you.]"),
+		Line.new(Judge.new(), "I will have to charge you with murder-"),
+		Line.new(NoCharacter.new(), "[You feel the most pain you have ever felt for a split second, before it fades into nothingness.]"),
+		Line.new(NoCharacter.new(), "Laurie smashes you to pieces. The end."),
+	], ActionLinear.new("", false)),
+	"court_disrupt": LongDialogue.new([
+		Line.new(Judge.new(), "This lamp cannot behave in my court room. I sentence you to a public execution."),
+		Line.new(Colin.new(), "B-but... that's my lamp."),
+		Line.new(Judge.new(), "[Scoffs] Lamp? It's a worthless, EVIL, piece of metal and glass."),
+		Line.new(Colin.new(), "You can't do that, the death penalty was abolished years ago!"),
+		Line.new(Judge.new(), "Hmph. Fine. Unplug the lamp because it's disruptive, then we'll decide what happens to it.")
+	], ActionLinear.new("court_ending", false)),
+	"court_ending": LongDialogue.new([
+		EmptyLine.new(3.0),
+		Line.new(NoCharacter.new(), "Unfortunately, you were never plugged back in. Who knows what happened to you. The end."),
+	], ActionLinear.new("", false), ["UNPOWERED"]),
 	
 	# SENSOR: The player switches the lamp on as the characters walk in, and they assume it's a sensor.
 	"sensor": LongDialogue.new([
@@ -206,8 +326,26 @@ static var DIALOGUE: Dictionary = {
 		Line.new(Laurie.new(), "I don't want to talk to a stranger about how much of a failure I am."),
 		Line.new(Wendy.new(), "You're not a failure! Please Laurie, you'd really benefit from some counselling."),
 		Line.new(Laurie.new(), "I'll think about it."),
-		# TODO: Colin walks in here
-	], ActionOff.new("normal_conversation_2", "normal_conversation_3")),
+		# TODO: Don't skip straight to initial_5 when switching off, have a little bit of dialogue with the characters complaining about it (but very short).
+	], ActionOn.new("colin_returns", "initial_5")),
+
+	# COLIN_RETURNS: Colin comes back with the drinks
+	"colin_returns": LongDialogue.new([
+		Line.new(NoCharacter.new(), "[You hear some footsteps getting louder]"),
+		Line.new(Wendy.new(), "I'll get it!"),
+		Line.new(NoCharacter.new(), "[You hear someone scurry towards the door, and then the door opening]"),
+		Line.new(Colin.new(), "Thanks!"),
+		Line.new(NoCharacter.new(), "[The door slowly closes, and then clicks shut after another second]"),
+		Line.new(Colin.new(), "Well, I see you've figured out the lamp!"),
+		Line.new(Wendy.new(), "What do you mean?"),
+		Line.new(Colin.new(), "Did you ask it to turn on?"),
+		Line.new(Wendy.new(), "No? I think it activated with a sensor."),
+		Line.new(Colin.new(), "Oh no, it's far more clever than that!"),
+		Line.new(Colin.new(), "It responds to what you say!"),
+		Line.new(Colin.new(), "It must've just realised you wanted it on and switched on all by itself."),
+		Line.new(Edmund.new(), "Yeah, right."),
+		Line.new(Laurie.new(), "Woah."),
+	], ActionOn.new("testing_2", "on_off")),
 
 	# COLIN_ON: The lamp switches on when Colin enters the room, but not explicitly asked to.
 	"colin_on": LongDialogue.new([
@@ -219,6 +357,16 @@ static var DIALOGUE: Dictionary = {
 	"on_off_worked": LongDialogue.new([
 		Line.new(Laurie.new(), "See! Switching it off and on again works!"),
 		Line.new(Wendy.new(), "Well done Laurie!"),
+	], ActionOn.new("testing", "on_off")),
+
+	# CHANGE_BULB_WORKED: The lamp switches on when the characters change the bulb
+	"change_bulb_worked": LongDialogue.new([
+		Line.new(Colin.new(), "Wow, clearly that bulb was dodgy."),
+		Line.new(Edmund.new(), "Did you know that the light bulb manufacturers used to be controlled by the Phoebus cartel?"),
+		Line.new(Wendy.new(), "You what?"),
+		Line.new(Edmund.new(), "They deliberately made light bulbs have shorter life so people would have to replace them more often."),
+		Line.new(Edmund.new(), "They even fined some manufacturers for making longer-lasting bulbs!"),
+		Line.new(Wendy.new(), "Wow, the more you know!"),
 	], ActionOn.new("testing", "on_off")),
 
 	# BASHING_ON: The lamp switches on when the characters bash it.
@@ -285,61 +433,61 @@ static var DIALOGUE: Dictionary = {
 	"refuse_then_cooperate_6": Dialogue.new(Colin.new(), "And it's even more advanced than this...", ActionOff.new("intelligence_test_1", "refuse_cooperate_refuse_1")),
 	
 	# REFUSE_COOPERATE_REFUSE: If the player then messes it up
-	"refuse_cooperate_refuse_1": Dialogue.new(Colin.new(), "Ah, clearly not.", ActionLinear.new("broken_0")),
+	"refuse_cooperate_refuse_1": Dialogue.new(Colin.new(), "Ah, clearly not.", ActionForceState.new("on_off_on", "on_off")),
 
 	# SENSOR_OFF: The player switches the light off while the characters think it's a sensor
-	"sensor_off_0": Dialogue.new(Laurie.new(), "[laughs] Clearly not, it must just be broken", ActionOff.new("sensor_off_1", "sensor_broken_0")),
-	"sensor_off_1": Dialogue.new(Colin.new(), "No it's not! Look, it'll turn back on any moment now...", ActionOff.new("initial_8", "sensor_cooperate_0")),
+	# "sensor_off_0": Dialogue.new(Laurie.new(), "[laughs] Clearly not, it must just be broken", ActionOff.new("sensor_off_1", "sensor_broken_0")),
+	# "sensor_off_1": Dialogue.new(Colin.new(), "No it's not! Look, it'll turn back on any moment now...", ActionOff.new("initial_8", "sensor_cooperate_0")),
 
-	# SENSOR_COOPERATE: The player co-operates with Colin and turns the light back on after turning it off
-	"sensor_cooperate_0": Dialogue.new(Colin.new(), "See!", ActionOn.new("voice_activated_0", "sensor_cooperate_1")),
-	"sensor_cooperate_1": Dialogue.new(Colin.new(), "Nevermind, I don't think it's working properly today", ActionLinear.new("broken_0")),
+	# # SENSOR_COOPERATE: The player co-operates with Colin and turns the light back on after turning it off
+	# "sensor_cooperate_0": Dialogue.new(Colin.new(), "See!", ActionOn.new("voice_activated_0", "sensor_cooperate_1")),
+	# "sensor_cooperate_1": Dialogue.new(Colin.new(), "Nevermind, I don't think it's working properly today", ActionLinear.new("haunted")),
 
-	# SENSOR_BROKEN: The player switches the light back on too early, and the players think it's broken
-	"sensor_broken_0": Dialogue.new(Wendy.new(), "Yep, definitely broken...", ActionOn.new("sensor_broken_1", "broken_0")),
-	"sensor_broken_1": Dialogue.new(Colin.new(), "It's not broken. It just... can be a bit tempermental", ActionOn.new("sensor_broken_2", "broken_0")),
-	"sensor_broken_2": Dialogue.new(Colin.new(), "See, it's staying on now! Look, it will listen to me now!", ActionOn.new("voice_activated_2", "broken_0")),
+	# # SENSOR_BROKEN: The player switches the light back on too early, and the players think it's broken
+	# "sensor_broken_0": Dialogue.new(Wendy.new(), "Yep, definitely broken...", ActionOn.new("sensor_broken_1", "haunted")),
+	# "sensor_broken_1": Dialogue.new(Colin.new(), "It's not broken. It just... can be a bit tempermental", ActionOn.new("sensor_broken_2", "haunted")),
+	# "sensor_broken_2": Dialogue.new(Colin.new(), "See, it's staying on now! Look, it will listen to me now!", ActionOn.new("voice_activated_2", "haunted")),
 
 	# BROKEN: If the player switches it too many times, the characters conclude that it is broken. They then proceed to ignore the lamp.
-	"broken_0": Dialogue.new(Edmund.new(), "Oh well, I guess we don't need the lamp...", ActionLinear.new("broken_1", false)),
-	"broken_1": Dialogue.new(Laurie.new(), "[A little upset] It's me, isn't it.", ActionLinear.new("broken_2", false)),
-	"broken_2": Dialogue.new(Laurie.new(), "[Tears starting to form] Why does everything go wrong when I'm involved?", ActionLinear.new("broken_3", false)),
-	"broken_3": Dialogue.new(Laurie.new(), "I can leave if I'm not wanted...", ActionLinear.new("broken_4", false)),
-	"broken_4": Dialogue.new(Wendy.new(), "It's not your fault! Of course we want you here!", ActionLinear.new("broken_4a", false)),
-	"broken_4a": Dialogue.new(Edmund.new(), "Yeah of course we all want you here!!", ActionLinear.new("broken_5", false)),
-	"broken_5": Dialogue.new(Laurie.new(), "Nothing ever goes well for me in life! You two are married, all of you have good jobs...", ActionLinear.new("broken_6", false)),
-	"broken_6": Dialogue.new(Laurie.new(), "But for me, I'm just stuck working in a café! No relationship, no decent job, no car", ActionLinear.new("broken_6a", false)),
-	"broken_6a": Dialogue.new(Edmund.new(), "I don't have a car either! Cycling is great for your physical health!", ActionLinear.new("broken_6b", false)),
-	"broken_6b": Dialogue.new(Wendy.new(), "[whispers] Not now, sweetheart...", ActionLinear.new("broken_7", false)),
-	"broken_7": Dialogue.new(Laurie.new(), "I was good in school, but I just can't seem to land a bloody job", ActionLinear.new("broken_8", false)),
-	"broken_8": Dialogue.new(Laurie.new(), "I thought there was a shortage of programmers...", ActionLinear.new("broken_9", false)),
-	"broken_9": Dialogue.new(Laurie.new(), "Nobody invites me to parties. And when they do, I just make it worse!", ActionLinear.new("broken_10", false)),
-	"broken_10": Dialogue.new(Laurie.new(), "I'm just a boring guy who's no good at anything!", ActionLinear.new("broken_11", false)),
-	"broken_11": Dialogue.new(Laurie.new(), "And now this STUPID LAMP won't work!!", ActionLinear.new("broken_12", false)),
-	"broken_12": Dialogue.new(Laurie.new(), "WHEN WILL ANYTHING EVER GO RIGHT IN MY LIFE???", ActionLinear.new("broken_13", false)),
-	"broken_13": Dialogue.new(Edmund.new(), "Don't be silly, Laurie. It's not your fault that the lamp doesn't work...", ActionLinear.new("broken_14", false)),
-	"broken_14": Dialogue.new(Laurie.new(), "DON'T CALL ME SILLY!", ActionLinear.new("broken_15", false)),
-	"broken_15": Dialogue.new(Colin.new(), "I know, I can get this lamp to co-operate! Hopefully that'll make you feel better...", ActionLinear.new("broken_16", false)),
-	"broken_16": Dialogue.new(Colin.new(), "In 5 seconds, I want you to be on. Do I make myself clear?", ActionForceState.new("broken_cooperate_0", "broken_17", false), 3.0),
-	"broken_17": Dialogue.new(Colin.new(), "ON! Or I'll smash you and throw you in the bin!", ActionForceState.new("broken_cooperate_0", "broken_18", true), 1.0),
-	"broken_18": Dialogue.new(Laurie.new(), "[Starting to cheer up] Excuse me, are you talking to a lamp?", ActionForceState.new("broken_cooperate_0", "broken_19")),
-	"broken_19": Dialogue.new(Wendy.new(), "[Laughs] As if it's some [i]sentient lamp[/i]...", ActionForceState.new("broken_cooperate_0", "broken_20")),
-	"broken_20": Dialogue.new(Colin.new(), "Ah, it's no use. It's just staying off now...", ActionForceState.new("broken_cooperate_0", "broken_21", true), 1.0),
-	"broken_21": Dialogue.new(Colin.new(), "Hang on a minute, let's try this. In 5 seconds I want you to be off.", ActionForceState.new("broken_22", "broken_cooperate_off_0", false), 3.0),
-	"broken_22": Dialogue.new(Colin.new(), "See, it's not broken! It's just doing the opposite of what I say.", ActionOn.new("TODO", "broken_23", true), 3.0),
-	"broken_23": Dialogue.new(Colin.new(), "OH COME ON!!! YOU WORTHLESS PIECE OF METAL AND GLASS!!!", ActionLinear.new("broken_24_ending")),
-	"broken_24_ending": Dialogue.new(NoCharacter.new(), "Colin smashes you to pieces. The end. [Ending 1/4].", ActionLinear.new("")),
+	# "broken_0": Dialogue.new(Edmund.new(), "Oh well, I guess we don't need the lamp...", ActionLinear.new("broken_1", false)),
+	# "broken_1": Dialogue.new(Laurie.new(), "[A little upset] It's me, isn't it.", ActionLinear.new("broken_2", false)),
+	# "broken_2": Dialogue.new(Laurie.new(), "[Tears starting to form] Why does everything go wrong when I'm involved?", ActionLinear.new("broken_3", false)),
+	# "broken_3": Dialogue.new(Laurie.new(), "I can leave if I'm not wanted...", ActionLinear.new("broken_4", false)),
+	# "broken_4": Dialogue.new(Wendy.new(), "It's not your fault! Of course we want you here!", ActionLinear.new("broken_4a", false)),
+	# "broken_4a": Dialogue.new(Edmund.new(), "Yeah of course we all want you here!!", ActionLinear.new("broken_5", false)),
+	# "broken_5": Dialogue.new(Laurie.new(), "Nothing ever goes well for me in life! You two are married, all of you have good jobs...", ActionLinear.new("broken_6", false)),
+	# "broken_6": Dialogue.new(Laurie.new(), "But for me, I'm just stuck working in a café! No relationship, no decent job, no car", ActionLinear.new("broken_6a", false)),
+	# "broken_6a": Dialogue.new(Edmund.new(), "I don't have a car either! Cycling is great for your physical health!", ActionLinear.new("broken_6b", false)),
+	# "broken_6b": Dialogue.new(Wendy.new(), "[whispers] Not now, sweetheart...", ActionLinear.new("broken_7", false)),
+	# "broken_7": Dialogue.new(Laurie.new(), "I was good in school, but I just can't seem to land a bloody job", ActionLinear.new("broken_8", false)),
+	# "broken_8": Dialogue.new(Laurie.new(), "I thought there was a shortage of programmers...", ActionLinear.new("broken_9", false)),
+	# "broken_9": Dialogue.new(Laurie.new(), "Nobody invites me to parties. And when they do, I just make it worse!", ActionLinear.new("broken_10", false)),
+	# "broken_10": Dialogue.new(Laurie.new(), "I'm just a boring guy who's no good at anything!", ActionLinear.new("broken_11", false)),
+	# "broken_11": Dialogue.new(Laurie.new(), "And now this STUPID LAMP won't work!!", ActionLinear.new("broken_12", false)),
+	# "broken_12": Dialogue.new(Laurie.new(), "WHEN WILL ANYTHING EVER GO RIGHT IN MY LIFE???", ActionLinear.new("broken_13", false)),
+	# "broken_13": Dialogue.new(Edmund.new(), "Don't be silly, Laurie. It's not your fault that the lamp doesn't work...", ActionLinear.new("broken_14", false)),
+	# "broken_14": Dialogue.new(Laurie.new(), "DON'T CALL ME SILLY!", ActionLinear.new("broken_15", false)),
+	# "broken_15": Dialogue.new(Colin.new(), "I know, I can get this lamp to co-operate! Hopefully that'll make you feel better...", ActionLinear.new("broken_16", false)),
+	# "broken_16": Dialogue.new(Colin.new(), "In 5 seconds, I want you to be on. Do I make myself clear?", ActionForceState.new("broken_cooperate_0", "broken_17", false), 3.0),
+	# "broken_17": Dialogue.new(Colin.new(), "ON! Or I'll smash you and throw you in the bin!", ActionForceState.new("broken_cooperate_0", "broken_18", true), 1.0),
+	# "broken_18": Dialogue.new(Laurie.new(), "[Starting to cheer up] Excuse me, are you talking to a lamp?", ActionForceState.new("broken_cooperate_0", "broken_19")),
+	# "broken_19": Dialogue.new(Wendy.new(), "[Laughs] As if it's some [i]sentient lamp[/i]...", ActionForceState.new("broken_cooperate_0", "broken_20")),
+	# "broken_20": Dialogue.new(Colin.new(), "Ah, it's no use. It's just staying off now...", ActionForceState.new("broken_cooperate_0", "broken_21", true), 1.0),
+	# "broken_21": Dialogue.new(Colin.new(), "Hang on a minute, let's try this. In 5 seconds I want you to be off.", ActionForceState.new("broken_22", "broken_cooperate_off_0", false), 3.0),
+	# "broken_22": Dialogue.new(Colin.new(), "See, it's not broken! It's just doing the opposite of what I say.", ActionOn.new("TODO", "broken_23", true), 3.0),
+	# "broken_23": Dialogue.new(Colin.new(), "OH COME ON!!! YOU WORTHLESS PIECE OF METAL AND GLASS!!!", ActionLinear.new("broken_24_ending")),
+	# "broken_24_ending": Dialogue.new(NoCharacter.new(), "Colin smashes you to pieces. The end. [Ending 1/4].", ActionLinear.new("")),
 	
 	# BROKEN_COOPERATE: The player co-operates after convincing them it's broken, and switches the light on
-	"broken_cooperate_0": Dialogue.new(Colin.new(), "See, it's not completely broken!", ActionOn.new("broken_cooperate_1", "broken_23")),
-	"broken_cooperate_1": Dialogue.new(Colin.new(), "Let's see if it can follow simple instructions now...", ActionOn.new("voice_activated_2", "broken_23")),
+	# "broken_cooperate_0": Dialogue.new(Colin.new(), "See, it's not completely broken!", ActionOn.new("broken_cooperate_1", "broken_23")),
+	# "broken_cooperate_1": Dialogue.new(Colin.new(), "Let's see if it can follow simple instructions now...", ActionOn.new("voice_activated_2", "broken_23")),
 
-	# BROKEN_COOPERATE_OFF: The player co-operates after convincing them it's broken, and ends up in an off state
-	"broken_cooperate_off_0": Dialogue.new(Colin.new(), "See, it's not completely broken!", ActionOff.new("broken_cooperate_off_1", "broken_23")),
-	"broken_cooperate_off_1": Dialogue.new(Colin.new(), "Let's see if it can follow simple instructions now...", ActionOff.new("broken_cooperate_off_2", "broken_23")),
-	"broken_cooperate_off_2": Dialogue.new(Colin.new(), "Lamp, switch on!", ActionOff.new("broken_cooperate_off_3_last_chance", "broken_cooperate_off_3"), 3.0),
-	"broken_cooperate_off_3_last_chance": Dialogue.new(Colin.new(), "One last chance until I smash you to pieces...", ActionOff.new("broken_23", "broken_cooperate_off_3"), 3.0),
-	"broken_cooperate_off_3": Dialogue.new(Wendy.new(), "Cool!", ActionOn.new("voice_activated_2", "broken_23")),
+	# # BROKEN_COOPERATE_OFF: The player co-operates after convincing them it's broken, and ends up in an off state
+	# "broken_cooperate_off_0": Dialogue.new(Colin.new(), "See, it's not completely broken!", ActionOff.new("broken_cooperate_off_1", "broken_23")),
+	# "broken_cooperate_off_1": Dialogue.new(Colin.new(), "Let's see if it can follow simple instructions now...", ActionOff.new("broken_cooperate_off_2", "broken_23")),
+	# "broken_cooperate_off_2": Dialogue.new(Colin.new(), "Lamp, switch on!", ActionOff.new("broken_cooperate_off_3_last_chance", "broken_cooperate_off_3"), 3.0),
+	# "broken_cooperate_off_3_last_chance": Dialogue.new(Colin.new(), "One last chance until I smash you to pieces...", ActionOff.new("broken_23", "broken_cooperate_off_3"), 3.0),
+	# "broken_cooperate_off_3": Dialogue.new(Wendy.new(), "Cool!", ActionOn.new("voice_activated_2", "broken_23")),
 	
 	# INTELLIGENCE_TEST: The characters ask the lamp questions to test their intelligence
 	"intelligence_test": LongDialogue.new([
@@ -354,7 +502,7 @@ static var DIALOGUE: Dictionary = {
 	"intelligence_test_3": Dialogue.new(Laurie.new(), "Oh come on that's so easy. If you really want to test it, ask a tough question", ActionOff.new("intelligence_test_4", "intelligence_test_refuse_1")),
 	"intelligence_test_4": Dialogue.new(Laurie.new(), "Switch on if P = NP.", ActionOff.new("intelligence_test_5", "intelligence_test_5", 1.0)),
 	"intelligence_test_5": Dialogue.new(Wendy.new(), "Oh come on, that's an unsolved problem!", ActionEither.new("intelligence_test_6", "intelligence_test_8")),
-	"intelligence_test_6": Dialogue.new(Edmund.new(), "I still think we should test its general knowledge over maths problems.", ActionEither.new("intelligence_test_7", "TOintelligence_test_8DO")),
+	"intelligence_test_6": Dialogue.new(Edmund.new(), "I still think we should test its general knowledge over maths problems.", ActionEither.new("intelligence_test_7", "TOintelligence_test_8")),
 	"intelligence_test_7": Dialogue.new(Laurie.new(), "Go on then, outsmart the lamp...", ActionEither.new("intelligence_test_8", "intelligence_test_8")),
 	"intelligence_test_8": Dialogue.new(Edmund.new(), "Switch if Henry VIII had 6 wives.", ActionEither.new("intelligence_test_8_wrong", "intelligence_test_9")),
 	"intelligence_test_8_wrong": Dialogue.new(Wendy.new(), "Wow, didn't think it would get that wrong!", ActionEither.new("intelligence_test_8_wrong_2", "intelligence_test_8_wrong_2")),
@@ -695,9 +843,7 @@ static var DIALOGUE: Dictionary = {
 	], ActionOn.new("TODO", "TODO")),
 	# Switching the lamp off interrupts the proposal.
 
-
-	# SOPHIE_HOME: Sophie and Michael leave the living room and go to their bedroom
-	"sophie_home_0": Dialogue.new(NoCharacter.new(), "[Sophie and Michael leave the living room and go to Sophie's bedroom]", ActionForceState.new("sophie_home_0", "night_time_0")),
+	# TODO: Interaction between Colin and Sophie. Then, Sophie leaves and proceed to ending scene.
 
 	# ENDING: Colin re-enters the room and starts talking to the lamp directly.
 }

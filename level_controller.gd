@@ -17,6 +17,10 @@ var powered: bool = true
 var wpm: float
 var extra_seconds: float
 
+var state: Dictionary = {
+	"total_flips": 0
+}
+
 const ANIMATION_IN_CHARACTERS_PER_SECOND: float = 40
 const ANIMATION_OUT_DURATION: float = 0.5
 const EXTRA_BLACK_TIME: float = 0.2
@@ -40,7 +44,7 @@ func _process(delta: float) -> void:
 	# Switch when time elapsed
 	if elapsed > timeForDialogue:
 		if not current.next_line():
-			var next: String = current.action.get_next(lamp, lamp)
+			var next: String = current.action.get_next(lamp, lamp, state)
 			change_state(next)
 		else:
 			display_line()
@@ -62,10 +66,11 @@ func _input(event: InputEvent) -> void:
 		return
 	if Input.is_action_just_pressed("toggle_lamp"):
 		if current.action.interrupt:
-			change_state(current.action.get_next(lamp, !lamp))
+			change_state(current.action.get_next(lamp, !lamp, state))
 		lamp = !lamp
 		lampOn.visible = lamp
 		lampOff.visible = !lamp
+		state["total_flips"] += 1
 		if lamp:
 			dialogueText.add_theme_color_override("default_color", Color.BLACK)
 		else:

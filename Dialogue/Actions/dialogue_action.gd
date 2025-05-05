@@ -23,7 +23,7 @@ func _init(on_on: String, on_off: String, off_on: String, off_off: String, inter
     super(interrupt)
 
 # Get the piece of dialogue to go to next
-func get_next(old_lamp_state: bool, new_lamp_state: bool) -> String:
+func get_next(old_lamp_state: bool, new_lamp_state: bool, state: Dictionary = {}) -> String:
     if old_lamp_state and new_lamp_state:
         return self.on_on
     elif old_lamp_state and not new_lamp_state:
