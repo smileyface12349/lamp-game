@@ -8,7 +8,8 @@ extends Node
 func _ready() -> void:
 	startButton.connect("pressed", start_game)
 	startPointTextEdit.connect("text_changed", change_start_point)
-	wordsDisplay.text = "Word Count: " + str(count_words())
+	wordsDisplay.text = "[right]Word Count: " + str(count_words())
+	store_in_file_descriptive()
 
 func change_start_point() -> void:
 	Globals.start_point = startPointTextEdit.text
@@ -34,8 +35,27 @@ func count_words() -> int:
 	var count: int = 0
 	for id: String in AllDialogue.DIALOGUE:
 		var dialogue: DialogueBase = AllDialogue.DIALOGUE[id]
-		count += dialogue.get_text().split(" ").size()
+		count += dialogue.get_text_body().split(" ").size()
 		# Multiple lines
 		while dialogue.next_line():
-			count += dialogue.get_text().split(" ").size()
+			count += dialogue.get_text_body().split(" ").size()
 	return count
+
+func store_in_file_basic() -> void:
+	var file: FileAccess = FileAccess.open("res://dialogue.txt", FileAccess.WRITE)
+	file.seek(0)
+	for id: String in AllDialogue.DIALOGUE:
+		var dialogue: DialogueBase = AllDialogue.DIALOGUE[id]
+		file.store_line(dialogue.get_text_body())
+		# Multiple lines
+		while dialogue.next_line():
+			file.store_line(dialogue.get_text_body())
+	file.close()
+
+func store_in_file_descriptive() -> void:
+	var file: FileAccess = FileAccess.open("res://dialogue.txt", FileAccess.WRITE)
+	file.seek(0)
+	for id: String in AllDialogue.DIALOGUE:
+		var dialogue: DialogueBase = AllDialogue.DIALOGUE[id]
+		file.store_line(dialogue.get_description(id))
+	file.close()

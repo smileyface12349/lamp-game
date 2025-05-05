@@ -32,3 +32,6 @@ func get_next(old_lamp_state: bool, new_lamp_state: bool, state: Dictionary = {}
         return self.off_on
     else:
         return self.off_off
+
+func get_description() -> String:
+    return "On -> On: <" + self.on_on + ">, On -> Off: <" + self.on_off + ">, Off -> On: <" + self.off_on + ">, Off -> Off: <" + self.off_off + ">"

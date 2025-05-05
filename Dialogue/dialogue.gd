@@ -15,3 +15,13 @@ func get_character() -> Character:
 
 func get_total_time(wpm: float, extra_seconds: float) -> float:
     return line.get_total_time(wpm, extra_seconds)
+
+func get_text_body() -> String:
+    return line.get_text_body()
+
+func get_description(id: String) -> String:
+    var description: String = "<" + id + "> " + line.get_description()
+    if flags.size() > 0:
+        description += " [FLAGS: " + ", ".join(flags) + "]"
+    description += " [ACTION: " + action.get_description() + "]"
+    return description

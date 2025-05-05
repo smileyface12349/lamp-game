@@ -11,3 +11,6 @@ func _init(stay_same: String, switch: String, interrupt: bool = true) -> void:
 		stay_same,
 		interrupt,
 	)
+
+func get_description() -> String:
+	return "Stay Same: <" + self.on_on + ">, Switch: <" + self.on_off + ">"

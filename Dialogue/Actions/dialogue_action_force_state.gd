@@ -10,3 +10,6 @@ func _init(on: String, off: String, interrupt: bool = true) -> void:
 		off,
 		interrupt,
 	)
+
+func get_description() -> String:
+	return "Ignores initial state and uses final state. On: <" + self.on_on + ">, Off: <" + self.on_off + ">"

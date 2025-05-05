@@ -30,5 +30,17 @@ func get_text() -> String:
 func get_character() -> Character:
 	return elements[line].get_character()
 
+func get_text_body() -> String:
+	return elements[line].get_text_body()
+
 func get_total_time(wpm: float, extra_seconds: float) -> float:
 	return elements[line].get_total_time(wpm, extra_seconds)
+
+func get_description(id: String) -> String:
+	var description: String = "BLOCK: <" + id + ">\n"
+	for element in elements:
+		description += "    " + element.get_description() + "\n"
+	if flags.size() > 0:
+		description += "    FLAGS: " + ", ".join(flags) + "\n"
+	description += "    => " + action.get_description()
+	return description

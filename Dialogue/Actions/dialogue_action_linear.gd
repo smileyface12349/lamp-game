@@ -10,3 +10,6 @@ func _init(next: String, interrupt: bool = true) -> void:
 		next,
 		interrupt,
 	)
+
+func get_description() -> String:
+	return "All paths to: <" + self.on_on + ">"

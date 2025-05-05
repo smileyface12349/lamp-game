@@ -11,3 +11,6 @@ func _init(stay_off: String, switch_on: String, interrupt: bool = true) -> void:
 		stay_off,
 		interrupt,
 	)
+
+func get_description() -> String:
+	return "Lamp starts OFF. Stay Off: <" + self.off_off + ">, Switch On: <" + self.off_on + ">"

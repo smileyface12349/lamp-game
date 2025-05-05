@@ -18,3 +18,6 @@ func _init(interrupt: bool = true) -> void:
 # Get the piece of dialogue to go to next
 func get_next(old_lamp_state: bool, new_lamp_state: bool, state: Dictionary) -> String:
     return "ERROR"
+
+func get_description() -> String:
+    return "ERROR"

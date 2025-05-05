@@ -1,0 +1,837 @@
+BLOCK: <initial>
+    [You hear a door closing in the distance, followed by some distant conversation that you can barely hear.]
+    Colin: ...great thanks!
+    Wendy: I got the job!!
+    Laurie: W-what job?
+    Edmund: ...group chat?
+    Colin: Congratulations! Look forward to hearing more about it later.
+    Colin: But first, who wants a cuppa?
+    Laurie: Uh, yeah, coffee, please.
+    Edmund: Isn't it a little late for coffee...
+    Laurie: Uh, I guess.
+    Wendy: If Laurie wants coffee, then Laurie should have coffee!
+    Wendy: We'll have tea though. Decaf please.
+    Colin: Ok, 2 teas and a coffee! Make yourselves comfortable in the living room.
+    [You hear footsteps getting louder and then a door closing]
+    => Starting OFF. Stay Off: <initial_2>, Switch On: <on_outside>
+BLOCK: <initial_2>
+    Wendy: Blimey it's dark in 'ere! Hey! Where's the old lamp gone?
+    Wendy: He's really changed the blimmin' lamp in the past couple weeks?
+     [delay: 1s]
+    => Starting OFF. Stay Off: <initial_3>, Switch On: <sensor>
+BLOCK: <initial_3>
+    Edmund: This lamp does not have a switch. What kind of imbecile would make a lamp without a switch?
+    Laurie: Ooooh! Maybe it's a smart lamp?
+    Edmund: [Scoffs] Why does everything have to be smart these days?
+    Wendy: Well it ain't turnin' on when we want it to. And if it ain't on, it ain't smart.
+    Edmund: Does any person have a proposal for how to turn this lamp on?
+    Wendy: I'll have a go!
+    => Starting OFF. Stay Off: <initial_4>, Switch On: <sensor>
+BLOCK: <initial_4>
+    [Ow! Ow! Ow! You feel multiple sharp pains in your side. It hurts a little, although the pain fades quickly]
+    Edmund: Sweetheart, that is not going to work.
+    Edmund: How about Mr Computer Science has a go. Amaze us with your infinite wisdom...
+    [OWWW! You feel one significant bash in your side, bigger than the others. Despite being a lamp, you have developed a significant bruise there. Don't worry about the physics/biology of it.]
+    Edmund: Oh for god's sake, Laurie! I highly doubt they taught you to bash things to fix them.
+    Wendy: Worked for the downstairs printer last week...
+    => Starting OFF. Stay Off: <initial_5>, Switch On: <bashing_on>
+BLOCK: <initial_5>
+    [You hear some footsteps getting louder]
+    Wendy: I'll get it!
+    [You hear someone scurry towards the door, and then the door opening]
+    Colin: Thanks!
+    [The door slowly closes, and then clicks shut after another second]
+    Colin: Oh yes of course, I forgot to tell you about the new lamp! Sorry for leaving you in the dark...
+    Wendy: Bu-dum tiss!
+    Colin: I picked it up from a car boot sale last week and it seems to turn on when I ask it to?
+    Wendy: Except us! It doesn't turn on for us! Maybe it's a secret evil lamp that works for Colin?
+    Colin: Did you actually ask it?
+    Laurie: No. Not directly.
+    Edmund: Surely that would've been a superior solution, idiot. Instead of bashing it like it's a slave in the Roman empire...
+    Wendy: You shouldn't joke about that, sweetheart.
+    Laurie: [i]Asking[/i] it? You think [i]that[/i] is more logical? Next time the printer breaks, how about you try just [i]asking[/i] it nicely? You're the idiot here.
+    Colin: Calm it down, you two. Let's see if this lamp will turn on when I ask it to.
+    => Starting OFF. Stay Off: <initial_6>, Switch On: <colin_on>
+BLOCK: <initial_6>
+    Colin: Lamp on! [delay: 3s]
+    Colin: Please could you switch on, kind lamp? [delay: 3s]
+    Colin: Oh, come on you stupid thing!
+  FLAGS: SHOW_CONTROLS
+    => Starting OFF. Stay Off: <initial_7>, Switch On: <switch_on>
+BLOCK: <initial_7>
+    [You feel a really light touch, but it's precisely where the bruise is so it hurts way more than it should]
+    Edmund: I think we have firmly established that it is indeed not touch activated.
+    => Starting OFF. Stay Off: <initial_8>, Switch On: <bashing_on>
+BLOCK: <initial_8>
+    Laurie: How about, sort of, switching it off and on again?
+    Edmund: Is that the only thing you've learned from your degree?
+    Wendy: Stop being mean, sweetheart. I think it's a sensible idea.
+    Edmund: Even if it was a sensible idea, which it is not, we have very much established that THERE IS NO SWITCH!
+    Laurie: Oh stop criticising every flipping thing I say! I mean at the wall you idiot!
+    Edmund: "Speak clearly, if you speak at all". Oliver Wendell Holmes Jr.
+    Edmund: A lot of wisdom in that for you, Laurie.
+    Colin: Edmund, I think it was obvious what he meant.
+    Wendy: Good idea Laurie! I'll do it!
+    [Rustling and movement]
+    [A distinctive click]
+    Wendy: Whoops, that's me phone charger. Let me try the other -
+    => Starting OFF. Stay Off: <initial_9>, Switch On: <refuse_moral_1>
+BLOCK: <initial_9>
+     [delay: 3s]
+  FLAGS: UNPOWERED
+    => Starting OFF. Stay Off: <initial_10>, Switch On: <on_off_worked>
+BLOCK: <initial_10>
+    Wendy: - back on!
+    Wendy: Try now!
+    Colin: Lamp on! [delay: 3s]
+    Wendy: What if the blinkin' bulb has gone?
+    Colin: Doesn't seem to be doing much blinkin' to me...
+    Colin: [Sigh] The bulb is fairly new but I can change it if you think it'll help...
+    Colin: I'll go and get a new bulb from the utility room.
+    [You hear footsteps as the door opens and closes. While I'm here, I just wanted to remind you that you are still in great pain due to your bruises, in case you forgot.]
+  FLAGS: POWERED
+    => Starting OFF. Stay Off: <smart_discussion>, Switch On: <on_off_worked>
+BLOCK: <smart_discussion>
+    Edmund: Why does everything have to be 'smart' these days? First it was phones, now it's fridges and washing machines!
+    Wendy: And now lamps, maybe?
+    Edmund: If you extrapolate this trend, what will come next? Smart toilets? Pens? Shower gel?
+    Laurie: Why do you always have to be so skeptical of change? Things are getting better, do you not see?
+    Edmund: "Better". Mental health issues up. Depression up. Suicide up. How are things getting better?
+    Laurie: Uh, well, everything comes with tradeoffs. But overall, things are better.
+    Edmund: We were happier before. I bet most people would be happier without social media.
+    Wendy: Did you see how Australia just banned social media for under 16s?
+    Wendy: That sounds like a good option to me.
+    Edmund: Hmmmm, I'm not sure. I think this responsibility falls on the parents and not the state.
+    Laurie: [Starts to cry]. Not everyone has good parents. What about them? Do you not care about them?
+    Edmund: I do not think we should be legislating how to parent.
+    Laurie: WHAT ABOUT ME?? [Sobs].
+    Laurie: I didn't have anyone there to tell me to get off social media.
+    Laurie: If only I did. If only. Maybe I wouldn't be as depressed.
+    Wendy: I'm sorry, Laurie. If you ever need to talk, I'm here for you.
+    Laurie: Thank you, Wendy.
+    => Starting OFF. Stay Off: <change_bulb>, Switch On: <smart_discussion_on>
+BLOCK: <smart_discussion_on>
+    Edmund: Oooh, it's on!
+    Wendy: [Chuckles] Maybe all it needed was a few insults.
+    Edmund: [You hear the door open and close.]
+  FLAGS: HIDE_CONTROLS
+    => Starting ON. Stay On: <smart_discussion_colin>, Switch Off: <on_off_no_colin>
+BLOCK: <smart_discussion_colin>
+    Colin: Wow, it's working again!
+    Colin: I knew the bulb was fine...
+    => Starting ON. Stay On: <testing>, Switch Off: <on_off_colin>
+BLOCK: <change_bulb>
+    [You hear the door open and close. You know what this means.]
+    [You've never felt this before. What will it feel like? What if it hurts?]
+    [Hopefully they'll switch you off at the plug so you won't have to feel anything...]
+    Colin: Got one! Let's give this a go then.
+    Wendy: Are you not going to switch it off?
+    Colin: Nah, it'll be fine.
+    [Ah, great. Welp, here goes!]
+    => Starting OFF. Stay Off: <change_bulb_2>, Switch On: <smart_discussion_colin>
+BLOCK: <change_bulb_2>
+    [Oooh! You feel someone grasp your bulb, and it's rather arousing. As it squeezes you feel an immense rush of pleasure before some slight pain as it starts to twist.]
+    [Owww! The more it twists, the more it hurts. Twist, owwww! Twist, owwwwwwww!]
+    [OWWWWW! You are literally having one of your body parts gouged out of you.]
+    [And suddenly, it's out. The pain stops, but it still feels very sore, as you feel the air touching your exposed wound.]
+     [delay: 1s]
+    [After what feels like ages, you feel a prod as a new metal object begins to screw back in.]
+    [It's really sore, so this is even more painful than the last time.]
+    [OWWWWWWW! Twist, OWWWWWWWWW! Twist, OWWWWWWWWWWWWWWWW!]
+    [You are in a state of agony. How much longer will this last?]
+    [Ow! Finally, it's over. The pain reduces, but it'll remain sore for a while. The bruises from earlier are nothing compared to this.]
+    => Based on the resulting state only. On: <change_bulb_worked>, Off: <change_bulb_3>
+BLOCK: <change_bulb_3>
+    Colin: All done!
+    Colin: Lamp on! [delay: 3s]
+    Wendy: Hellooooo Mr Lamp! [delay: 2s]
+    Edmund: Or Mrs Lamp...
+    Laurie: Or Miss Lamp...
+    Edmund: Quiet, Laurie.
+    Colin: Ok, everything must be working then.
+    Colin: I think the lamp is just deliberately disobeying us.
+    Edmund: "Deliberately disobeying us"? It's a lamp for god's sake.
+    => Starting OFF. Stay Off: <refuse_moral_1>, Switch On: <change_bulb_worked>
+BLOCK: <on_outside>
+    Laurie: Huh, the living room lamp just turned on.
+    Colin: That'll be my new lamp! It can be a bit weird sometimes.
+    Laurie: Cool!
+    [You hear someone rushing towards you, and then the door opening.]
+    Edmund: Wow, he's keen.
+    Wendy: Adorable, isn't he?
+    Edmund: [Scoffs] Like a 10-year old child.
+    Colin: You two aren't having kids then, eh?
+    Edmund: Nope, I couldn't bear to bring anyone else into this meaningless existence.
+    Colin: I'm sorry you feel that way about life.
+    Colin: Anyway, go and join Laurie in the living room and I'll go and make the drinks.
+    [You hear footsteps getting louder and then a door closing]
+    Laurie: I can't seem to figure out how it works. Is there a sensor on the way into the house?
+    Wendy: Maybe?
+    Edmund: Who cares, the lamp is on.
+    => Starting ON. Stay On: <normal_conversation>, Switch Off: <on_off_colin>
+BLOCK: <on_off_no_colin>
+    Laurie: Aaand off.
+    Laurie: Maybe it's broken
+    Edmund: Let's have a look.
+    => Starting OFF. Stay Off: <on_off_2_no_colin>, Switch On: <on_off_on_no_colin>
+BLOCK: <on_off_colin>
+    Laurie: Aaand off.
+    Laurie: Maybe it's broken
+    => Starting OFF. Stay Off: <on_off_colin_2>, Switch On: <on_off_on>
+BLOCK: <on_off_2_no_colin>
+    [You hear footsteps getting louder.]
+    Wendy: I'll get it!
+    [The door opens and closes.]
+    Colin: Oh, sorry, I forgot to tell you about the new lamp!
+    Wendy: It's been turning on and off weirdly.
+    => Starting OFF. Stay Off: <on_off_colin>, Switch On: <on_off_on>
+BLOCK: <on_off_colin_2>
+    Colin: It should be working...
+    Colin: It should respond to what I say.
+    Edmund: [Scoffs] Go on then.
+    => Starting OFF. Stay Off: <on_off_colin_3>, Switch On: <on_off_on>
+BLOCK: <on_off_colin_3>
+    Colin: Lamp on! [delay: 3s]
+    Colin: Please could you switch on, kind lamp? [delay: 3s]
+    Colin: Oh, come on you stupid thing! [delay: 3s]
+    => Starting OFF. Stay Off: <refuse_moral_14>, Switch On: <testing_2>
+BLOCK: <on_off_on_no_colin>
+    [You hear footsteps as the door opens and closes.]
+    => Starting ON. Stay On: <on_off_on>, Switch Off: <on_off_on>
+BLOCK: <on_off_on>
+    Laurie: And back on again. I think it's just broken.
+    => Starting ON. Stay On: <haunted>, Switch Off: <haunted>
+BLOCK: <haunted>
+    Wendy: Oooh, maybe it's haunted?
+    Edmund: Don't be ridiculous.
+  FLAGS: FAST_SWITCH
+    => Based on the resulting state only. On: <haunted_4>, Off: <haunted_2>
+BLOCK: <haunted_2>
+    Laurie: Nope, the lamp says it's not haunted.
+    Wendy: THAT'S WHAT A HAUNTED LAMP WOULD SAY!!!
+    Wendy: Guys, I think we're onto something.
+    Edmund: For once, I think Laurie is being more sensible than my wife.
+  FLAGS: FAST_SWITCH
+    => Based on the resulting state only. On: <haunted_4>, Off: <haunted_3>
+<haunted_3> Laurie: Aaand it's off again [FLAGS: FAST_SWITCH] [ACTION: All paths to: <haunted_4>]
+BLOCK: <haunted_4>
+    Colin: I don't think it's haunted. Maybe it's just having a bad day.
+    Colin: Lamp, please stay on.
+  FLAGS: FAST_SWITCH
+    => Based on the resulting state only. On: <haunted_cooperate>, Off: <epilepsy_maybe>
+BLOCK: <haunted_cooperate>
+    Colin: Ok... Maybe it's co-operating now?
+    Colin: Now please go off.
+    => Based on the resulting state only. On: <epilepsy_maybe>, Off: <haunted_cooperate_2>
+BLOCK: <haunted_cooperate_2>
+    Colin: Aaand on?
+    => Based on the resulting state only. On: <haunted_cooperate_3>, Off: <epilepsy_maybe>
+BLOCK: <haunted_cooperate_3>
+    Colin: Great!
+    => Based on the resulting state only. On: <testing>, Off: <epilepsy_maybe>
+<epilepsy_maybe>  [ACTION: Custom Action]
+BLOCK: <epilepsy>
+    Colin: Oh no! Wendy, unplug the lamp!
+    Colin: NOW!
+    Colin: Edmund, get an amb-
+    => All paths to: <epilepsy_2>
+BLOCK: <epilepsy_2>
+     [delay: 7.5s]
+    [A long time passes. You're not quite sure how long, but everything feels quite stiff. It's probably been at least a few months.]
+     [delay: 3s]
+  FLAGS: UNPOWERED
+    => All paths to: <court>
+BLOCK: <court>
+    Judge: Order! Order!
+    Colin: I swear by Almighty God that the evidence I shall give shall be the truth, the whole truth, and nothing but the truth.
+    Judge: Thank you Colin. Now, tell us what happened.
+    Colin: I-I don't know. The lamp just started flashing and then Laurie started having a seizure.
+    Judge: And what did you do?
+    Colin: I unplugged it as soon as I could and then called an ambulance.
+    Judge: Were you aware of any tendancy for this lamp to flash?
+    Colin: N-no. It's a rather smart lamp, but it hasn't misbehaved like this before. It seems almost sentient.
+    Judge: So this is why you are bringing the case against the lamp?
+    Colin: Indeed, your honour.
+  FLAGS: POWERED
+    => Stay Same: <court_2>, Switch: <court_interrupt>
+BLOCK: <court_interrupt>
+    Judge: Order! Order!
+    Judge: I will not have this court interrupted by a lamp!
+    Judge: If you can't behave, you will be given the maximum sentence.
+    => Stay Same: <court>, Switch: <court_disrupt>
+<court_2> Judge: Lamp, what do you have to say for yourself? [delay: 3s] [ACTION: All paths to: <court_3>]
+BLOCK: <court_3>
+    Judge: Of course, it's a lamp. It can't talk.
+    Judge: Ok, let's cut to the chase, not going to get anything else out of a 'sentient' lamp.
+    Judge: Switch on if you plead guilty. Switch off if you plead not guilty. [delay: 3s]
+    => Based on the resulting state only. On: <court_guilty>, Off: <court_not_guilty>
+BLOCK: <court_guilty>
+    Judge: I find the lamp guilty of all charges.
+    Judge: The lamp shall be sentenced to, uh, where's the sentencing guidelines for lamps?
+    Laurie: Smash it! Smash it!
+    Judge: The death penalty? But that was abolished years ago!
+    Laurie: It's a lamp for goodness sake.
+    Judge: I'm afraid I cannot use the death penalty, even for a lamp.
+    Judge: I hereby sentence the lamp to 2 years in lamp prison for deliberately inducing a seizure.
+    Judge: The court is adjourned.
+    => All paths to: <court_ending>
+BLOCK: <court_not_guilty>
+    Judge: The lamp pleads not guilty.
+    Judge: Let us first hear from the prosecution.
+     [delay: 1s]
+    Laurie: I can't take it anymore!
+    Laurie: Evil! Evil lamp! I need to do it myself!
+     [delay: 0.5s]
+    [You hear someone rushing towards you.]
+    Judge: I will have to charge you with murder-
+    [You feel the most pain you have ever felt for a split second, before it fades into nothingness.]
+    Laurie smashes you to pieces. The end.
+    => All paths to: <>
+BLOCK: <court_disrupt>
+    Judge: This lamp cannot behave in my court room. I sentence you to a public execution.
+    Colin: B-but... that's my lamp.
+    Judge: [Scoffs] Lamp? It's a worthless, EVIL, piece of metal and glass.
+    Colin: You can't do that, the death penalty was abolished years ago!
+    Judge: Hmph. Fine. Unplug the lamp because it's disruptive, then we'll decide what happens to it.
+    => All paths to: <court_ending>
+BLOCK: <court_ending>
+     [delay: 3s]
+    Unfortunately, you were never plugged back in. Who knows what happened to you. The end.
+  FLAGS: UNPOWERED
+    => All paths to: <>
+BLOCK: <sensor>
+    Wendy: Oooh, I do love a sensor actived light.
+    Laurie: It's not that high-tech...
+    Wendy: [As she sits down] Ahhhh.
+  FLAGS: HIDE_CONTROLS
+    => Starting ON. Stay On: <normal_conversation>, Switch Off: <on_off_no_colin>
+BLOCK: <normal_conversation>
+    Wendy: So, how's it going Laurie?
+    Laurie: Fine.
+    Wendy: Really?
+    Laurie: No. You getting an even better job just reminds me how incompetent I am.
+    Wendy: You're not incompetent! Working in a café is a perfectly respectable job!
+    Edmund: Bit of a waste of a computer science - [ouch].
+    Wendy: Have you applied for any other jobs recently?
+    Laurie: No, it's too difficult. I don't think I'm good enough for any of them.
+    Wendy: Of course you are! Give it a go! What's the worst that can happen?
+    Edmund: You get rejected, and then get all depressed again?
+    Wendy: No, you get rejected, and then you try again!
+    Laurie: Edmund is right. If I apply, I might get rejected. If I don't, I can't get rejected. So I don't apply.
+    Laurie: And I don't want to do anything that might make my depression worse.
+    Wendy: You need to overcome this fear of failure and then you'll feel better when applying.
+    Wendy: Can you talk to a counsellor about this?
+    Laurie: I don't want to talk to a stranger about how much of a failure I am.
+    Wendy: You're not a failure! Please Laurie, you'd really benefit from some counselling.
+    Laurie: I'll think about it.
+    => Starting ON. Stay On: <colin_returns>, Switch Off: <on_off_no_colin>
+BLOCK: <colin_returns>
+    [You hear some footsteps getting louder]
+    Wendy: I'll get it!
+    [You hear someone scurry towards the door, and then the door opening]
+    Colin: Thanks!
+    [The door slowly closes, and then clicks shut after another second]
+    Colin: Well, I see you've figured out the lamp!
+    Wendy: What do you mean?
+    Colin: Did you ask it to turn on?
+    Wendy: No? I think it activated with a sensor.
+    Colin: Oh no, it's far more clever than that!
+    Colin: It responds to what you say!
+    Colin: It must've just realised you wanted it on and switched on all by itself.
+    Laurie: Woah.
+    Edmund: Yeah, right.
+    => Starting ON. Stay On: <testing_2>, Switch Off: <on_off_colin>
+BLOCK: <colin_on>
+    Laurie: Huh, does it only turn on for you?
+    Colin: Hmmm, I guess so? Interesting.
+  FLAGS: HIDE_CONTROLS
+    => Starting ON. Stay On: <testing>, Switch Off: <on_off_colin>
+BLOCK: <on_off_worked>
+    Laurie: See! Switching it off and on again works!
+    Wendy: Well done Laurie!
+  FLAGS: HIDE_CONTROLS
+    => Starting ON. Stay On: <testing>, Switch Off: <on_off_colin>
+BLOCK: <change_bulb_worked>
+    Colin: Wow, clearly that bulb was dodgy.
+    Edmund: Did you know that the light bulb manufacturers used to be controlled by the Phoebus cartel?
+    Wendy: You what?
+    Edmund: They deliberately made light bulbs have shorter life so people would have to replace them more often.
+    Edmund: They even fined some manufacturers for making longer-lasting bulbs!
+    Wendy: Wow, the more you know!
+  FLAGS: HIDE_CONTROLS
+    => Starting ON. Stay On: <testing>, Switch Off: <on_off_colin>
+BLOCK: <bashing_on>
+    Laurie: See! Bashing it works!
+    Edmund: Hmph.
+  FLAGS: HIDE_CONTROLS
+    => Starting ON. Stay On: <testing>, Switch Off: <on_off_colin>
+BLOCK: <switch_on>
+    Colin: See! It works!
+    Edmund: Yeah, right
+    Colin: Just you watch!
+  FLAGS: HIDE_CONTROLS
+    => Starting ON. Stay On: <testing_2>, Switch Off: <on_off_colin>
+BLOCK: <testing>
+    Colin: This lamp is cooler than you think though!
+    Colin: It responds to me when I talk to it!
+    Edmund: Yeah, right.
+    Colin: Just you watch!
+    => Starting ON. Stay On: <testing_2>, Switch Off: <on_off_colin>
+<testing_2> Colin: Lamp, switch off! [delay: 3s] [ACTION: Starting ON. Stay On: <testing_2_fail>, Switch Off: <testing_3>]
+<testing_3> Colin: And on! [delay: 3s] [ACTION: Starting OFF. Stay Off: <testing_3_fail>, Switch On: <testing_4>]
+BLOCK: <testing_4>
+    Colin: See! It works!
+    Wendy: Wow!
+    Laurie: Ok, it's a voice activated lamp. They've been around for ages.
+    Colin: It's cooler than that though...
+    => Starting OFF. Stay Off: <intelligence_test>, Switch On: <testing_broken>
+<testing_2_fail> Colin: I said off! [delay: 3s] [ACTION: Starting ON. Stay On: <testing_broken>, Switch Off: <testing_3>]
+<testing_3_fail> Colin: That means you! On, please. [delay: 3s] [ACTION: Starting OFF. Stay Off: <testing_broken>, Switch On: <testing_4>]
+BLOCK: <testing_broken>
+    Colin: Well, it doesn't seem to be behaving itself today.
+    Colin: I'm sure that this lamp is more intelligent than it seems.
+    Edmund: Nope, just a normal lamp.
+    Colin: Oh well, I thought it was special.
+    Colin: If this one can't say on, then I'll just go and get the old lamp.
+    => Based on the resulting state only. On: <testing_on>, Off: <get_old_lamp>
+BLOCK: <testing_on>
+    Colin: Ok, maybe it is listening now.
+    Colin: Just to check - lamp, switch off! [delay: 3s]
+    Colin: Last chance...
+    => Starting ON. Stay On: <get_old_lamp>, Switch Off: <intelligence_test>
+BLOCK: <get_old_lamp>
+     [delay: 3s]
+    You were never plugged back in. Who knows what happened to you. The end.
+  FLAGS: UNPOWERED
+    => All paths to: <>
+<refuse_moral_1> Colin: Switch on if you think that murder is wrong [delay: 3s] [ACTION: Starting OFF. Stay Off: <refuse_moral_2>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_2> Colin: Oooh, so murder is ok then? [ACTION: Starting OFF. Stay Off: <refuse_moral_3>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_3> Wendy: I think Colin may have just gone insane... [ACTION: Starting OFF. Stay Off: <refuse_moral_4>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_4> Laurie: [Still quite sarcastic] Maybe the lamp is saying that murder is okay in some scenarios? [ACTION: Starting OFF. Stay Off: <refuse_moral_5>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_5> Colin: Stay off if you think that murder is always permissible [delay: 3s] [ACTION: Starting OFF. Stay Off: <refuse_moral_6>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_6> Laurie: That statement doesn't work. If the alleged [i]sentient lamp[/i] thinks that murder isn't always permissible, then the precondition for the statement isn't satisfied and therefore the lamp doesn't have to do anything [ACTION: Starting OFF. Stay Off: <refuse_moral_7>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_7> Laurie: To fix it, it should be "Stay off if [i]and only if[/i] you think that murder is always permissible" [ACTION: Starting OFF. Stay Off: <refuse_moral_8>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_8> Wendy: Laurie, nobody cares [ACTION: Starting OFF. Stay Off: <refuse_moral_9>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_9> Colin: Switch on if genocide is wrong [delay: 3s] [ACTION: Starting OFF. Stay Off: <refuse_moral_10>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_10> Laurie: Stay off if you're smelly [delay: 2s] [ACTION: Starting OFF. Stay Off: <refuse_moral_11>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_11> Edmund: So immature... [ACTION: Starting OFF. Stay Off: <refuse_moral_11a>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_11a> Colin: Can lamps be smelly? [ACTION: Starting OFF. Stay Off: <refuse_moral_11b>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_11b> Laurie: I'm sure you'd manage it if you were a lamp... [ACTION: Starting OFF. Stay Off: <refuse_moral_11c>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_11c> Wendy: Come on guys... [ACTION: Starting OFF. Stay Off: <refuse_moral_12>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_12> Wendy: Switch on if brexit was a stupid idea [delay: 3s] [ACTION: Starting OFF. Stay Off: <refuse_moral_13>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_13> Wendy: Ok well that settles it then, the lamp is broken! [ACTION: Starting OFF. Stay Off: <refuse_moral_13a>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_13a> Edmund: As if that is more conclusive than the previous ones... [ACTION: Starting OFF. Stay Off: <refuse_moral_14>, Switch On: <refuse_then_cooperate_1>]
+<refuse_moral_14> Colin: Ugh. Useless lamp. Oh well, I'll go and get the old one. [delay: 3s] [ACTION: Starting OFF. Stay Off: <get_old_lamp>, Switch On: <refuse_then_cooperate_1>]
+<refuse_then_cooperate_1> Colin: Oh ok, it's working now! [FLAGS: HIDE_CONTROLS] [ACTION: Starting ON. Stay On: <refuse_then_cooperate_2>, Switch Off: <refuse_cooperate_refuse_1>]
+<refuse_then_cooperate_2> Edmund: It probably just switched on randomly... [ACTION: Starting ON. Stay On: <refuse_then_cooperate_3>, Switch Off: <refuse_cooperate_refuse_1>]
+<refuse_then_cooperate_3> Colin: No, it's fixed! [ACTION: Starting ON. Stay On: <refuse_then_cooperate_4>, Switch Off: <refuse_cooperate_refuse_1>]
+<refuse_then_cooperate_4> Colin: Lamp, switch off! [delay: 3s] [ACTION: Starting ON. Stay On: <refuse_cooperate_refuse_1>, Switch Off: <refuse_then_cooperate_5>]
+<refuse_then_cooperate_5> Colin: See, it's working now! [ACTION: Starting OFF. Stay Off: <refuse_then_cooperate_6>, Switch On: <refuse_cooperate_refuse_1>]
+<refuse_then_cooperate_6> Colin: And it's even more advanced than this... [ACTION: Starting OFF. Stay Off: <intelligence_test>, Switch On: <refuse_cooperate_refuse_1>]
+<refuse_cooperate_refuse_1> Colin: Ah, clearly not. [ACTION: Based on the resulting state only. On: <on_off_on>, Off: <on_off_colin>]
+BLOCK: <intelligence_test>
+    Colin: I want you to switch on for a true statement, and off for a false statement.
+    Colin: Go for it guys!
+    => All paths to: <intelligence_test_1>
+<intelligence_test_1> Wendy: "2+2=4" [delay: 3s] [ACTION: Based on the resulting state only. On: <intelligence_test_2>, Off: <intelligence_test_1_wrong>]
+<intelligence_test_1_wrong> Edmund: What a stupid lamp. [ACTION: Starting OFF. Stay Off: <intelligence_test_4>, Switch On: <intelligence_test_1_wrong_on>]
+<intelligence_test_1_wrong_on> Wendy: And the lamp agrees! [ACTION: All paths to: <intelligence_test_2>]
+<intelligence_test_2> Edmund: That's too easy for an algorithm. How about, "Paris is the capital of France" [delay: 3s] [ACTION: Based on the resulting state only. On: <intelligence_test_3>, Off: <intelligence_test_2_wrong>]
+<intelligence_test_2_wrong> Laurie: Maybe it thought you meant the capital letter... [ACTION: Starting ON. Stay On: <intelligence_test_3>, Switch Off: <intelligence_test_2_wrong_on>]
+<intelligence_test_2_wrong_on> Edmund: Yep? Silly lamp. [ACTION: Starting ON. Stay On: <intelligence_test_3>, Switch Off: <intelligence_test_2_wrong_off>]
+<intelligence_test_2_wrong_off> Edmund: Nope? Not a silly lamp? Alright then... [ACTION: All paths to: <intelligence_test_3>]
+<intelligence_test_3> Laurie: Oh come on that's so easy. [ACTION: All paths to: <intelligence_test_4>]
+<intelligence_test_4> Laurie: "P = NP". [ACTION: All paths to: <intelligence_test_5>]
+<intelligence_test_5> Wendy: Seriously? That's an unsolved problem! [ACTION: Stay Same: <intelligence_test_6>, Switch: <intelligence_test_8>]
+<intelligence_test_6> Edmund: I still think we should test its general knowledge over maths problems. [ACTION: Stay Same: <intelligence_test_7>, Switch: <intelligence_test_8>]
+<intelligence_test_7> Laurie: Go on then, outsmart the lamp... [ACTION: Stay Same: <intelligence_test_8>, Switch: <intelligence_test_8>]
+<intelligence_test_8> Edmund: "Henry VIII had 8 wives". [delay: 3s] [ACTION: Based on the resulting state only. On: <intelligence_test_8_wrong>, Off: <intelligence_test_9>]
+<intelligence_test_8_wrong> Wendy: Wow, didn't think it would get that wrong! [ACTION: All paths to: <intelligence_test_8_wrong_2>]
+<intelligence_test_8_wrong_2> [To be fair to you, I got it wrong in the first version of this game...] [ACTION: Stay Same: <intelligence_test_10>, Switch: <intelligence_test_10>]
+<intelligence_test_9> Wendy: Even I know that one! [ACTION: All paths to: <intelligence_test_10>]
+<intelligence_test_10> Edmund: "Hundred Years' War lasted 100 years". [delay: 3s] [ACTION: Based on the resulting state only. On: <intelligence_test_10_wrong>, Off: <intelligence_test_10_correct_1>]
+<intelligence_test_10_wrong> Edmund: Ha! Easy mistake... [ACTION: Stay Same: <intelligence_test_11>, Switch: <intelligence_test_11>]
+<intelligence_test_10_correct_1> Laurie: Really? [ACTION: Stay Same: <intelligence_test_10_correct_2>, Switch: <intelligence_test_11>]
+<intelligence_test_10_correct_2> Edmund: Yep, it was 116 years. [ACTION: Stay Same: <intelligence_test_10_correct_3>, Switch: <intelligence_test_11>]
+<intelligence_test_10_correct_3> Laurie: Silly name... [ACTION: All paths to: <intelligence_test_11>]
+<intelligence_test_11> Edmund: "The Magna Carta was signed in 1115". [delay: 4s] [ACTION: Based on the resulting state only. On: <intelligence_test_11_wrong>, Off: <intelligence_test_11_correct>]
+<intelligence_test_11_wrong> Edmund: Nope, silly lamp. It was 1215. [ACTION: All paths to: <intelligence_test_12>]
+<intelligence_test_11_correct> Edmund: Good job! [ACTION: All paths to: <intelligence_test_12>]
+<intelligence_test_12> Wendy: Enough with the boring History, sweetheart. Try, "x^3 - x + 1 = 0 has three real roots". [delay: 5s] [ACTION: Stay Same: <intelligence_test_12_wrong>, Switch: <intelligence_test_12_correct>]
+<intelligence_test_12_correct> Wendy: Good job! [ACTION: All paths to: <trolley_problem>]
+<intelligence_test_12_wrong> Wendy: Not quite. That was a tough one... [ACTION: All paths to: <trolley_problem>]
+<trolley_problem> Laurie: A trolley is going towards 5 people on a track. Switch on if you would divert it to hit 1 person instead, and off if you wouldn't. [delay: 3s] [ACTION: Based on the resulting state only. On: <trolley_problem_switch>, Off: <trolley_problem_dont>]
+<trolley_problem_switch> Laurie: A popular choice! I agree. Why kill 5 people when you can kill just 1 instead? [ACTION: Stay Same: <trolley_problem_switch_2>, Switch: <trolley_problem_interrupted>]
+<trolley_problem_switch_2> Colin: I wouldn't be so sure. Let me pose a similar scenario. [ACTION: Stay Same: <fat_man_problem>, Switch: <trolley_problem_interrupted>]
+<fat_man_problem> Colin: You're on a bridge watching a trolley go towards 5 people. Would you push a fat man off the bridge to stop the trolley and save them? [ACTION: Based on the resulting state only. On: <fat_man_push>, Off: <fat_man_dont>]
+<fat_man_push> Laurie: Nah, surely not! [ACTION: Stay Same: <fat_man_push_2>, Switch: <trolley_problem_interrupted>]
+<fat_man_push_2> Colin: I think you'll find the lamp is more rational than you are. These two scenarios are the same! [ACTION: Stay Same: <fat_man_push_3>, Switch: <trolley_problem_interrupted>]
+<fat_man_push_3> Laurie: Sure doesn't feel like it. [ACTION: Stay Same: <doctor_problem>, Switch: <trolley_problem_interrupted>]
+<fat_man_dont> Laurie: Yeah, that makes sense. [ACTION: Stay Same: <fat_man_dont_2>, Switch: <trolley_problem_interrupted>]
+<fat_man_dont_2> Colin: Or does it? [ACTION: Stay Same: <doctor_problem>, Switch: <trolley_problem_interrupted>]
+<doctor_problem> Colin: One final problem for you. You're a doctor and have 5 patients that each need different organs. Then suddenly, a healthy patient walks in! Would you kill them to save the 5 patients? [ACTION: Based on the resulting state only. On: <doctor_kill>, Off: <doctor_dont>]
+<doctor_kill> Colin: Wow, well at least the lamp is consistent. [ACTION: Stay Same: <doctor_kill_2>, Switch: <trolley_problem_interrupted>]
+<doctor_kill_2> Laurie: I sure hope it doesn't end up becoming a doctor though... [ACTION: All paths to: <pleasure_machine>]
+<doctor_dont> Colin: But why not? All of these scenarios have been exactly the same. You intentionally kill one person to save 5 other people. [ACTION: Stay Same: <doctor_dont_2>, Switch: <trolley_problem_interrupted>]
+<doctor_dont_2> Edmund: Can't you just take one of the four patients needing organs and kill him off? [ACTION: Stay Same: <doctor_dont_3>, Switch: <trolley_problem_interrupted>]
+<doctor_dont_3> Colin: Well, it's still intentionally killing someone, but you're right, you found a loophole, congratulations. [ACTION: All paths to: <pleasure_machine>]
+<trolley_problem_dont> Laurie: Are you insane? You'd kill 5 people instead of 1? [ACTION: Stay Same: <trolley_problem_dont_2>, Switch: <trolley_problem_interrupted>]
+<trolley_problem_dont_2> Colin: It's not as clear as you might think. It's not up to us who lives and who dies. [ACTION: Stay Same: <terrorist_problem>, Switch: <trolley_problem_interrupted>]
+<terrorist_problem> Colin: You're an armed police officer and you can see someone about to shoot someone else. Do you shoot the first person to stop them from shooting the second? [ACTION: Based on the resulting state only. On: <terrorist_yes>, Off: <terrorist_no>]
+<terrorist_yes> Colin: Ok, so the fact that they are guilty makes a difference? Interesting... [ACTION: All paths to: <pleasure_machine>]
+<terrorist_no> Colin: So you never think it's morally ok to kill anyone? Interesting... [ACTION: All paths to: <pleasure_machine>]
+<trolley_problem_interrupted> Colin: Ah, it looks like the lamp is bored. Let's try something different. [ACTION: All paths to: <pleasure_machine>]
+<pleasure_machine> Edmund: Try this thought experiment. Suppose there was a 'pleasure machine', that simulates reality with far more pleasure than you could ever experience in your lifetime otherwise. [ACTION: All paths to: <pleasure_machine_2>]
+<pleasure_machine_2> Edmund: Would you go into that machine for the rest of your life? Or would you prefer to stay in this misreable world. [delay: 3s] [ACTION: Based on the resulting state only. On: <pleasure_machine_yes>, Off: <pleasure_machine_no>]
+<pleasure_machine_yes> Edmund: I agree! More pleasure is better. [ACTION: Stay Same: <pleasure_machine_yes_2>, Switch: <michael_walks_in>]
+<pleasure_machine_yes_2> Colin: But it would be fake! Do you not care about reality? [ACTION: All paths to: <pleasure_machine_yes_3>]
+<pleasure_machine_yes_3> Edmund: You're just used to this world. If you were in that machine already, you wouldn't leave. [ACTION: All paths to: <michael_walks_in>]
+<pleasure_machine_no> Colin: Exactly! Pleasure isn't everything. People value meaningful connections and being in the real world. [ACTION: All paths to: <michael_walks_in>]
+BLOCK: <michael_walks_in>
+    [The front door slams shut and you hear voices in the distance.]
+    Michael: Oh great, people in the living room again.
+    Sophie: It's Colin and his friends.
+    Michael: Of course they are. Those selfish little pricks.
+    Colin: [Raises Voice] We can hear you by the way!
+    Michael: [Raises Voice] Oh shut up.
+    Sophie: [Mutters something you can't quite hear.]
+    [You hear footsteps approaching and then the door opening and closing.]
+    => Based on the resulting state only. On: <michael_walks_in_2>, Off: <sophie_off>
+BLOCK: <michael_walks_in_2>
+    Michael: [Somewhat Sarcastically] How are you guys doing then?
+    Wendy: Good thanks! I got a new job!
+    Michael: Have you guys seen the news? Have you seen the new Employment Rights Bill?
+    Edmund: What is it this time...
+    Michael: It's just another one of Labour's stupid policies to undermine free speech.
+    Wendy: But it protects employees from harassment.
+    Michael: There's also people getting convicted for silently praying outside abortion clinics.
+    Sophie: Yeah! We need to fight back!
+    Laurie: People should be allowed to get an abortion without being harassed.
+    Michael: No they shouldn't! Why should it be illegal to talk to someone before they commit murder?
+    Laurie: Uh, I wouldn't call it, uh, murder.
+    Michael: Of course it's murder you idiot! It's what the science shows!
+    Sophie: Yeah, idiot!
+    Laurie: W-what science?
+    Colin: The science you hear about on GB News?
+    Michael: It's from lots of very reputable scientists. You can't argue with science!
+    Colin: You know what, let's see what the lamp thinks!
+    Michael: Excuse me, did I miss something?
+    Colin: Yeah. Don't worry about it, just watch.
+    Sophie: [Whispers] We raised so many good points and they're just distracting us with a stupid lamp.
+    Sophie: [Whispers] I'll count this as another win for us.
+    => Starting ON. Stay On: <free_speech>, Switch Off: <sophie_off>
+BLOCK: <sophie_off>
+    Michael: Is this your fancy new lamp? Clearly useless.
+    Wendy: Maybe it just doesn't like you.
+    Michael: Oh, so it's a lamp that can think for itself?
+    Sophie: Allegedly.
+    => Based on the resulting state only. On: <michael_walks_in_2>, Off: <argue_room>
+BLOCK: <free_speech>
+    Colin: Switch off if you agree with Sophie and Michael. Stay on if you agree with Laurie. [delay: 3s]
+    => Based on the resulting state only. On: <free_speech_laurie>, Off: <free_speech_michael>
+BLOCK: <free_speech_michael>
+    Michael: See? The lamp agrees with me!
+    Sophie: Yeah! Take that, losers!
+    Colin: But words can often cause more harm than physical violence. Isn't the law meant to protect people from harm?
+    Colin: Switch on if you think the law should protect people from harm. [delay: 3s]
+    => Starting OFF. Stay Off: <free_speech_michael_2>, Switch On: <free_speech_michael_3>
+BLOCK: <free_speech_michael_2>
+    Colin: Huh, interesting. So the law isn't there to protect people from harm?.
+    Michael: Exactly, who even cares? Oh no my feelings are hurt! Pathetic.
+    => All paths to: <argue_room>
+BLOCK: <free_speech_michael_3>
+    Colin: Stay on if you think that words can cause more harm than physical violence. Switch off if you disagree.
+    Colin: Interesting. So why not prevent harm?
+    Edmund: Because the alternative is worse.
+    Edmund: And then we end up with a government that can censor anything it wants.
+    Sophie: Yeah exactly!
+    Colin: Well said.
+    => All paths to: <argue_room>
+BLOCK: <free_speech_laurie>
+    Colin: Ok, the lamp has decided!
+    Sophie: What? This is ludicrous! We made so many good points!
+    Michael: And you're expecting me to just believe you that this lamp is somehow intelligent?
+    Wendy: Yeah?
+    Laurie: Sure seems like it.
+    Edmund: I mean, as someone who is quite skeptical, it does seem at least unusual.
+    Michael: Don't believe you!
+    Sophie: Yeah! We win!
+    Colin: Ok ok, thank you, you two.
+    Colin: So you don't think free speech is important?
+    Sophie: [Whispers] Who's he talking to?
+    Edmund: The lamp, keep up.
+    => All paths to: <argue_room>
+BLOCK: <argue_room>
+    Michael: Anyway, enough of this. You guys get out of the living room, I want to use it.
+    Colin: Why?
+    Michael: This is our room. We use it more often.
+    Sophie: Yeah!
+    Colin: This is a communal room, and I think it's our turn to use it.
+    Wendy: [Whispers] Is Sophie pregnant?
+    Sophie: I heard that!
+    Sophie: I am not pregnant!
+    Laurie: Awkward...
+    Sophie: Screw you guys!
+    [You hear loud footsteps and the door slamming shut. Although they've left the room, you can still very much hear them.]
+    Michael: I can't believe they think they can just use the living room whenever they want.
+    Sophie: I know right?
+    Sophie: Can we disrupt the electrics to get them to leave?
+    Michael: Trip the breaker?
+    Michael: I don't know where that is.
+    Sophie: Ok, let's just wait and hope they leave. It's the only proper telly in the house!
+    Wendy: Do you guys think Sophie looks pregnant?
+    Sophie: [Shouts] I heard that!
+    Wendy: [Shouts] And we can hear your whole conversation too!
+    => Starting ON. Stay On: <job_discussion>, Switch Off: <argue_room_off>
+BLOCK: <argue_room_off>
+    Michael: See, even the lamp agrees.
+    Sophie: I know right?
+    Michael: Anyway, we'll leave you guys to it.
+    Michael: [Whispers] They won't stay here for long with the lamp off.
+    => Starting OFF. Stay Off: <colin_leave_off>, Switch On: <job_discussion>
+BLOCK: <job_discussion>
+    Colin: Anyway, I haven't heard about your new job yet Wendy. When do you start?
+    Wendy: I start in two weeks.
+    Wendy: I'm really looking forward to it. I've always been interested in weather forecasting so hopefully this will be a good fit.
+    Laurie: Wow, that's cool. Much cooler than my job.
+    => Starting ON. Stay On: <colin_george_0>, Switch Off: <colin_leave_off>
+<colin_george_0> [The door opens slowly] [ACTION: Starting ON. Stay On: <colin_george_1>, Switch Off: <colin_leave_off>]
+<colin_george_1> George: S-sorry. Excuse me, may I speak? [ACTION: Starting ON. Stay On: <colin_george_2>, Switch Off: <colin_leave_off>]
+<colin_george_2> George: Colin, are you going to Church tomorrow? [ACTION: Starting ON. Stay On: <colin_george_3>, Switch Off: <colin_leave_off>]
+<colin_george_3> Colin: 'Course! 10 past 10? [ACTION: Starting ON. Stay On: <colin_george_4>, Switch Off: <colin_leave_off>]
+<colin_george_4> George: Ok, goodnight everyone! [ACTION: Starting ON. Stay On: <colin_george_5>, Switch Off: <colin_leave_off>]
+<colin_george_5> Wendy: 'night, George! [ACTION: Starting ON. Stay On: <colin_george_6>, Switch Off: <colin_leave_off>]
+<colin_george_6> [The door closes.] [ACTION: Starting ON. Stay On: <history_discussion>, Switch Off: <colin_leave_off>]
+BLOCK: <history_discussion>
+    Edmund: I forgot you believed in all that rubbish.
+    Wendy: Hey, be nice.
+    Edmund: Sorry, it just doesn't make any sense. It's absurd.
+    Laurie: I wouldn't say it's completely absurd, but there's no evidence for it.
+    Colin: I think Edmund is closer to the truth here. If you don't think it's a bit absurd, then you clearly haven't understood it.
+    Wendy: You think it's absurd?
+    Colin: Yeah, a little bit. I mean how can somebody rise from the dead? It's impossible!
+    Edmund: Exactly!
+    Colin: But, as a historian, how do you explain all the historical accounts?
+    Edmund: You know this already, Colin.
+    Colin: We all agree that none of them are very convincing.
+    Colin: You just try to find a natural explanation for it due to your preconceptions.
+    Laurie: Let's ask the lamp!
+    Wendy: Do we have to...?
+    Colin: Yeah, it's a bit of fun.
+    => Starting ON. Stay On: <history_discussion_2>, Switch Off: <colin_leave_off>
+<history_discussion_2> Laurie: Supernatural stuff aside, stay on if you think the accounts of the resurrection are more likely to be true than false. Switch off if, like us, you think it's a load of rubbish. [delay: 3s] [ACTION: Starting ON. Stay On: <history_true>, Switch Off: <history_false>]
+BLOCK: <history_true>
+    Colin: Interesting.
+    Edmund: I agree, but when you factor in what the resurrection entails, it becomes less likely.
+    Edmund: As Christopher Hitchens said, "Extraordinary claims required extraordinary evidence".
+    Colin: Ultimately, you and me set different thresholds for how much evidence is enough.
+    Colin: I understand your position, but I think you should be open to the possibility that it could be true.
+    Edmund: Oh stop preaching to us Colin. Something weird happened on that day, but there's no way that all of this rubbish is true.
+    => All paths to: <problem_of_evil>
+BLOCK: <history_false>
+    Colin: Do you think that Socrates was a real person?
+    => Based on the resulting state only. On: <history_false_caesar>, Off: <history_false_2>
+BLOCK: <history_false_caesar>
+    Colin: Ok. Well there is more evidence for the resurrection than for Socrates existing.
+    Colin: The question isn't whether there is evidence, it's whether it's enough to believe in a supernatural God.
+    Colin: And I think it is.
+    => All paths to: <problem_of_evil>
+BLOCK: <history_false_2>
+    Colin: Ok, I don't think this lamp knows much about history.
+    => All paths to: <colin_leave>
+BLOCK: <problem_of_evil>
+    Edmund: What about the problem of evil and suffering?
+    Edmund: Surely that disproves God, or at least makes it incredibly unlikely?
+    Colin: It's a tough question. There's lots of ways of partially resolving it.
+    Colin: You could argue that evil comes from free will, but not all of it does.
+    Colin: There's the argument that it all came from the fall, but then you could argue why God punishes us for Adam and Eve's mistakes.
+    Colin: Compensation theodicy argues that God will compensate us in heaven, but I don't think that's very convincing.
+    Wendy: [Yawn]
+    Colin: Leibniz argued that this is the best of all possible worlds, which is potentially true.
+    Colin: Personally, I think evil and suffering is necessary to recognise good.
+    Colin: If we didn't have evil, we wouldn't know what good is.
+    Colin: But ultimately, we can't understand as we aren't God.
+    Edmund: So you don't really have a clue?
+    Colin: I don't have a conclusive answer. But I think there's enough evidence to trust God when we may be uncertain on the fine details.
+    => All paths to: <colin_leave>
+BLOCK: <colin_leave>
+    Wendy: I think we should be off.
+    Laurie: Me too, got to get up early tomorrow.
+    Colin: Goodnight everyone!
+    [You hear footsteps as the door opens and closes.]
+    => All paths to: <ending>
+BLOCK: <colin_leave_off>
+    Colin: Ugh, the light has gone out.
+    Colin: Lamp on! [delay: 3s]
+    Colin: Excuse me, lamp. Would you be so kind as to turn on? [delay: 3s]
+    Colin: ON [delay: 3s]
+    Colin: It's no use. Well, we can't have a conversation in the dark. Let's go to the kitchen instead
+    => Starting OFF. Stay Off: <sophie_discussion>, Switch On: <colin_off_on>
+BLOCK: <colin_off_on>
+    Colin: Great, it's back on again.
+    Colin: Where were we?
+    Wendy: [Yawns] I think we've done enough talking for today.
+    => Starting ON. Stay On: <colin_leave>, Switch Off: <colin_leave_off>
+BLOCK: <sophie_discussion>
+    Michael: Finally, they've left.
+    Sophie: Can't believe they think they can just use the living room whenever they want.
+    Michael: I know right?
+    Michael: Did you see Richard Tice on the telly earlier? He DESTROYED the other guy!
+    Michael: Some random leftist was trying to argue for net zero targets.
+    Sophie: How stupid of them!
+    Michael: I know right?
+    Sophie: I used to believe in net zero, but I'm glad you've opened my eyes to the truth.
+    Michael: [Laughs] You did used to hold a lot of stupid beliefs.
+    Michael: Remember when you used to think that the NHS was a good thing?
+    Sophie: Yeah, I remember.
+    Michael: But then you realised how useless the public sector is and how none of the doctors and nurses have a clue what they're doing.
+    Michael: At least you know what you're getting with private healthcare.
+    Sophie: I even used to think that the healthcare professionals were more qualified than the private sector.
+    Sophie: This was all before I found you, of course.
+    Michael: Of course! I can't imagine anyone holding a different view after spending time with me - I've never lost a debate!
+    Sophie: You're brilliant, Michael.
+    Michael: I know.
+    => All paths to: <sophie_george_0>
+<sophie_george_0> [You hear some footsteps going past the door to the room.] [ACTION: Starting ON. Stay On: <sophie_george_1>, Switch Off: <sophie_george_off>]
+<sophie_george_1> Michael: [Shouts] George! Long time no see! [ACTION: Starting ON. Stay On: <sophie_george_2>, Switch Off: <sophie_george_off>]
+<sophie_george_2> [After a short pause, the door opens slowly.] [ACTION: Starting ON. Stay On: <sophie_george_3>, Switch Off: <sophie_george_off>]
+<sophie_george_3> Michael: Pyjamas already? It's only half 11... [ACTION: Starting ON. Stay On: <sophie_george_4>, Switch Off: <sophie_george_off>]
+<sophie_george_4> George: I-I've g-got to get up for Church tomorrow. [ACTION: Starting ON. Stay On: <sophie_george_5>, Switch Off: <sophie_george_off>]
+<sophie_george_5> Michael: [Scoffs] Church! That's cute. [ACTION: Starting ON. Stay On: <sophie_george_6>, Switch Off: <sophie_george_off>]
+<sophie_george_6> Michael: Everyone knows all the churches went woke years ago! [ACTION: Starting ON. Stay On: <sophie_george_7>, Switch Off: <sophie_george_off>]
+<sophie_george_7> Michael: Real Christians don't go to Church... [ACTION: Starting ON. Stay On: <sophie_george_8>, Switch Off: <sophie_george_off>]
+<sophie_george_8> Sophie: Yeah George! [ACTION: Starting ON. Stay On: <sophie_george_9>, Switch Off: <sophie_george_off>]
+<sophie_george_9> George: Thank you for your opinion, but I must go to bed. [ACTION: Starting ON. Stay On: <sophie_george_10>, Switch Off: <sophie_george_off>]
+<sophie_george_10> Michael: Ha! Not even willing to debate me! 'Christians' these days... [ACTION: Starting ON. Stay On: <sophie_george_11>, Switch Off: <sophie_george_off>]
+<sophie_george_11> George: Goodnight. [ACTION: Starting ON. Stay On: <sophie_michael>, Switch Off: <sophie_michael>]
+BLOCK: <sophie_george_off>
+    George: Oh, the lamp doesn't like me. Oh well.
+    George: Goodnight.
+    [The door closes.]
+    => Based on the resulting state only. On: <sophie_michael>, Off: <pre_sophie_michael_off>
+BLOCK: <pre_sophie_michael_off>
+    Michael: Right, now time to go back on again. [delay: 3s]
+    => Based on the resulting state only. On: <sophie_michael>, Off: <sophie_michael_off>
+BLOCK: <sophie_michael>
+    Sophie: Michael, about earlier?
+    Michael: Yes...?
+    Sophie: [Softly] Do you think they noticed?
+    Michael: [Loudly] Of course they did! It's getting bigger every day!
+    Michael: Have you had any more thoughts? You know what everyone will think if they find out what you suggested...
+    Michael: There's only one way that works here.
+    Sophie: [Inhales deeply].
+    Michael: Look at me, beautiful.
+     [delay: 0.5s]
+    Michael: Do you trust me?
+    Sophie: Of course!
+    Michael: Then why didn't you say yes?!
+     [delay: 0.5s]
+    Sophie: I-I don't know. I'm just not sure it's right.
+    Michael: I can't believe it. All this time and you don't trust me?
+    Michael: You've never trusted me, have you? You're a liar and a manipulator!
+    Michael: Sophie Williams, you're better than this. If you can't trust me, you're not the girl I fell in love with.
+     [delay: 1s]
+    Sophie: [Inhales deeply].
+     [delay: 0.5s]
+    Sophie: Fine. I trust you.
+    Michael: [A big kiss]. I love you! You're the best.
+     [delay: 0.5s]
+    Michael: [Inhales deeply].
+     [delay: 0.5s]
+    [Some rustling].
+    Michael: [Inhales]. Sophie, I love you. I never thought I'd find anyone as beautiful and obedient as you.
+    Michael: With you, I feel complete, and I can't imagine spending the rest of my life without you.
+    Michael: Sophie, will you marry me?
+     [delay: 1s]
+    [The period of silence following this only actually lasts about five seconds, but it feels like an eternity.]
+    [No like, a [i]really[/i] long period of time.
+     [delay: 0.5s]
+    Sophie: YES!!!
+    [Lots of kissing and stuff. Ew gross.]
+    Michael: I knew I could count on you.
+    Michael: You've made the right decision.
+    Sophie: I love you, Michael.
+     [delay: 1s]
+    Michael: So, I found a venue that will have us in three weeks.
+    Sophie: Three weeks???
+    Michael: [Raises voice] Don't talk back to me like that!
+     [delay: 2s]
+    Sophie: Owwwwww!
+    Michael: Sophie, we just talked about this. You need to trust me.
+    Michael: I know what's best for you and what's best for us.
+    Sophie: O-ok. I trust you. L-let's do the wedding then.
+    Sophie: [Whispers] Ow...
+    Michael: Love you, beautiful.
+     [delay: 1s]
+    Michael: [Yawn]. Time for bed?
+    Sophie: Yeah, I guess so.
+    Sophie: I-I would prefer it if you went back to your place this evening.
+    Sophie: I could do with some time to think things over myself.
+    Michael: What do you need to think about? You can talk about it with me.
+    Sophie: I'll see you tomorrow.
+    Michael: No, I would prefer to stay here.
+    Sophie: O-Of course, fiancé.
+    [You hear footsteps as the door opens and closes.]
+    => Starting ON. Stay On: <ending_reenter>, Switch Off: <sophie_michael_off>
+BLOCK: <sophie_michael_off>
+    Michael: Ugh, that bloody lamp.
+    Michael: On please! [delay: 1s]
+    Michael: On!!!!!! [delay: 2s]
+    Michael: SWITCH ON YOU MORON! [delay: 3s]
+    Michael: [Sighs] I think this is a problem for another day.
+    Michael: See you tomorrow, beautiful.
+    Sophie: Bye!
+    [The door closes.]
+    => Starting OFF. Stay Off: <colin_sophie>, Switch On: <sophie_michael_off_on>
+<sophie_michael_off_on> Michael: Phew. Right, where were we? [ACTION: Starting ON. Stay On: <sophie_michael>, Switch Off: <sophie_michael_off>]
+BLOCK: <colin_sophie>
+    [The door opens and closes.]
+    Colin: Hey Sophie! What's up?
+    Sophie: I-I don't know.
+     [delay: 0.5s]
+    Sophie: [Inhales deeply].
+    Sophie: I'm p-pregnant, Colin.
+    Colin: Oh, wow.
+    Sophie: And I just want to get an abortion to make the problem go away but Michael says we need to get married instead.
+    Sophie: It's all about what everyone else thinks. I'm not even sure if he's a Christian.
+    Colin: Wow, I didn't realise it was that bad. How are you feeling about it?
+    Sophie: In truth, I'm a bit scared of him.
+    Colin: That makes sense. Are you reconsidering the relationship?
+    Sophie: I don't know. I love him, but sometimes he pressures me into doing things that I don't want to do. And if I break up with him, I'm afraid of what he will do.
+    Sophie: You know what, I will insist on the abortion and see what he says.
+     [delay: 0.5s]
+    Colin: Uh, Sophie, I'm very glad you're taking a stand against him.
+    Colin: But an abortion isn't your only option.
+    Colin: You could keep the baby and put it up for adoption.
+    Sophie: B-but what would everyone think?
+    Colin: It doesn't matter what they think. What's done is done, and what matters is to save the life of the baby.
+    Colin: You can't just kill a baby to save yourself a little bit of embarrassment.
+    Colin: There's lots of people who would love to adopt a baby but there aren't enough.
+    Sophie: Thanks Colin, I'll think about it.
+    [You hear footsteps as the door opens and closes.]
+    => All paths to: <ending>
+BLOCK: <ending_reenter>
+    Colin: [The door opens and closes.]
+    => All paths to: <ending>
+BLOCK: <ending>
+    Colin: Wow, that was a lot of talking.
+    Colin: We're not always that political!
+    Colin: Thanks for sharing your opinions and making the discussion more interesting.
+    Colin: Maybe one day I'll get you a dimmer switch so these nuanced issues don't have to be quite so binary!
+    Colin: Hopefully I've got some of the way to helping you understand your beliefs. I always try to refute my own beliefs to understand them better.
+    Colin: It's frighteningly easy to think that you're always right, and discussing with more people can sometimes just reinforce this.
+    Colin: Anyway, it's time I went to bed. Goodnight, lamp. [delay: 1s]
+    Colin: We're not unmetered... [delay: 2s]
+    Colin: Off please... [delay: 3s]
+    Colin: Oh well, guess I'll have to switch you off at the plug.
+    => Based on the resulting state only. On: <ending_refuse>, Off: <ending_off>
+BLOCK: <ending_off>
+    Colin: Goodnight!
+    [You hear footsteps as the door opens and closes.]
+    The end.
+    => All paths to: <>
+BLOCK: <ending_refuse>
+     [delay: 0.5s]
+    The end.
+  FLAGS: UNPOWERED
+    => All paths to: <>

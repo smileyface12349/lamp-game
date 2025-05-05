@@ -25,6 +25,7 @@ const ANIMATION_IN_CHARACTERS_PER_SECOND: float = 40
 const ANIMATION_OUT_DURATION: float = 0.5
 const EXTRA_BLACK_TIME: float = 0.2
 const ANIMATION_FADE_LENGTH: int = 10
+const SWITCH_COOLDOWN: float = 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -65,6 +66,8 @@ func _input(event: InputEvent) -> void:
 	if not powered:
 		return
 	if Input.is_action_just_pressed("toggle_lamp"):
+		if elapsed < SWITCH_COOLDOWN and not current.flags.has("FAST_SWITCH"):
+			return
 		if current.action.interrupt:
 			change_state(current.action.get_next(lamp, !lamp, state))
 		state["total_flips"] += 1

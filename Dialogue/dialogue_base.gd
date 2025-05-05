@@ -19,3 +19,6 @@ func get_total_time(wpm: float, extra_seconds: float) -> float:
 
 func next_line() -> bool:
 	return false
+
+func get_text_body() -> String:
+	return ""
