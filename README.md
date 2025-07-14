@@ -4,4 +4,4 @@ A game where you play as a lamp, passively listening to conversations and interj
 
 # License
 
-This game is provided with no license. You may use the code to run this game, but you may not use any of its contents in your own project without my written approval. This may change in future.
+This code is provided under the MIT license. This means that you can do pretty much whatever you want with this code, but the only thing I ask is that you credit me. If you go on to make something cool with this code, I'd love to hear about it!
